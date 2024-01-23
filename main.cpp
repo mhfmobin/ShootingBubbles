@@ -7,9 +7,9 @@
     License: MIT License
 */
 
-#include "packages.h"
-#include "front-end.h"
-#include "back-end.h"
+#include "core/packages.h"
+#include "core/front-end.h"
+#include "core/back-end.h"
 
 using namespace std;
 
