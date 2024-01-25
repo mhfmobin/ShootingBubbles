@@ -7,6 +7,7 @@ bool isGameOver();
 bool isWinner();
 void loadLevel(int level_id);
 bool isColor(int n);
+time_t time();
 
 //================================ Implementation ================================
 
