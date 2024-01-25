@@ -9,12 +9,13 @@
 */
 
 #include "core/config.h"
-#include "core/front-end.h"
 #include "core/back-end.h"
+#include "core/front-end.h"
 
 using namespace std;
 
 int main() {
-    
+    bool isPaused = false;
+
     return 0;
 }
