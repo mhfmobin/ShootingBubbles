@@ -1,0 +1,3 @@
+C:/Users/ASUS ROG/pcpp/BouncingBalls/cmake-build-debug/CMakeFiles/BouncingBalls.dir
+C:/Users/ASUS ROG/pcpp/BouncingBalls/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ASUS ROG/pcpp/BouncingBalls/cmake-build-debug/CMakeFiles/rebuild_cache.dir
