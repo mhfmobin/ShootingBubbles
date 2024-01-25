@@ -1,12 +1,8 @@
 
-struct Ball {
-    int color;
-    bool is_falling;
-    float x, y;
-};
+bool isGameOver();
+bool isWinner();
+void loadLevel(int level_id);
 
-vector<vector<Ball>> data;
- 
 
 bool isGameOver() {
     int last_row = data.size() - 1;
@@ -16,3 +12,11 @@ bool isGameOver() {
     return false;
 }
 
+bool isWinner() {
+    return (data.size()) ? true : false;
+}
+
+
+void loadLevel(int level_id) {
+
+}
