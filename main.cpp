@@ -13,6 +13,7 @@
 #include "core/front-end.h"
 
 int main(int argc, char* argv[]) {
+
     //starting
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
@@ -20,13 +21,12 @@ int main(int argc, char* argv[]) {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     SDL_Window* window = SDL_CreateWindow("Bouncing Ball",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-    //load images
-    menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
+    // load images 
     modes_img = IMG_LoadTexture(renderer, "../images/modes.png");
     menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
     levels_img = IMG_LoadTexture(renderer, "../images/levels.png");
     setting_img = IMG_LoadTexture(renderer, "../images/setting.png");
-    //load sounds
+    // load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
 
@@ -38,11 +38,7 @@ int main(int argc, char* argv[]) {
     SDL_PollEvent(e);
 
     bool map_bool=false;
-
-    while (true)
-    {
-
-
+    while (true) {
         SDL_PollEvent(e);
         SDL_ShowCursor(SDL_ENABLE);
         mouse_x = e->button.x;

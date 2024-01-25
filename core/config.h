@@ -2,33 +2,28 @@
 #define BOUNCINGBALLS_CONFIG_H
 
 #include <bits/stdc++.h>
-#include <vector>
-#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_gfx.h>
 #include <SDL2/SDL_mixer.h>
-//#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
+
 using namespace std;
 
-/*
-****************************************************
-                    definitions
-****************************************************
-*/
+/*****************************************************
+                    Definitions
+*****************************************************/
 
 #define WIDTH 480
 #define HEIGHT 720
 #define BASE_Y 650 // The line that will be used to check game over
 #define START_Y 150 // The line that lowest ball is there when the level is started
 #define MAX_BALLS 10 // max balls in row
-#define BALL_RADIUS 24
+#define R 24 // ball radius
 
-/*
-****************************************************
-                    structures
-****************************************************
-*/
+/*****************************************************
+                    Structures
+*****************************************************/
 
 struct Ball {
     int color;
@@ -36,28 +31,37 @@ struct Ball {
     float x = 0, y = 0;
 };
 
-/*
-****************************************************
-                    global variable
-****************************************************
-*/
+/*****************************************************
+                    Global Variable
+*****************************************************/
 
 vector<vector<Ball>> data;
 SDL_Event* e = new SDL_Event();
-int mouse_x,mouse_y;
-bool modes=false;
-bool levels=false;
-bool menu_sd=true;
-bool setting=false;
-bool btn_sd_c=true;
+int mouse_x, mouse_y;
+bool modes = false;
+bool levels = false;
+bool menu_sd = true;
+bool setting = false;
+bool btn_sd_c = true;
+bool is_timer_on = false;
+int timer = 1000000000;
+float yv = 0; // velocity in Y axis
+float added_y = 0;
+vector<int> times = {60,60,60,60,60};
+vector<int> colors = {2,3,5,7,11,13};
+// 2 -> red
+// 3 -> yellow
+// 5 -> green
+// 7 -> blue
+// 11 -> purple
+// 13 -> black
 
-/*
-****************************************************
-                    for files
-****************************************************
-*/
+/*****************************************************
+                    File Handlers
+*****************************************************/
 
-//******images*******
+// ====================== Images =======================
+
 SDL_Texture* menu_img = NULL;
 SDL_Rect menu_rect;
 SDL_Texture* l_poison_img = NULL;
@@ -78,7 +82,9 @@ SDL_Texture* modes_img = NULL;
 SDL_Rect modes_rect;
 SDL_Texture* setting_img = NULL;
 SDL_Rect setting_rect;
-//******sounds*******
+
+// ====================== Sounds =======================
+
 Mix_Chunk* menu1_sd;
 Mix_Chunk* menu2_sd;
 Mix_Chunk* menu3_sd;
@@ -95,8 +101,6 @@ Mix_Chunk* l_desert_sd;
 Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
-
-
 
 
 #endif //BOUNCINGBALLS_CONFIG_H
