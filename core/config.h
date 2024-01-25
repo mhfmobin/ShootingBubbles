@@ -43,6 +43,13 @@ struct Ball {
 */
 
 vector<vector<Ball>> data;
+SDL_Event* e = new SDL_Event();
+int mouse_x,mouse_y;
+bool modes=false;
+bool levels=false;
+bool menu_sd=true;
+bool setting=false;
+bool btn_sd_c=true;
 
 /*
 ****************************************************
@@ -69,7 +76,8 @@ SDL_Texture* levels_img = NULL;
 SDL_Rect levels_rect;
 SDL_Texture* modes_img = NULL;
 SDL_Rect modes_rect;
-
+SDL_Texture* setting_img = NULL;
+SDL_Rect setting_rect;
 //******sounds*******
 Mix_Chunk* menu1_sd;
 Mix_Chunk* menu2_sd;
