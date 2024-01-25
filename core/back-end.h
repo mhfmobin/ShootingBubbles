@@ -1,13 +1,13 @@
-#ifndef BOUNCINGBALLS_BACK_END_H
-#define BOUNCINGBALLS_BACK_END_H
-
 //================================ Definition ================================ 
 
 bool isGameOver();
 bool isWinner();
 void loadLevel(int level_id);
+void loadSettings();
+void saveSettings();
 bool isColor(int n);
 time_t time();
+vector<int> cannonBalls();
 
 //================================ Implementation ================================
 
@@ -31,8 +31,58 @@ bool isWinner() {
     return false;
 }
 
+void loadSettings() {
+    string filename = "../data/user-setting.txt"; 
+    string line;
+
+    ifstream file(filename);
+
+    if (!file.good()) {
+        cerr << "Error opening the file: " << filename << endl;
+        return;
+    }
+
+    getline(file, line);
+    settings["music_mode"] = stoi(line);
+
+    getline(file, line);
+    settings["music_volume"] = stoi(line);   
+
+    getline(file, line);
+    settings["sound_mode"] = stoi(line);  
+
+    getline(file, line);
+    settings["sound_volume"] = stoi(line);  
+
+    getline(file, line);
+    settings["theme"] = stoi(line);
+    
+    file.close();
+
+}
+
+void saveSettings() {
+    string filename = "../data/user-setting.txt"; 
+    string line;
+
+    ofstream file(filename);
+
+    if (!file.good()) {
+        cerr << "Error opening the file: " << filename << endl;
+        return;
+    }
+
+    file << settings["music_mode"] << endl;
+    file << settings["music_volume"] << endl;
+    file << settings["sound_mode"] << endl;
+    file << settings["sound_volume"] << endl;
+    file << settings["theme"] << endl;
+    
+    file.close();
+}
+
 void loadLevel(int level_id) {
-    string filename = "level-" + to_string(level_id) + ".csv"; 
+    string filename = "../data/level-" + to_string(level_id) + ".csv"; 
 
     ifstream file(filename);
 
@@ -68,6 +118,7 @@ void loadLevel(int level_id) {
         }
     }
 }
+
 bool isColor(int n) {
     for (int i = 0; i < colors.size(); ++i)
         if (colors[i] == n)
@@ -79,4 +130,42 @@ time_t time() {
     return chrono::duration_cast<chrono::seconds>(chrono::system_clock::now().time_since_epoch()).count();
 }
 
-#endif //BOUNCINGBALLS_BACK_END_H
+vector<int> cannonBalls() {
+    set<int> uniqueColors = accumulate(data.begin(), data.end(), set<int>(), [](const set<int>& acc, const vector<Ball>& balls) {
+        set<int> result = acc;
+        for (const Ball& ball : balls)
+            if (ball.color)
+                result.insert(ball.color);
+        
+        return result;
+    });
+
+    vector<int> balls = {};
+
+    if (!uniqueColors.size()) {
+        balls = {0,0};
+    } else if (uniqueColors.size() == 1) {
+        int onlyColor = *uniqueColors.begin();
+        balls = {onlyColor, onlyColor};
+    } else {
+        vector<int> shuffledColors(uniqueColors.begin(), uniqueColors.end());
+        random_shuffle(shuffledColors.begin(), shuffledColors.end());
+        balls = {shuffledColors[0], shuffledColors[1]};
+    }
+
+    return balls;
+}
+
+void ballPlacement(int i, int j, int color) {
+    
+}
+
+void popBalls(int i, int j, int color) {
+    if (i != data.size() -1) { // check next row
+        
+    }
+
+    if (i != 0) { // check previous row 
+        
+    }
+}

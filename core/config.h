@@ -47,6 +47,7 @@ bool is_timer_on = false;
 int timer = 1000000000;
 float yv = 0; // velocity in Y axis
 float added_y = 0;
+map<string, int> settings;
 vector<int> times = {60,60,60,60,60};
 vector<int> colors = {2,3,5,7,11,13};
 // 2 -> red
