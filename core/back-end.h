@@ -8,7 +8,11 @@ void saveSettings();
 bool isColor(int n);
 time_t time();
 vector<int> cannonBalls();
-
+bool isValidPosition(int row, int col);
+void fallBalls();
+void popBalls(int row, int col, int color, bool first = false);
+void ballPlacement(int row, int col, int color);
+bool isSame(int one, int two);
 //================================ Implementation ================================
 
 bool isGameOver() {
@@ -101,10 +105,10 @@ void loadLevel(int level_id) {
             int color = stoi(cell);
             Ball ball;
             ball.color = color;
-
+            cout<< ball.color<<" ";
             row.push_back(ball);
         }
-
+        cout<<endl;
         data.push_back(row);
     }
 
@@ -156,16 +160,57 @@ vector<int> cannonBalls() {
     return balls;
 }
 
-void ballPlacement(int i, int j, int color) {
+bool isValidPosition(int row, int col) {
+    return (row >= 0 && row < data.size() && col >= 0 && col < (10 - row%2));
+}
+
+void ballPlacement(int row, int col, int color) {
+    data[row][col].color = color;
+    float added = (row%2) ? 2*R : R ;
+    data[row][col].x = 2*col*R + added;
+    data[row][col].y = START_Y - ((data.size()-1 - row) * sqrt(3) * R + R);
+    popBalls(row, col, color, true);
+    fallBalls();
+}
+
+void popBalls(int row, int col, int color, bool first = false) {
+
+    if (!first) {
+        data[row][col].color = 0;
+    }
+    
+
+    int offsets[6][2] = (row%2) ?
+                        {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}} : 
+                        {{-1, -1}, {-1, 0}, {0, -1}, {0, 1}, {1, -1}, {1, 0}};
+
+    for (int i = 0; i < 6; ++i) {
+        int newRow = row + offsets[i][0];
+        int newCol = col + offsets[i][1];
+
+        if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
+            if (first){
+                data[row][col].color = 0;
+            }
+            popBalls(newRow, newCol, color);
+        }
+    }
+    return;
+}
+
+bool isSame(int one, int two) {
+    return (one % two == 0 || two % one == 0);
+}
+
+void fallBalls() {
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < data[i].size(); j++) {
+            
+        }
+    }
     
 }
 
-void popBalls(int i, int j, int color) {
-    if (i != data.size() -1) { // check next row
-        
-    }
-
-    if (i != 0) { // check previous row 
-        
-    }
+bool isAlone(int row, int col) {
+    
 }
