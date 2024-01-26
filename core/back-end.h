@@ -211,9 +211,4 @@ void fallBalls() {
             
         }
     }
-    
-}
-
-bool isAlone(int row, int col) {
-    
 }
