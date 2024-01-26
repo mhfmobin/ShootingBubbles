@@ -174,7 +174,7 @@ void ballPlacement(int row, int col, int color) {
     fallBalls();
 }
 
-void popBalls(int row, int col, int color, bool first = false) {
+void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
         data[row][col].color = 0;
