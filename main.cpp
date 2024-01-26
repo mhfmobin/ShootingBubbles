@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
     menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
     levels_img = IMG_LoadTexture(renderer, "../images/levels.png");
     setting_img = IMG_LoadTexture(renderer, "../images/setting.png");
+    l_desert_img = IMG_LoadTexture(renderer, "../images/level-desert.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
@@ -79,9 +80,16 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
-            //cout<<data[0][1].color;
-            //cout<<"test";
-            DrawABall(renderer,100,100,2);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+            SDL_RenderPresent(renderer);
+            Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            ShowBalls(renderer);
+            added_y += Vy;
+            //SDL_Delay(0.2);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+//            SDL_RenderPresent(renderer);
         }
 
 

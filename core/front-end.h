@@ -14,6 +14,7 @@ int ColorPickerG(int color);
 int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
+void ShowLevel(int level_id);
 
 
 
@@ -70,9 +71,8 @@ void Levels(SDL_Renderer* renderer){
         levels = false;
     }
     if((mouse_x>24)&&(mouse_x<205)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
-        PlayMusic(btn_sd,25/2,0,btn_sd_c);
-
-        //loadLevel(1);
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        loadLevel(1);
         levels = false;
         menu_show = false;
         SDL_RenderClear(renderer);
@@ -143,7 +143,7 @@ void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
         for (int j = 0; j < limit; ++j) {
-            DrawABall(renderer,data[i][j].x,data[i][j].y,data[i][j].color);
+            DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
 }

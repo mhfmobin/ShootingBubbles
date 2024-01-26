@@ -47,7 +47,7 @@ bool is_timer_on = false;
 bool menu_show = true;
 bool show_level_1=false;
 int timer = 1000000000;
-float yv = 0; // velocity in Y axis
+float Vy = 0.5; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};
