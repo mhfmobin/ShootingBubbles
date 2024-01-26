@@ -141,7 +141,8 @@ int ColorPickerB(int color){
 
 void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
-        for (int j = 0; j < MAX_BALLS; ++j) {
+        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+        for (int j = 0; j < limit; ++j) {
             DrawABall(renderer,data[i][j].x,data[i][j].y,data[i][j].color);
         }
     }
