@@ -14,7 +14,7 @@ int ColorPickerG(int color);
 int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
-void ShowLevel(int level_id);
+void ShowLevel(SDL_Renderer* renderer,int level_id);
 
 
 
@@ -73,11 +73,11 @@ void Levels(SDL_Renderer* renderer){
     if((mouse_x>24)&&(mouse_x<205)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         loadLevel(1);
+        added_y=0;
         levels = false;
         menu_show = false;
         SDL_RenderClear(renderer);
         show_level_1=true;
-
     }
 }
 
@@ -155,8 +155,47 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
     filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
     SDL_RenderPresent(renderer);
 }
-void ShowLevel(int level_id){
-
+void ShowLevel(SDL_Renderer* renderer,int level_id){
+    SDL_PollEvent(e);
+    if( e -> type == SDL_QUIT){
+        run=false;
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+    }
+    if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
+    {
+        e ->type = 0 ;
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+    }
+    switch(level_id) {
+        case 1:
+            Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 2:
+            Draw(renderer,l_volcano_img,l_volcano_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 3:
+            Draw(renderer,l_poison_img,l_poison_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 4:
+            Draw(renderer,l_shadow_img,l_shadow_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 5:
+            Draw(renderer,l_final_img,l_final_rect,0,0,WIDTH,HEIGHT);
+            break;
+        default:
+            break;
+    }
+    ShowBalls(renderer);
+    added_y += Vy;
+    SDL_Delay(0);
 }
 
 #endif //BOUNCINGBALLS_FRONT_END_H
