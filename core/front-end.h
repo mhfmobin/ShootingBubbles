@@ -155,6 +155,8 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
     filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
     SDL_RenderPresent(renderer);
 }
+void ShowLevel(int level_id){
 
+}
 
 #endif //BOUNCINGBALLS_FRONT_END_H
