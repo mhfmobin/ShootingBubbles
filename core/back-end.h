@@ -116,7 +116,8 @@ void loadLevel(int level_id) {
     file.close();
 
     for (int i = 0; i < data.size(); i++) {
-        for (int j = 0; j < MAX_BALLS; ++j) {
+        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+        for (int j = 0; j < limit; ++j) {
             float added = (i%2) ? 2*R : R ;
             data[i][j].x = 2*j*R + added;
             data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
