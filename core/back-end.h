@@ -180,12 +180,14 @@ void popBalls(int row, int col, int color, bool first) {
         data[row][col].color = 0;
     }
     
-    if (row%2) {
-        int offsets[6][2] = {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}};
+    int offsets[6][2];
+    if (row % 2) {
+        int temp[][2] = {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
     } else {
-        int offsets[6][2] = {{-1, -1}, {-1, 0}, {0, -1}, {0, 1}, {1, -1}, {1, 0}};
+        int temp[][2] = {{-1, -1}, {-1, 0}, {0, -1}, {0, 1}, {1, -1}, {1, 0}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
     }
-
     for (int i = 0; i < 6; ++i) {
         int newRow = row + offsets[i][0];
         int newCol = col + offsets[i][1];
