@@ -7,7 +7,7 @@ void loadSettings();
 void saveSettings();
 bool isColor(int n);
 time_t time();
-vector<int> cannonBalls();
+int cannonBall();
 bool isValidPosition(int row, int col);
 void fallBalls();
 void popBalls(int row, int col, int color, bool first = false);
@@ -136,7 +136,7 @@ time_t time() {
     return chrono::duration_cast<chrono::seconds>(chrono::system_clock::now().time_since_epoch()).count();
 }
 
-vector<int> cannonBalls() {
+int cannonBall() {
     set<int> uniqueColors = accumulate(data.begin(), data.end(), set<int>(), [](const set<int>& acc, const vector<Ball>& balls) {
         set<int> result = acc;
         for (const Ball& ball : balls)
@@ -146,20 +146,18 @@ vector<int> cannonBalls() {
         return result;
     });
 
-    vector<int> balls = {};
+    int color = 0;
 
-    if (!uniqueColors.size()) {
-        balls = {0,0};
-    } else if (uniqueColors.size() == 1) {
+    if (uniqueColors.size() == 1) {
         int onlyColor = *uniqueColors.begin();
-        balls = {onlyColor, onlyColor};
-    } else {
+        color = onlyColor;
+    } else if (uniqueColors.size() > 1) {
         vector<int> shuffledColors(uniqueColors.begin(), uniqueColors.end());
         random_shuffle(shuffledColors.begin(), shuffledColors.end());
-        balls = {shuffledColors[0], shuffledColors[1]};
+        color = shuffledColors[0];
     }
 
-    return balls;
+    return color;
 }
 
 bool isValidPosition(int row, int col) {
