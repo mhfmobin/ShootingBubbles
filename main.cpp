@@ -48,8 +48,6 @@ int main(int argc, char* argv[]) {
     e->type = 0;
     SDL_PollEvent(e);
 
-    bool map_bool=false;
-
     while (run){
         SDL_PollEvent(e);
         SDL_ShowCursor(SDL_ENABLE);
@@ -86,6 +84,8 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
+            //Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
         }
 

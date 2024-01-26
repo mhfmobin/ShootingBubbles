@@ -106,10 +106,8 @@ void loadLevel(int level_id) {
             int color = stoi(cell);
             Ball ball;
             ball.color = color;
-            cout<< ball.color<<" ";
             row.push_back(ball);
         }
-        cout<<endl;
         data.push_back(row);
     }
 
