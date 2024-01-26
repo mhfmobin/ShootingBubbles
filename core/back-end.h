@@ -13,6 +13,7 @@ void fallBalls();
 void popBalls(int row, int col, int color, bool first = false);
 void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
+
 //================================ Implementation ================================
 
 bool isGameOver() {
