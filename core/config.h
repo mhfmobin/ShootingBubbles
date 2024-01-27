@@ -27,7 +27,7 @@ using namespace std;
 
 struct Ball {
     int color;
-    bool is_falling = false;
+    bool is_falling = false, falling_tmp = false;
     float x = 0, y = 0;
 };
 
