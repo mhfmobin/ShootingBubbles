@@ -14,6 +14,7 @@ int ColorPickerG(int color);
 int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
+void ShowCanon(SDL_Renderer* renderer);
 void ShowLevel(SDL_Renderer* renderer,int level_id);
 
 
@@ -147,7 +148,7 @@ void ShowBalls(SDL_Renderer* renderer){
             DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
-    SDL_RenderPresent(renderer);
+
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -179,6 +180,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
 
     ShowBalls(renderer);
     added_y += Vy;
+    lineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
+    SDL_RenderPresent(renderer);
     //SDL_Delay(0);
 }
 

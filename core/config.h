@@ -16,7 +16,7 @@ using namespace std;
 
 #define WIDTH 480
 #define HEIGHT 720
-#define BASE_Y 650 // The line that will be used to check game over
+#define BASE_Y 600 // The line that will be used to check game over
 #define START_Y 150 // The line that lowest ball is there when the level is started
 #define MAX_BALLS 10 // max balls in row
 #define R 24 // ball radius
