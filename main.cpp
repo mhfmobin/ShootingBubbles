@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
     l_poison_img = IMG_LoadTexture(renderer, "../images/level-poison.png");
     l_shadow_img = IMG_LoadTexture(renderer, "../images/level-shadow.png");
     l_final_img = IMG_LoadTexture(renderer, "../images/level-final.png");
+    cannon_img = IMG_LoadTexture(renderer, "../images/cannon.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");

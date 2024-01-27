@@ -90,6 +90,8 @@ SDL_Texture* modes_img = NULL;
 SDL_Rect modes_rect;
 SDL_Texture* setting_img = NULL;
 SDL_Rect setting_rect;
+SDL_Texture* cannon_img = NULL;
+SDL_Rect cannon_rect;
 
 // ====================== Sounds =======================
 
