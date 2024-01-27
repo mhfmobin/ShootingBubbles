@@ -13,7 +13,7 @@
 #include "core/front-end.h"
 
 int main(int argc, char* argv[]) {
-
+    loadSettings();
     //starting
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
