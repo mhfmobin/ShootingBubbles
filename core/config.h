@@ -38,6 +38,7 @@ struct Ball {
 vector<vector<Ball>> data;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
+bool run=true;
 bool modes = false;
 bool levels = false;
 bool menu_sd = true;
@@ -46,8 +47,12 @@ bool btn_sd_c = true;
 bool is_timer_on = false;
 bool menu_show = true;
 bool show_level_1=false;
+bool show_level_2=false;
+bool show_level_3=false;
+bool show_level_4=false;
+bool show_level_5=false;
 int timer = 1000000000;
-float yv = 0; // velocity in Y axis
+float Vy = 0.1; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};

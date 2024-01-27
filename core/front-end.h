@@ -14,6 +14,7 @@ int ColorPickerG(int color);
 int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
+void ShowLevel(SDL_Renderer* renderer,int level_id);
 
 
 
@@ -70,14 +71,14 @@ void Levels(SDL_Renderer* renderer){
         levels = false;
     }
     if((mouse_x>24)&&(mouse_x<205)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
-        PlayMusic(btn_sd,25/2,0,btn_sd_c);
-
-        //loadLevel(1);
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        data = {};
+        loadLevel(1);
+        added_y=0;
         levels = false;
         menu_show = false;
         SDL_RenderClear(renderer);
         show_level_1=true;
-
     }
 }
 
@@ -143,9 +144,10 @@ void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
         for (int j = 0; j < limit; ++j) {
-            DrawABall(renderer,data[i][j].x,data[i][j].y,data[i][j].color);
+            DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
+    SDL_RenderPresent(renderer);
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -153,8 +155,31 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
     int Gc = ColorPickerG(color);
     int Bc = ColorPickerB(color);
     filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
-    SDL_RenderPresent(renderer);
 }
+void ShowLevel(SDL_Renderer* renderer,int level_id){
+    SDL_RenderClear(renderer);
+    SDL_PollEvent(e);
+    if( e -> type == SDL_QUIT){
+        run=false;
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+    }
+    if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
+    {
+        e ->type = 0 ;
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+    }
 
+    ShowBalls(renderer);
+    added_y += Vy;
+    //SDL_Delay(0);
+}
 
 #endif //BOUNCINGBALLS_FRONT_END_H

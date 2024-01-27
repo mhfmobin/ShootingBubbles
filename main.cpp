@@ -27,6 +27,11 @@ int main(int argc, char* argv[]) {
     menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
     levels_img = IMG_LoadTexture(renderer, "../images/levels.png");
     setting_img = IMG_LoadTexture(renderer, "../images/setting.png");
+    l_desert_img = IMG_LoadTexture(renderer, "../images/level-desert.png");
+    l_volcano_img = IMG_LoadTexture(renderer, "../images/level-volcano.png");
+    l_poison_img = IMG_LoadTexture(renderer, "../images/level-poison.png");
+    l_shadow_img = IMG_LoadTexture(renderer, "../images/level-shadow.png");
+    l_final_img = IMG_LoadTexture(renderer, "../images/level-final.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
@@ -43,9 +48,7 @@ int main(int argc, char* argv[]) {
     e->type = 0;
     SDL_PollEvent(e);
 
-    bool map_bool=false;
-
-    while (true){
+    while (run){
         SDL_PollEvent(e);
         SDL_ShowCursor(SDL_ENABLE);
         mouse_x = e->button.x;
@@ -53,10 +56,12 @@ int main(int argc, char* argv[]) {
         if(menu_show) DrawMenu(renderer);
 
         if( e -> type == SDL_QUIT){
+            run=false;
             break;
         }
 
         if((menu_show) && (mouse_x>12)&&(mouse_x<85)&&(mouse_y>12)&&(mouse_y<85) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+            run=false;
             break;
         }
         if((menu_show) && (mouse_x>294)&&(mouse_x<470)&&(mouse_y>36)&&(mouse_y<88) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
@@ -79,9 +84,9 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
-            //cout<<data[0][1].color;
-            //cout<<"test";
-            DrawABall(renderer,100,100,2);
+            //Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,1);
         }
 
 
