@@ -9,7 +9,7 @@ bool isColor(int n);
 time_t time();
 int cannonBall();
 bool isValidPosition(int row, int col);
-void fallBalls();
+void fallBalls(int row, int col);
 void popBalls(int row, int col, int color, bool first = false);
 void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
@@ -109,6 +109,8 @@ void loadLevel(int level_id) {
             row.push_back(ball);
         }
         data.push_back(row);
+
+        
     }
 
     file.close();
@@ -168,7 +170,15 @@ void ballPlacement(int row, int col, int color) {
     data[row][col].x = 2*col*R + added;
     data[row][col].y = START_Y - ((data.size()-1 - row) * sqrt(3) * R + R);
     popBalls(row, col, color, true);
-    fallBalls();
+
+    for (int i = 0; i < data[0].size(); ++i) {
+        if (data[0][i].color && !data[0][i].falling_tmp) {
+            data[0][i].falling_tmp = true;
+            fallBalls(0, i);
+        }
+    }
+    fallBalls(row, col, true);
+    resetFallingBalls();
 }
 
 void popBalls(int row, int col, int color, bool first) {
@@ -203,8 +213,32 @@ bool isSame(int one, int two) {
     return (one % two == 0 || two % one == 0);
 }
 
-void fallBalls() {
-    for (int j = 0; j < data[i].size(); j++) {
-        
+void fallBalls(int row, int col) {
+    int offsets[6][2];
+    if (row % 2) {
+        int temp[][2] = {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
+    } else {
+        int temp[][2] = {{-1, -1}, {-1, 0}, {0, -1}, {0, 1}, {1, -1}, {1, 0}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
     }
+    for (int i = 0; i < 6; ++i) {
+        int newRow = row + offsets[i][0];
+        int newCol = col + offsets[i][1];
+
+        if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && !data[newRow][newCol].falling_tmp) {
+            data[newRow][newCol].falling_tmp = true;
+            fallBalls(newRow, newCol);
+        }
+    }
+}
+
+void resetFallingBalls() {
+    for (int i = 0; i < data.size(); ++i)
+        for (int j = 0; j < data[i].size(); ++j)
+            if (data[i][j].falling_tmp) {
+                data[i][j].falling_tmp = false;
+                data[i][j].is_falling = true;
+                data[i][j].color = 0;
+            }
 }
