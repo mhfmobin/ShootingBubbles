@@ -179,7 +179,6 @@ void ballPlacement(int row, int col, int color) {
             fallBalls(0, i);
         }
     }
-    fallBalls(row, col, true);
     resetFallingBalls();
 }
 
