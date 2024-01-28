@@ -31,11 +31,17 @@ struct Ball {
     float x = 0, y = 0;
 };
 
+struct Point2d {
+    int x;
+    int y;
+};
+
 /*****************************************************
                     Global Variable
 *****************************************************/
 
 vector<vector<Ball>> data;
+Point2d center;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 bool run=true;

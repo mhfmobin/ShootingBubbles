@@ -31,7 +31,7 @@ void Draw(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, 
     img_rect.y = y;
     img_rect.w = w;
     img_rect.h = h;
-    SDL_RenderClear(renderer);
+    //SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
     SDL_RenderPresent(renderer);
 }
@@ -148,7 +148,8 @@ void ShowBalls(SDL_Renderer* renderer){
             DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
-
+    aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
+    SDL_RenderPresent(renderer);
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -178,16 +179,18 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_5=false;
     }
 
+
     ShowBalls(renderer);
     added_y += Vy;
-    lineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    ShowCannon(renderer);
     SDL_RenderPresent(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+    ShowCannon(renderer);
     //SDL_Delay(0);
 }
 
 void ShowCannon(SDL_Renderer* renderer){
-
+    Draw(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
+   // SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 90, &center_of_cannon, SDL_FLIP_NONE);
 
 
 }
