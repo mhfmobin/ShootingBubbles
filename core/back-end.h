@@ -13,7 +13,8 @@ void fallBalls(int row, int col);
 void popBalls(int row, int col, int color, bool first = false);
 void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
-
+void resetFallingBalls();
+void generateRandomGame(int n);
 //================================ Implementation ================================
 
 bool isGameOver() {
