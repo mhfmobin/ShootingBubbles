@@ -87,6 +87,8 @@ void saveSettings() {
 }
 
 void loadLevel(int level_id) {
+    data.clear();
+
     string filename = "../data/level-" + to_string(level_id) + ".csv"; 
 
     ifstream file(filename);
@@ -241,4 +243,36 @@ void resetFallingBalls() {
                 data[i][j].is_falling = true;
                 data[i][j].color = 0;
             }
+}
+
+
+void generateRandomGame(int n) {
+    data.clear();
+    srand(time(NULL));
+    for (int i = 0; i < n; ++i) {
+        vector<Ball> row;
+        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+        int prevColor = -1;
+        for (int j = 0; j < limit; ++j) {
+            Ball ball;
+            int color;
+            if (prevColor != -1 && rand() % 2 == 0) {
+                color = prevColor;
+            } else {
+                color = colors[rand() % colors.size()]; 
+                prevColor = color; 
+            }
+            ball.color = color;
+            row.push_back(ball);
+        }
+        data.push_back(row);
+    }
+    for (int i = 0; i < data.size(); i++) {
+        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+        for (int j = 0; j < limit; ++j) {
+            float added = (i%2) ? 2*R : R ;
+            data[i][j].x = 2*j*R + added;
+            data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
+        }
+    }
 }
