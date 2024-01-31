@@ -91,9 +91,9 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
-            Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            //Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
-            ShowLevel(renderer,1);
+            ShowLevel(renderer);
         }
 
 

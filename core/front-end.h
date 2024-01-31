@@ -181,7 +181,7 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
             break;
     }
 }
-void ShowLevel(SDL_Renderer* renderer,int level_id){
+void ShowLevel(SDL_Renderer* renderer){
     SDL_RenderClear(renderer);
     SDL_PollEvent(e);
     if( e -> type == SDL_QUIT){
@@ -203,15 +203,15 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
 
 
-    ShowBalls(renderer);
-    added_y += Vy;
-    SDL_RenderPresent(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+    //ShowBalls(renderer);
+    //added_y += Vy;
+    //SDL_RenderPresent(renderer);
+    //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     ShowCannon(renderer);
     SDL_GetMouseState(&mouse_x,&mouse_y);
     DrawShootLine(renderer,mouse_x,mouse_y);
 
-    //SDL_Delay(0);
+    //SDL_Delay(0.1);
 }
 
 void ShowCannon(SDL_Renderer* renderer){
@@ -222,11 +222,20 @@ void ShowCannon(SDL_Renderer* renderer){
 }
 
 void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
-    int dx = mouseX - xl;
-    int dy = mouseY - yl;
-    double slope;
+    float dx = mouseX - xl;
+    float dy = mouseY - yl;
+    float slope;
     if(dx!=0) slope=dy/dx;
-    lineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
+    else if(dx==0) lineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
+    if (slope<0) {
+        lineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
+        lineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,-WIDTH,-slope*(-WIDTH-WIDTH)+slope*(WIDTH-xl)+yl,142,55,200,255);
+    }
+    else if (slope>0) {
+        lineRGBA(renderer,xl,yl,0,slope*(0-xl)+yl,142,55,200,255);
+        lineRGBA(renderer,0,slope*(0-xl)+yl,WIDTH,-slope*(WIDTH-0)+slope*(0-xl)+yl,142,55,200,255);
+    }
+
     SDL_RenderPresent(renderer);
 
 }
