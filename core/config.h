@@ -42,6 +42,8 @@ struct Point2d {
 
 vector<vector<Ball>> data;
 Point2d center;
+int xl=WIDTH/2;
+int yl=BASE_Y+100;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 bool run=true;
@@ -98,6 +100,18 @@ SDL_Texture* setting_img = NULL;
 SDL_Rect setting_rect;
 SDL_Texture* cannon_img = NULL;
 SDL_Rect cannon_rect;
+SDL_Texture* red_ball_img = NULL;
+SDL_Rect red_ball_rect;
+SDL_Texture* yellow_ball_img = NULL;
+SDL_Rect yellow_ball_rect;
+SDL_Texture* green_ball_img = NULL;
+SDL_Rect green_ball_rect;
+SDL_Texture* blue_ball_img = NULL;
+SDL_Rect blue_ball_rect;
+SDL_Texture* purple_ball_img = NULL;
+SDL_Rect purple_ball_rect;
+SDL_Texture* black_ball_img = NULL;
+SDL_Rect black_ball_rect;
 
 // ====================== Sounds =======================
 

@@ -9,13 +9,14 @@ void Levels(SDL_Renderer* renderer);
 void Setting(SDL_Renderer* renderer);
 void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play);
 //game
-int ColorPickerR(int color);
-int ColorPickerG(int color);
-int ColorPickerB(int color);
+//int ColorPickerR(int color);
+//int ColorPickerG(int color);
+//int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
 void ShowCannon(SDL_Renderer* renderer);
 void ShowLevel(SDL_Renderer* renderer,int level_id);
+void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY);
 
 
 
@@ -110,36 +111,36 @@ void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play){
 }
 
 //GAME
-int ColorPickerR(int color){
-    int Rc;
-    if(color==2) Rc=255;//red
-    else if(color==3) Rc = 255;//yellow
-    else if(color==5) Rc = 18;//green
-    else if(color==7) Rc = 0;//blue
-    else if(color==11) Rc = 171;//purple
-    else if(color==13) Rc = 0;//black
-    return Rc;
-}
-int ColorPickerG(int color){
-    int Gc;
-    if(color==2) Gc=14;//red
-    else if(color==3) Gc = 231;//yellow
-    else if(color==5) Gc = 240;//green
-    else if(color==7) Gc = 189;//blue
-    else if(color==11) Gc = 69;//purple
-    else if(color==13) Gc = 0;//black
-    return Gc;
-}
-int ColorPickerB(int color){
-    int Bc;
-    if(color==2) Bc=14;//red
-    else if(color==3) Bc = 0;//yellow
-    else if(color==5) Bc = 0;//green
-    else if(color==7) Bc = 255;//blue
-    else if(color==11) Bc = 255;//purple
-    else if(color==13) Bc = 0;//black
-    return Bc;
-}
+//int ColorPickerR(int color){
+//    int Rc;
+//    if(color==2) Rc=255;//red
+//    else if(color==3) Rc = 255;//yellow
+//    else if(color==5) Rc = 18;//green
+//    else if(color==7) Rc = 0;//blue
+//    else if(color==11) Rc = 171;//purple
+//    else if(color==13) Rc = 0;//black
+//    return Rc;
+//}
+//int ColorPickerG(int color){
+//    int Gc;
+//    if(color==2) Gc=14;//red
+//    else if(color==3) Gc = 231;//yellow
+//    else if(color==5) Gc = 240;//green
+//    else if(color==7) Gc = 189;//blue
+//    else if(color==11) Gc = 69;//purple
+//    else if(color==13) Gc = 0;//black
+//    return Gc;
+//}
+//int ColorPickerB(int color){
+//    int Bc;
+//    if(color==2) Bc=14;//red
+//    else if(color==3) Bc = 0;//yellow
+//    else if(color==5) Bc = 0;//green
+//    else if(color==7) Bc = 255;//blue
+//    else if(color==11) Bc = 255;//purple
+//    else if(color==13) Bc = 0;//black
+//    return Bc;
+//}
 
 void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
@@ -147,15 +148,38 @@ void ShowBalls(SDL_Renderer* renderer){
             DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
-    aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    SDL_RenderPresent(renderer);
+    //aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
+    //SDL_RenderPresent(renderer);
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
-    int Rc = ColorPickerR(color);
-    int Gc = ColorPickerG(color);
-    int Bc = ColorPickerB(color);
-    filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
+//    int Rc = ColorPickerR(color);
+//    int Gc = ColorPickerG(color);
+//    int Bc = ColorPickerB(color);
+//    filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
+    switch (color) {
+        case 2:
+            Draw(renderer,red_ball_img,red_ball_rect,x-24,y-24,48,48);
+            break;
+        case 3:
+            Draw(renderer,yellow_ball_img,yellow_ball_rect,x-24,y-24,48,48);
+            break;
+        case 5:
+            Draw(renderer,green_ball_img,green_ball_rect,x-24,y-24,48,48);
+            break;
+        case 7:
+            Draw(renderer,blue_ball_img,blue_ball_rect,x-24,y-24,48,48);
+            break;
+        case 11:
+            Draw(renderer,purple_ball_img,purple_ball_rect,x-24,y-24,48,48);
+            break;
+        case 13:
+            Draw(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
+            break;
+        default:
+            Draw(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
+            break;
+    }
 }
 void ShowLevel(SDL_Renderer* renderer,int level_id){
     SDL_RenderClear(renderer);
@@ -184,6 +208,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     ShowCannon(renderer);
+    SDL_GetMouseState(&mouse_x,&mouse_y);
+    DrawShootLine(renderer,mouse_x,mouse_y);
+
     //SDL_Delay(0);
 }
 
@@ -191,6 +218,16 @@ void ShowCannon(SDL_Renderer* renderer){
     Draw(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
    // SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 90, &center_of_cannon, SDL_FLIP_NONE);
 
+
+}
+
+void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
+    int dx = mouseX - xl;
+    int dy = mouseY - yl;
+    double slope;
+    if(dx!=0) slope=dy/dx;
+    lineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
+    SDL_RenderPresent(renderer);
 
 }
 

@@ -33,6 +33,12 @@ int main(int argc, char* argv[]) {
     l_shadow_img = IMG_LoadTexture(renderer, "../images/level-shadow.png");
     l_final_img = IMG_LoadTexture(renderer, "../images/level-final.png");
     cannon_img = IMG_LoadTexture(renderer, "../images/cannon.png");
+    red_ball_img = IMG_LoadTexture(renderer, "../images/ball2.png");
+    yellow_ball_img = IMG_LoadTexture(renderer, "../images/ball3.png");
+    green_ball_img = IMG_LoadTexture(renderer, "../images/ball5.png");
+    blue_ball_img = IMG_LoadTexture(renderer, "../images/ball7.png");
+    purple_ball_img = IMG_LoadTexture(renderer, "../images/ball11.png");
+    black_ball_img = IMG_LoadTexture(renderer, "../images/ball13.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
@@ -43,7 +49,7 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     SDL_RenderPresent(renderer);
 
-    PlayMusic(menu1_sd,25,-1,menu_sd);
+    PlayMusic(menu1_sd,0,-1,menu_sd);
 
 
     e->type = 0;
@@ -85,8 +91,8 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
-           // Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
-            //SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            Draw(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
         }
 
