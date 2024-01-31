@@ -191,7 +191,7 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
             break;
     }
 }
-void ShowLevel(SDL_Renderer* renderer){
+void ShowLevel(SDL_Renderer* renderer,int level_id){
     SDL_RenderClear(renderer);
     SDL_PollEvent(e);
     if( e -> type == SDL_QUIT){
@@ -211,14 +211,30 @@ void ShowLevel(SDL_Renderer* renderer){
         show_level_4=false;
         show_level_5=false;
     }
+    switch (level_id) {
+        case 1:
+            DrawWithoutPresent(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 2:
+            DrawWithoutPresent(renderer,l_volcano_img,l_volcano_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 3:
+            DrawWithoutPresent(renderer,l_poison_img,l_poison_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 4:
+            DrawWithoutPresent(renderer,l_shadow_img,l_shadow_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 5:
+            DrawWithoutPresent(renderer,l_final_img,l_final_rect,0,0,WIDTH,HEIGHT);
+            break;
 
-
+    }
     ShowBalls(renderer);
     added_y += Vy;
     ShowCannon(renderer);
     SDL_GetMouseState(&mouse_x,&mouse_y);
     DrawShootLine(renderer,mouse_x,mouse_y);
-    SDL_RenderPresent(renderer);
+
 
     //SDL_Delay(0.1);
 }
