@@ -159,7 +159,7 @@ void ShowBalls(SDL_Renderer* renderer){
         }
     }
     aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    SDL_RenderPresent(renderer);
+    //SDL_RenderPresent(renderer);
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -215,17 +215,16 @@ void ShowLevel(SDL_Renderer* renderer){
 
     ShowBalls(renderer);
     added_y += Vy;
-    //SDL_RenderPresent(renderer);
-    //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     ShowCannon(renderer);
     SDL_GetMouseState(&mouse_x,&mouse_y);
     DrawShootLine(renderer,mouse_x,mouse_y);
+    SDL_RenderPresent(renderer);
 
     //SDL_Delay(0.1);
 }
 
 void ShowCannon(SDL_Renderer* renderer){
-    Draw(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
+    DrawWithoutPresent(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
    // SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 90, &center_of_cannon, SDL_FLIP_NONE);
 
 
@@ -246,7 +245,7 @@ void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
         lineRGBA(renderer,0,slope*(0-xl)+yl,WIDTH,-slope*(WIDTH-0)+slope*(0-xl)+yl,142,55,200,255);
     }
 
-    SDL_RenderPresent(renderer);
+    //SDL_RenderPresent(renderer);
 }
 
 #endif //BOUNCINGBALLS_FRONT_END_H
