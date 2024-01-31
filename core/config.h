@@ -60,7 +60,7 @@ bool show_level_3=false;
 bool show_level_4=false;
 bool show_level_5=false;
 int timer = 1000000000;
-float Vy = 0.1; // velocity in Y axis
+float Vy = 0.01; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};

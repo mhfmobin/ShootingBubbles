@@ -4,6 +4,7 @@
 //menu and other thing
 void DrawMenu(SDL_Renderer* renderer);
 void Draw(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h);
+void DrawWithoutPresent(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h);
 void Modes(SDL_Renderer* renderer);
 void Levels(SDL_Renderer* renderer);
 void Setting(SDL_Renderer* renderer);
@@ -35,6 +36,15 @@ void Draw(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, 
     //SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
     SDL_RenderPresent(renderer);
+}
+void DrawWithoutPresent(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h)
+{
+    img_rect.x = x;
+    img_rect.y = y;
+    img_rect.w = w;
+    img_rect.h = h;
+    //SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
 }
 
 void Modes(SDL_Renderer* renderer){
@@ -148,8 +158,8 @@ void ShowBalls(SDL_Renderer* renderer){
             DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
-    //aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    //SDL_RenderPresent(renderer);
+    aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
+    SDL_RenderPresent(renderer);
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -159,25 +169,25 @@ void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
 //    filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
     switch (color) {
         case 2:
-            Draw(renderer,red_ball_img,red_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,x-24,y-24,48,48);
             break;
         case 3:
-            Draw(renderer,yellow_ball_img,yellow_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,yellow_ball_img,yellow_ball_rect,x-24,y-24,48,48);
             break;
         case 5:
-            Draw(renderer,green_ball_img,green_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,green_ball_img,green_ball_rect,x-24,y-24,48,48);
             break;
         case 7:
-            Draw(renderer,blue_ball_img,blue_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,blue_ball_img,blue_ball_rect,x-24,y-24,48,48);
             break;
         case 11:
-            Draw(renderer,purple_ball_img,purple_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,x-24,y-24,48,48);
             break;
         case 13:
-            Draw(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
             break;
         default:
-            Draw(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
+            DrawWithoutPresent(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
             break;
     }
 }
@@ -203,8 +213,8 @@ void ShowLevel(SDL_Renderer* renderer){
     }
 
 
-    //ShowBalls(renderer);
-    //added_y += Vy;
+    ShowBalls(renderer);
+    added_y += Vy;
     //SDL_RenderPresent(renderer);
     //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     ShowCannon(renderer);
@@ -237,7 +247,6 @@ void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
     }
 
     SDL_RenderPresent(renderer);
-
 }
 
 #endif //BOUNCINGBALLS_FRONT_END_H
