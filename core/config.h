@@ -59,8 +59,10 @@ bool show_level_2=false;
 bool show_level_3=false;
 bool show_level_4=false;
 bool show_level_5=false;
+bool show_level_random=false;
+SDL_Point center_cannon;
 int timer = 1000000000;
-float Vy = 0.01; // velocity in Y axis
+float Vy = 0.1; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};
@@ -131,6 +133,17 @@ Mix_Chunk* l_desert_sd;
 Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
+
+// ====================== Initialize =======================
+
+void Initialize() {
+    center_cannon.x = WIDTH/2;
+    center_cannon.y = BASE_Y+50;
+    cannon_rect.x=WIDTH/2-90/2;
+    cannon_rect.y=BASE_Y;
+    cannon_rect.w=90;
+    cannon_rect.h=100;
+}
 
 
 #endif //BOUNCINGBALLS_CONFIG_H

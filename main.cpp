@@ -14,6 +14,7 @@
 
 int main(int argc, char* argv[]) {
     loadSettings();
+    Initialize();
     //starting
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
@@ -49,7 +50,7 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     SDL_RenderPresent(renderer);
 
-    PlayMusic(menu1_sd,0,-1,menu_sd);
+    PlayMusic(menu1_sd,25,-1,menu_sd);
 
 
     e->type = 0;
@@ -93,7 +94,10 @@ int main(int argc, char* argv[]) {
         while(show_level_1){
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
-            SDL_RenderPresent(renderer);
+        }
+        while(show_level_random){
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,6);
         }
 
 

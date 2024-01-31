@@ -61,10 +61,16 @@ void Modes(SDL_Renderer* renderer){
         e ->type = 0 ;
         modes = false;
     }
-    if((mouse_x>160)&&(mouse_x<313)&&(mouse_y>180)&&(mouse_y<223) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>160)&&(mouse_x<315)&&(mouse_y>180)&&(mouse_y<223) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
         levels=true;
         modes=false;
+    }
+    if((mouse_x>160)&&(mouse_x<315)&&(mouse_y>460)&&(mouse_y<500) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
+        modes=false;
+        generateRandomGame(10);
+        show_level_random=true;
     }
 }
 
@@ -201,17 +207,26 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_3=false;
         show_level_4=false;
         show_level_5=false;
+        show_level_random=false;
     }
     if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
     {
         e ->type = 0 ;
+        run=false;
         show_level_1=false;
         show_level_2=false;
         show_level_3=false;
         show_level_4=false;
         show_level_5=false;
+        show_level_random=false;
     }
-    switch (level_id) {
+    int temp_id;
+    if(level_id==6){
+        srand(time(NULL));
+        temp_id=1+rand()%5;
+    }
+    else temp_id=level_id;
+    switch (temp_id) {
         case 1:
             DrawWithoutPresent(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
             break;
@@ -235,13 +250,13 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     SDL_GetMouseState(&mouse_x,&mouse_y);
     DrawShootLine(renderer,mouse_x,mouse_y);
 
-
+    SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }
 
 void ShowCannon(SDL_Renderer* renderer){
-    DrawWithoutPresent(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
-   // SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 90, &center_of_cannon, SDL_FLIP_NONE);
+    //DrawWithoutPresent(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
+    SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 2, &center_cannon, SDL_FLIP_NONE);
 
 
 }
@@ -251,14 +266,14 @@ void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
     float dy = mouseY - yl;
     float slope;
     if(dx!=0) slope=dy/dx;
-    else if(dx==0) lineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
+    else if(dx==0) aalineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
     if (slope<0) {
-        lineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
-        lineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,-WIDTH,-slope*(-WIDTH-WIDTH)+slope*(WIDTH-xl)+yl,142,55,200,255);
+        aalineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
+        aalineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,-WIDTH,-slope*(-WIDTH-WIDTH)+slope*(WIDTH-xl)+yl,142,55,200,255);
     }
     else if (slope>0) {
-        lineRGBA(renderer,xl,yl,0,slope*(0-xl)+yl,142,55,200,255);
-        lineRGBA(renderer,0,slope*(0-xl)+yl,WIDTH,-slope*(WIDTH-0)+slope*(0-xl)+yl,142,55,200,255);
+        aalineRGBA(renderer,xl,yl,0,slope*(0-xl)+yl,142,55,200,255);
+        aalineRGBA(renderer,0,slope*(0-xl)+yl,WIDTH,-slope*(WIDTH-0)+slope*(0-xl)+yl,142,55,200,255);
     }
 
     //SDL_RenderPresent(renderer);
