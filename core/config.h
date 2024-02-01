@@ -31,31 +31,29 @@ struct Ball {
     float x = 0, y = 0;
 };
 
-struct Point2d {
-    int x;
-    int y;
-};
 
 /*****************************************************
                     Global Variable
 *****************************************************/
 
 vector<vector<Ball>> data;
-Point2d center;
 int xl=WIDTH/2;
 int yl=BASE_Y+100;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
+int dx=0,dy=0;
+double shootedX =0, shootedY=0;
 double shoot_angle;
 bool shoot= true;
 bool shooting = false;
 bool run=true;
 bool modes = false;
 bool levels = false;
-bool menu_sd = true;
-bool setting = false;
+bool menu_sd_c = true;
+bool shoot_sd_c = true;
 bool btn_sd_c = true;
+bool setting = false;
 bool is_timer_on = false;
 bool menu_show = true;
 bool show_level_1=false;
@@ -64,6 +62,9 @@ bool show_level_3=false;
 bool show_level_4=false;
 bool show_level_5=false;
 bool show_level_random=false;
+bool music_play=true;
+bool sound_play=true;
+double vol=1;
 SDL_Point center_cannon;
 int timer = 1000000000;
 float Vy = 0.01; // velocity in Y axis
@@ -139,6 +140,7 @@ Mix_Chunk* l_desert_sd;
 Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
+Mix_Music *test = NULL;
 
 // ====================== Initialize =======================
 

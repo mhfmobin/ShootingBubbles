@@ -45,6 +45,7 @@ int main(int argc, char* argv[]) {
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
     shoot_sd = Mix_LoadWAV("../sounds/shoot.wav");
+    test = Mix_LoadMUS("../sounds/test.mp3");
 
 
 
@@ -52,8 +53,8 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     SDL_RenderPresent(renderer);
 
-    PlayMusic(menu1_sd,25,-1,menu_sd);
-
+    Mix_VolumeMusic(10*vol);
+    Mix_PlayMusic(test,-1);
 
     e->type = 0;
     SDL_PollEvent(e);
@@ -66,20 +67,37 @@ int main(int argc, char* argv[]) {
         if(menu_show) DrawMenu(renderer);
 
         if( e -> type == SDL_QUIT){
-            run=false;
+            e->type = 0;run=false;
             break;
+        }
+        if(!music_play){
+            menu_sd_c=false;
+        }
+        if(music_play){
+            menu_sd_c=true;
+        }
+        if(!sound_play){
+            btn_sd_c=false;
+            shoot_sd_c=false;
+        }
+        if(sound_play){
+            btn_sd_c=true;
+            shoot_sd_c= true;
         }
 
         if((menu_show) && (mouse_x>12)&&(mouse_x<85)&&(mouse_y>12)&&(mouse_y<85) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+            e->type = 0;
             run=false;
             break;
         }
         if((menu_show) && (mouse_x>294)&&(mouse_x<470)&&(mouse_y>36)&&(mouse_y<88) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+            e->type = 0;
             modes=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
             Modes(renderer);
         }
         if((menu_show) && (mouse_x>292)&&(mouse_x<470)&&(mouse_y>145)&&(mouse_y<188) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+            e->type = 0;
             setting=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
             Setting(renderer);
@@ -94,6 +112,7 @@ int main(int argc, char* argv[]) {
             Setting(renderer);
         }
         while(show_level_1){
+            //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
         }
@@ -102,10 +121,8 @@ int main(int argc, char* argv[]) {
             ShowLevel(renderer,6);
         }
 
-
         e->type = 0;
     }
-
 
 
     SDL_DestroyTexture(menu_img);

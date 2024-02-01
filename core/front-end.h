@@ -15,7 +15,7 @@ void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play);
 //int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,double x,double y,int color);
-void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY, double angle);
+void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY);
 double MouseAngle(double mouseX, double mouseY);
 void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
@@ -114,49 +114,92 @@ void Setting(SDL_Renderer* renderer){
         e ->type = 0 ;
         setting = false;
     }
-    if((mouse_x>24)&&(mouse_x<205)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>214)&&(mouse_x<264)&&(mouse_y>157)&&(mouse_y<222) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
+        music_play=false;
+        Mix_VolumeMusic(0);
+    }
+    if((mouse_x>311)&&(mouse_x<393)&&(mouse_y>155)&&(mouse_y<224) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        music_play=true;
+        Mix_VolumeMusic(25);
+    }
+    if((mouse_x>211)&&(mouse_x<262)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        sound_play=false;
+    }
+    if((mouse_x>323)&&(mouse_x<395)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        sound_play=true;
+    }
+    if((mouse_x>48)&&(mouse_x<90)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1/4;
+    }
+    if((mouse_x>125)&&(mouse_x<170)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1/2;
+    }
+    if((mouse_x>205)&&(mouse_x<245)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1;
+    }
+    if((mouse_x>280)&&(mouse_x<320)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=2;
+    }
+    if((mouse_x>355)&&(mouse_x<395)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=3;
+    }
+    if((mouse_x>48)&&(mouse_x<90)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1/4;
+    }
+    if((mouse_x>125)&&(mouse_x<170)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1/2;
+    }
+    if((mouse_x>205)&&(mouse_x<245)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=1;
+    }
+    if((mouse_x>280)&&(mouse_x<320)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=2;
+    }
+    if((mouse_x>355)&&(mouse_x<395)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        vol=3;
     }
 }
 
 void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play){
     if(can_play){
-        Mix_VolumeChunk(music, volume);
+        Mix_VolumeChunk(music, volume*vol);
+        Mix_PlayChannel(-1, music, repeat);
+    }
+    else{
+        Mix_VolumeChunk(music, 0);
         Mix_PlayChannel(-1, music, repeat);
     }
 }
 
 //GAME
-//int ColorPickerR(int color){
-//    int Rc;
-//    if(color==2) Rc=255;//red
-//    else if(color==3) Rc = 255;//yellow
-//    else if(color==5) Rc = 18;//green
-//    else if(color==7) Rc = 0;//blue
-//    else if(color==11) Rc = 171;//purple
-//    else if(color==13) Rc = 0;//black
-//    return Rc;
-//}
-//int ColorPickerG(int color){
-//    int Gc;
-//    if(color==2) Gc=14;//red
-//    else if(color==3) Gc = 231;//yellow
-//    else if(color==5) Gc = 240;//green
-//    else if(color==7) Gc = 189;//blue
-//    else if(color==11) Gc = 69;//purple
-//    else if(color==13) Gc = 0;//black
-//    return Gc;
-//}
-//int ColorPickerB(int color){
-//    int Bc;
-//    if(color==2) Bc=14;//red
-//    else if(color==3) Bc = 0;//yellow
-//    else if(color==5) Bc = 0;//green
-//    else if(color==7) Bc = 255;//blue
-//    else if(color==11) Bc = 255;//purple
-//    else if(color==13) Bc = 0;//black
-//    return Bc;
-//}
 
 void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
@@ -170,10 +213,6 @@ void ShowBalls(SDL_Renderer* renderer){
 }
 
 void DrawABall(SDL_Renderer* renderer,double x,double y,int color){
-//    int Rc = ColorPickerR(color);
-//    int Gc = ColorPickerG(color);
-//    int Bc = ColorPickerB(color);
-//    filledCircleRGBA(renderer, x, y, R, Rc,Gc,Bc,255);
     switch (color) {
         case 2:
             DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,x-24,y-24,48,48);
@@ -230,6 +269,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     switch (temp_id) {
         case 1:
             DrawWithoutPresent(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
+            //PlayMusic(l_desert_sd,100,-1,1);
             break;
         case 2:
             DrawWithoutPresent(renderer,l_volcano_img,l_volcano_rect,0,0,WIDTH,HEIGHT);
@@ -250,7 +290,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     added_y += Vy;
     DrawWithoutPresent(renderer,bottom_img,bottom_rect,0,BASE_Y+25,WIDTH,100);
     SDL_GetMouseState(&mouse_x,&mouse_y);
-    double angle = 180-( MouseAngle( mouse_x, mouse_y ) * 180 / M_PI );
+   // double angle = 180-( MouseAngle( mouse_x, mouse_y ) * 180 / M_PI );
     if(shoot){
         c1=cannonBall();
         c2=cannonBall();
@@ -293,27 +333,29 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,150,BASE_Y+100-24,36,36);
             break;
     }
+    if((e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e->type=0;
+        PlayMusic(shoot_sd,70,0,true);
+        shooting=true;
+        SDL_GetMouseState(&mouse_x,&mouse_y);
+        double shootedX =WIDTH/2-24,  shootedY=BASE_Y+80-24;
+        dx= (mouse_x-(WIDTH/2-24))/100;
+        dy= (mouse_y-(BASE_Y+80-24))/100;
+    }
+    if(shooting){
+        shootedX+=dx;
+        shootedY+=dy;
+        DrawABall(renderer,shootedX,shootedY,c1);
+    }
 
-//    if((e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
-//        e->type=0;
-//        PlayMusic(shoot_sd,100,0,true);
-//        shooting=true;
-//        shoot_angle=angle;
-//    }
-//    if (shooting){
-//        double shootedX =WIDTH/2-24,  shootedY=BASE_Y+80-24;
-//        double dx=8 * sin(shoot_angle),dy=8 * cos(shoot_angle);
-//        DrawABall(renderer,shootedX+dx,shootedY+dy,c1);
-//    }
-
-    ShowCannon(renderer,mouse_x,mouse_y,angle);
+    ShowCannon(renderer,mouse_x,mouse_y);
     //DrawShootLine(renderer,mouse_x,mouse_y);
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }
 
-void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY, double angle){
-    //double angle = 180-( MouseAngle( mouseX, mouseY ) * 180 / M_PI );
+void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY){
+    double angle = 180-( MouseAngle( mouseX, mouseY ) * 180 / M_PI );
     SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, angle, &center_cannon, SDL_FLIP_NONE);
 }
 double MouseAngle(double mouseX, double mouseY){
