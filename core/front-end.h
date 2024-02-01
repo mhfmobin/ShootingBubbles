@@ -15,9 +15,10 @@ void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play);
 //int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color);
-void ShowCannon(SDL_Renderer* renderer);
+void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY);
+double MouseAngle(double mouseX, double mouseY);
 void ShowLevel(SDL_Renderer* renderer,int level_id);
-void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY);
+void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 
 
 
@@ -246,22 +247,54 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
     ShowBalls(renderer);
     added_y += Vy;
-    ShowCannon(renderer);
     SDL_GetMouseState(&mouse_x,&mouse_y);
-    DrawShootLine(renderer,mouse_x,mouse_y);
+    ShowCannon(renderer,mouse_x,mouse_y);
+    //DrawShootLine(renderer,mouse_x,mouse_y);
 
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }
 
-void ShowCannon(SDL_Renderer* renderer){
+void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY){
     //DrawWithoutPresent(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
-    SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, 2, &center_cannon, SDL_FLIP_NONE);
+    double angle = 180-( MouseAngle( mouseX, mouseY ) * 180 / M_PI );
+    SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, angle, &center_cannon, SDL_FLIP_NONE);
+    int c=cannonBall();
+
+//    switch (c) {
+//        case 2:
+//            SDL_RenderCopyEx(renderer, red_ball_img, NULL, &red_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        case 3:
+//            SDL_RenderCopyEx(renderer, yellow_ball_img, NULL, &yellow_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        case 5:
+//            SDL_RenderCopyEx(renderer, green_ball_img, NULL, &green_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        case 7:
+//            SDL_RenderCopyEx(renderer, blue_ball_img, NULL, &blue_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        case 11:
+//            SDL_RenderCopyEx(renderer, purple_ball_img, NULL, &purple_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        case 13:
+//            SDL_RenderCopyEx(renderer, black_ball_img, NULL, &black_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//        default:
+//            SDL_RenderCopyEx(renderer, black_ball_img, NULL, &black_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
+//            break;
+//    }
 
 
 }
+double MouseAngle(double mouseX, double mouseY){
+    double t= atan((mouseY-(BASE_Y+50))/(mouseX-WIDTH/2));
+    if(mouseX-WIDTH/2>0) t = M_PI/2 - t;
+    else if(mouseX-WIDTH/2<0) t = 3*M_PI/2 - t;
+    return t;
+}
 
-void DrawShootLine(SDL_Renderer* renderer, int mouseX, int mouseY) {
+void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY) {
     float dx = mouseX - xl;
     float dy = mouseY - yl;
     float slope;

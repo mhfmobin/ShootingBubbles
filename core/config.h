@@ -62,7 +62,7 @@ bool show_level_5=false;
 bool show_level_random=false;
 SDL_Point center_cannon;
 int timer = 1000000000;
-float Vy = 0.1; // velocity in Y axis
+float Vy = 0.01; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};
@@ -137,8 +137,8 @@ Mix_Chunk* win_sd;
 // ====================== Initialize =======================
 
 void Initialize() {
-    center_cannon.x = WIDTH/2;
-    center_cannon.y = BASE_Y+50;
+    center_cannon.x = 45;
+    center_cannon.y = 50;
     cannon_rect.x=WIDTH/2-90/2;
     cannon_rect.y=BASE_Y;
     cannon_rect.w=90;
