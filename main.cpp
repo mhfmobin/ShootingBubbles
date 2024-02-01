@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
+    shoot_sd = Mix_LoadWAV("../sounds/shoot.wav");
 
 
 
