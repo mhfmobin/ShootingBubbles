@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
     blue_ball_img = IMG_LoadTexture(renderer, "../images/ball7.png");
     purple_ball_img = IMG_LoadTexture(renderer, "../images/ball11.png");
     black_ball_img = IMG_LoadTexture(renderer, "../images/ball13.png");
+    bottom_img = IMG_LoadTexture(renderer, "../images/botrect.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");

@@ -21,7 +21,6 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 
 
-
 //_______________________functions______________________________
 
 void DrawMenu(SDL_Renderer* renderer){
@@ -166,7 +165,8 @@ void ShowBalls(SDL_Renderer* renderer){
         }
     }
     aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    //SDL_RenderPresent(renderer);
+    aalineRGBA(renderer,0,BASE_Y-2,WIDTH,BASE_Y-2,185,0,0,255);
+
 }
 
 void DrawABall(SDL_Renderer* renderer,int x,int y,int color){
@@ -245,47 +245,61 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             break;
 
     }
+
     ShowBalls(renderer);
     added_y += Vy;
+    DrawWithoutPresent(renderer,bottom_img,bottom_rect,0,BASE_Y+25,WIDTH,100);
     SDL_GetMouseState(&mouse_x,&mouse_y);
+    int c1,c2;
+    if(shoot){
+        c1=cannonBall();
+        c2=cannonBall();
+        shoot=false;
+    }
+    switch (c1) {
+        case 2:
+            DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
+        case 3:
+            DrawWithoutPresent(renderer,yellow_ball_img,yellow_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
+        case 5:
+            DrawWithoutPresent(renderer,green_ball_img,green_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
+        case 7:
+            DrawWithoutPresent(renderer,blue_ball_img,blue_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
+        case 11:
+            DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
+    }
+    switch (c2) {
+        case 2:
+            DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 3:
+            DrawWithoutPresent(renderer,yellow_ball_img,yellow_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 5:
+            DrawWithoutPresent(renderer,green_ball_img,green_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 7:
+            DrawWithoutPresent(renderer,blue_ball_img,blue_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 11:
+            DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+    }
+
     ShowCannon(renderer,mouse_x,mouse_y);
     //DrawShootLine(renderer,mouse_x,mouse_y);
-
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }
 
 void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY){
-    //DrawWithoutPresent(renderer,cannon_img,cannon_rect,WIDTH/2-90/2,BASE_Y,90,100);
     double angle = 180-( MouseAngle( mouseX, mouseY ) * 180 / M_PI );
     SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, angle, &center_cannon, SDL_FLIP_NONE);
-    int c=cannonBall();
-
-//    switch (c) {
-//        case 2:
-//            SDL_RenderCopyEx(renderer, red_ball_img, NULL, &red_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        case 3:
-//            SDL_RenderCopyEx(renderer, yellow_ball_img, NULL, &yellow_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        case 5:
-//            SDL_RenderCopyEx(renderer, green_ball_img, NULL, &green_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        case 7:
-//            SDL_RenderCopyEx(renderer, blue_ball_img, NULL, &blue_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        case 11:
-//            SDL_RenderCopyEx(renderer, purple_ball_img, NULL, &purple_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        case 13:
-//            SDL_RenderCopyEx(renderer, black_ball_img, NULL, &black_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//        default:
-//            SDL_RenderCopyEx(renderer, black_ball_img, NULL, &black_ball_rect, angle, &center_cannon, SDL_FLIP_NONE);
-//            break;
-//    }
-
-
 }
 double MouseAngle(double mouseX, double mouseY){
     double t= atan((mouseY-(BASE_Y+50))/(mouseX-WIDTH/2));

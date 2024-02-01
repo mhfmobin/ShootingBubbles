@@ -46,6 +46,7 @@ int xl=WIDTH/2;
 int yl=BASE_Y+100;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
+bool shoot= true;
 bool run=true;
 bool modes = false;
 bool levels = false;
@@ -114,6 +115,8 @@ SDL_Texture* purple_ball_img = NULL;
 SDL_Rect purple_ball_rect;
 SDL_Texture* black_ball_img = NULL;
 SDL_Rect black_ball_rect;
+SDL_Texture* bottom_img = NULL;
+SDL_Rect bottom_rect;
 
 // ====================== Sounds =======================
 
@@ -138,7 +141,7 @@ Mix_Chunk* win_sd;
 
 void Initialize() {
     center_cannon.x = 45;
-    center_cannon.y = 50;
+    center_cannon.y = 80;
     cannon_rect.x=WIDTH/2-90/2;
     cannon_rect.y=BASE_Y;
     cannon_rect.w=90;
