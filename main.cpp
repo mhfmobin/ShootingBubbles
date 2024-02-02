@@ -46,6 +46,8 @@ int main(int argc, char* argv[]) {
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
     shoot_sd = Mix_LoadWAV("../sounds/shoot.wav");
     test = Mix_LoadMUS("../sounds/test.mp3");
+    game_over_sd = Mix_LoadWAV("../sounds/game-over.wav");
+    win_sd = Mix_LoadWAV("../sounds/win.wav");
 
 
 
@@ -115,6 +117,26 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
+        }
+        while(show_level_2){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,2);
+        }
+        while(show_level_3){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,3);
+        }
+        while(show_level_4){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,4);
+        }
+        while(show_level_5){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,5);
         }
         while(show_level_random){
             SDL_SetRenderDrawColor(renderer,0,0,0,225);

@@ -98,6 +98,46 @@ void Levels(SDL_Renderer* renderer){
         SDL_RenderClear(renderer);
         show_level_1=true;
     }
+    if((mouse_x>265)&&(mouse_x<460)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        data = {};
+        loadLevel(2);
+        added_y=0;
+        levels = false;
+        menu_show = false;
+        SDL_RenderClear(renderer);
+        show_level_2=true;
+    }
+    if((mouse_x>25)&&(mouse_x<200)&&(mouse_y>390)&&(mouse_y<435) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        data = {};
+        loadLevel(3);
+        added_y=0;
+        levels = false;
+        menu_show = false;
+        SDL_RenderClear(renderer);
+        show_level_3=true;
+    }
+    if((mouse_x>265)&&(mouse_x<465)&&(mouse_y>390)&&(mouse_y<435) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        data = {};
+        loadLevel(4);
+        added_y=0;
+        levels = false;
+        menu_show = false;
+        SDL_RenderClear(renderer);
+        show_level_4=true;
+    }
+    if((mouse_x>180)&&(mouse_x<290)&&(mouse_y>520)&&(mouse_y<580) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        data = {};
+        loadLevel(5);
+        added_y=0;
+        levels = false;
+        menu_show = false;
+        SDL_RenderClear(renderer);
+        show_level_5=true;
+    }
 }
 
 void Setting(SDL_Renderer* renderer){
@@ -342,14 +382,18 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         dx= (mouse_x-(WIDTH/2-24))/100;
         dy= (mouse_y-(BASE_Y+80-24))/100;
     }
-    if(shooting){
-        shootedX+=dx;
-        shootedY+=dy;
-        DrawABall(renderer,shootedX,shootedY,c1);
-    }
-
-    ShowCannon(renderer,mouse_x,mouse_y);
+//    if(shooting){
+//        shootedX+=dx;
+//        shootedY+=dy;
+//        DrawABall(renderer,shootedX,shootedY,c1);
+//    }
     DrawShootLine(renderer,mouse_x,mouse_y);
+    ShowCannon(renderer,mouse_x,mouse_y);
+
+//    if(isGameOver()){
+//
+//        PlayMusic(game_over_sd,50,0,sound_play);
+//    }
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }

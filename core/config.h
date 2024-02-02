@@ -38,7 +38,7 @@ struct Ball {
 
 vector<vector<Ball>> data;
 int xl=WIDTH/2;
-int yl=BASE_Y+100;
+int yl=BASE_Y+78;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
@@ -67,7 +67,7 @@ bool sound_play=true;
 double vol=1;
 SDL_Point center_cannon;
 int timer = 1000000000;
-float Vy = 0.01; // velocity in Y axis
+float Vy = 0.1; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 vector<int> times = {60,60,60,60,60};
