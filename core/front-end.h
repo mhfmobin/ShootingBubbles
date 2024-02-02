@@ -349,7 +349,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
 
     ShowCannon(renderer,mouse_x,mouse_y);
-    //DrawShootLine(renderer,mouse_x,mouse_y);
+    DrawShootLine(renderer,mouse_x,mouse_y);
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }
@@ -369,15 +369,40 @@ void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY) {
     float dx = mouseX - xl;
     float dy = mouseY - yl;
     float slope;
+    float x2,y2;
     if(dx!=0) slope=dy/dx;
     else if(dx==0) aalineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
     if (slope<0) {
-        aalineRGBA(renderer,xl,yl,WIDTH,slope*(WIDTH-xl)+yl,142,55,200,255);
-        aalineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,-WIDTH,-slope*(-WIDTH-WIDTH)+slope*(WIDTH-xl)+yl,142,55,200,255);
+        x2 = WIDTH;
+        y2 = slope*(WIDTH-xl)+yl;
+        if(y2<0){
+            y2 = 0;
+            x2 = -yl/slope + xl;
+        }
+        aalineRGBA(renderer,xl,yl,x2,y2,142,55,200,255);
+        x2 = -WIDTH;
+        y2 = -slope*(-WIDTH-WIDTH)+slope*(WIDTH-xl)+yl;
+        if(y2<0){
+            y2=0;
+            x2= WIDTH + (WIDTH-xl) + yl/slope;
+        }
+        aalineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,x2,y2,142,55,200,255);
     }
     else if (slope>0) {
+        x2 = 0;
+        y2 = slope*(0-xl)+yl;
+        if(y2<0){
+            y2 = 0;
+            x2 = -yl/slope + xl;;
+        }
         aalineRGBA(renderer,xl,yl,0,slope*(0-xl)+yl,142,55,200,255);
-        aalineRGBA(renderer,0,slope*(0-xl)+yl,WIDTH,-slope*(WIDTH-0)+slope*(0-xl)+yl,142,55,200,255);
+        x2 = WIDTH;
+        y2 = -slope*(WIDTH-0)+slope*(0-xl)+yl;
+        if(y2<0){
+            y2 = 0;
+            x2 = yl/slope - xl;
+        }
+        aalineRGBA(renderer,0,slope*(0-xl)+yl,x2,y2,142,55,200,255);
     }
 
     //SDL_RenderPresent(renderer);
