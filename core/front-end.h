@@ -10,10 +10,8 @@ void Levels(SDL_Renderer* renderer);
 void Setting(SDL_Renderer* renderer);
 void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play);
 double Distance(double x1,double y1,double x2,double y2);
+string CountDown(int s);
 //game
-//int ColorPickerR(int color);
-//int ColorPickerG(int color);
-//int ColorPickerB(int color);
 void ShowBalls(SDL_Renderer* renderer);
 void DrawABall(SDL_Renderer* renderer,double x,double y,int color);
 void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY);
@@ -82,6 +80,7 @@ void Modes(SDL_Renderer* renderer){
         show_timer_level=true;
         timer_level=true;
         is_timer_on=true;
+        start_time = time();
     }
 }
 
@@ -283,9 +282,6 @@ void DrawABall(SDL_Renderer* renderer,double x,double y,int color){
         case 13:
             DrawWithoutPresent(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
             break;
-        default:
-            DrawWithoutPresent(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
-            break;
     }
 }
 void ShowLevel(SDL_Renderer* renderer,int level_id){
@@ -428,7 +424,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawShootLine(renderer,mouse_x,mouse_y);
     ShowCannon(renderer,mouse_x,mouse_y);
     if(timer_level){
-        stringRGBA(renderer,480-175,720-30,"time = 145",255,255,255,255);
+        string tim = CountDown(70);
+        stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
     }
 
 //    if(isGameOver()){
@@ -562,5 +559,14 @@ double Distance(double x1,double y1,double x2,double y2){
     return d;
 }
 
-
+string CountDown(int s) {
+    auto now_s = time();
+    auto end_s = start_time + s;
+    auto remaining_s = end_s - now_s;
+    auto minutes = remaining_s / 60;
+    auto seconds = remaining_s % 60;
+    ostringstream oss;
+    oss << setw(2) << setfill('0') << minutes << ":"<< setw(2) << setfill('0') << seconds;
+    return "time = "+oss.str();
+}
 #endif //BOUNCINGBALLS_FRONT_END_H

@@ -12,6 +12,7 @@
 #include "core/back-end.h"
 #include "core/front-end.h"
 
+
 int main(int argc, char* argv[]) {
     loadSettings();
     Initialize();
@@ -63,8 +64,8 @@ int main(int argc, char* argv[]) {
 
     e->type = 0;
     SDL_PollEvent(e);
-
     while (run){
+
         SDL_PollEvent(e);
         SDL_ShowCursor(SDL_ENABLE);
         mouse_x = e->button.x;
@@ -76,6 +77,10 @@ int main(int argc, char* argv[]) {
             run=false;
             break;
         }
+//        if( e -> type == SDL_TEXTINPUT){
+//            e->type = 0;
+//            name += e->text.text;
+//        }
         if(!music_play){
             menu_sd_c=false;
         }
@@ -147,6 +152,11 @@ int main(int argc, char* argv[]) {
             ShowLevel(renderer,6);
         }
         while(show_timer_level){
+            if( e -> type == SDL_QUIT){
+                e->type = 0;
+                show_timer_level=false;
+                break;
+            }
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,7);
         }
