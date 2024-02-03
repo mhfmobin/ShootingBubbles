@@ -186,17 +186,16 @@ void ballPlacement(int row, int col, int color) {
     float added = (row%2) ? 2*R : R ;
     data[row][col].x = 2*col*R + added;
     data[row][col].y = START_Y - ((level_row_count-1 - row) * sqrt(3) * R + R);
-    cout<<data[row][col].x<<" "<<data[row][col].y<<endl;
 
-   popBalls(row, col, color, true);
+    popBalls(row, col, color, true);
 
-//    for (int i = 0; i < data[0].size(); ++i) {
-//        if (data[0][i].color && !data[0][i].falling_tmp) {
-//            data[0][i].falling_tmp = true;
-//            fallBalls(0, i);
-//        }
-//    }
-//    resetFallingBalls();
+    for (int i = 0; i < data[0].size(); ++i) {
+        if (data[0][i].color && !data[0][i].falling_tmp) {
+            data[0][i].falling_tmp = true;
+            fallBalls(0, i);
+        }
+    }
+    resetFallingBalls();
 }
 
 void popBalls(int row, int col, int color, bool first) {
@@ -253,12 +252,13 @@ void fallBalls(int row, int col) {
 
 void resetFallingBalls() {
     for (int i = 0; i < data.size(); ++i)
-        for (int j = 0; j < data[i].size(); ++j)
-            if (data[i][j].falling_tmp) {
-                data[i][j].falling_tmp = false;
+        for (int j = 0; j < data[i].size(); ++j) {
+            if (!data[i][j].falling_tmp) {
                 data[i][j].is_falling = true;
-                data[i][j].color = 0;
+                // data[i][j].color = 0;
             }
+            data[i][j].falling_tmp = false;
+        }
 }
 
 void generateRandomGame(int n) {
