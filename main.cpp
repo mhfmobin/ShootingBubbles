@@ -41,6 +41,8 @@ int main(int argc, char* argv[]) {
     purple_ball_img = IMG_LoadTexture(renderer, "../images/ball11.png");
     black_ball_img = IMG_LoadTexture(renderer, "../images/ball13.png");
     bottom_img = IMG_LoadTexture(renderer, "../images/botrect.png");
+    go_img = IMG_LoadTexture(renderer, "../images/game-over.png");
+    win_img = IMG_LoadTexture(renderer, "../images/win.png");
     //load sounds
     menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
@@ -69,7 +71,8 @@ int main(int argc, char* argv[]) {
         if(menu_show) DrawMenu(renderer);
 
         if( e -> type == SDL_QUIT){
-            e->type = 0;run=false;
+            e->type = 0;
+            run=false;
             break;
         }
         if(!music_play){
@@ -141,6 +144,11 @@ int main(int argc, char* argv[]) {
         while(show_level_random){
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,6);
+        }
+        while(show_game_over){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowGameOver(renderer);
         }
 
         e->type = 0;

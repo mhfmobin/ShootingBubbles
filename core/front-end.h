@@ -19,6 +19,8 @@ void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY);
 double MouseAngle(double mouseX, double mouseY);
 void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
+void ShowWin(SDL_Renderer* renderer);
+void ShowGameOver(SDL_Renderer* renderer);
 
 
 //_______________________functions______________________________
@@ -391,8 +393,15 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     ShowCannon(renderer,mouse_x,mouse_y);
 
 //    if(isGameOver()){
-//
 //        PlayMusic(game_over_sd,50,0,sound_play);
+//        data.clear();
+//        show_level_1=false;
+//        show_level_2=false;
+//        show_level_3=false;
+//        show_level_4=false;
+//        show_level_5=false;
+//        show_level_random=false;
+//        show_game_over=true;
 //    }
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
@@ -449,7 +458,51 @@ void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY) {
         aalineRGBA(renderer,0,slope*(0-xl)+yl,x2,y2,142,55,200,255);
     }
 
-    //SDL_RenderPresent(renderer);
 }
+
+void ShowWin(SDL_Renderer* renderer){
+    SDL_PollEvent(e);
+    SDL_ShowCursor(SDL_ENABLE);
+    mouse_x = e->button.x;
+    mouse_y = e->button.y;
+    Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
+
+    // SHOW SCORES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    if( e -> type == SDL_QUIT){
+        show_win=false;
+    }
+    if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
+    {
+        e ->type = 0 ;
+        show_win=false;
+    }
+    if((mouse_x>180)&&(mouse_x<270)&&(mouse_y>545)&&(mouse_y<635) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        levels=true;
+        show_win=false;
+    }
+}
+void ShowGameOver(SDL_Renderer* renderer){
+    SDL_PollEvent(e);
+    SDL_ShowCursor(SDL_ENABLE);
+    mouse_x = e->button.x;
+    mouse_y = e->button.y;
+    Draw(renderer,go_img,win_rect,0,0,WIDTH,HEIGHT);
+    if( e -> type == SDL_QUIT){
+        show_game_over=false;
+    }
+    if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
+    {
+        e ->type = 0 ;
+        show_game_over=false;
+    }
+    if((mouse_x>190)&&(mouse_x<280)&&(mouse_y>545)&&(mouse_y<635) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        levels=true;
+        show_game_over=false;
+    }
+}
+
 
 #endif //BOUNCINGBALLS_FRONT_END_H

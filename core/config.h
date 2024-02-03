@@ -62,6 +62,8 @@ bool show_level_3=false;
 bool show_level_4=false;
 bool show_level_5=false;
 bool show_level_random=false;
+bool show_win=false;
+bool show_game_over=false;
 bool music_play=true;
 bool sound_play=true;
 double vol=1;
@@ -121,6 +123,11 @@ SDL_Texture* black_ball_img = NULL;
 SDL_Rect black_ball_rect;
 SDL_Texture* bottom_img = NULL;
 SDL_Rect bottom_rect;
+SDL_Texture* go_img = NULL;
+SDL_Rect go_rect;
+SDL_Texture* win_img = NULL;
+SDL_Rect win_rect;
+
 
 // ====================== Sounds =======================
 
