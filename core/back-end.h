@@ -149,6 +149,12 @@ int cannonBall() {
         return result;
     });
 
+    // removing black
+
+    if (uniqueColors.find(13) != uniqueColors.end())
+        uniqueColors.erase(13);
+
+ 
     int color = 0;
 
     if (uniqueColors.size() == 1) {
@@ -245,7 +251,6 @@ void resetFallingBalls() {
             }
 }
 
-
 void generateRandomGame(int n) {
     data.clear();
     srand(time(NULL));
@@ -276,3 +281,4 @@ void generateRandomGame(int n) {
         }
     }
 }
+
