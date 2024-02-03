@@ -53,7 +53,7 @@ int mouse_x, mouse_y;
 int c1,c2;
 double dx=0,dy=0;
 double shoot_angle;
-bool shoot= true;
+bool shoot = true;
 bool shooting = false;
 bool run=true;
 bool login=true;

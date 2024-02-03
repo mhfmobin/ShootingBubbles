@@ -15,6 +15,9 @@ void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
 void resetFallingBalls();
 void generateRandomGame(int n);
+void saveScore(int score);
+unordered_map<string, int> sortedScores();
+bool ballCollision();
 
 //================================ Implementation ================================
 
@@ -320,7 +323,7 @@ unordered_map<string, int> sortedScores() {
     return sortedMap;
 }
 
-void ballCollision() {
+bool ballCollision() {
     for (int i = 0; i < data.size(); i++) {
         for (int j = 0; j < data[i].size(); j++) {
             if (!data[i][j].color) continue;
@@ -347,9 +350,11 @@ void ballCollision() {
 
                 if (isValidPosition(fi, fj) && !data[fi][fj].color) {
                     ballPlacement(fi,fj,shooted_ball.color);
-                    return;
+                    return true;
                 }
             }
         }
     }
+
+    return false;
 }

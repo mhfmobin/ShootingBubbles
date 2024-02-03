@@ -394,31 +394,20 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,150,BASE_Y+100-24,36,36);
             break;
     }
-    ShootBall shooted;
-    shooted.color=c1;
-    shooted.x= WIDTH/2;
-    shooted.y=BASE_Y+80;
-    shooting_balls.push_back(shooted);
+    shooted_ball.color = c1;
+    shooted_ball.x = WIDTH/2;
+    shooted_ball.y = BASE_Y+80;
     if(shooting){
 
-        if((shooting_balls[0].x==WIDTH-48) || (shooting_balls[0].x==0+48)){
+        if((shooted_ball.x==WIDTH-48) || (shooted_ball.x==0+48)){
             dx=-dx;
             cout<<"are";
         }
 
-        shooting_balls[0].x+=dx;
-        shooting_balls[0].y+=dy;
-        DrawABall(renderer,shooting_balls[0].x,shooting_balls[0].y,shooting_balls[0].color);
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data[i].size(); ++j) {
-                if(Distance(data[i][j].x+24,data[i][j].y+24,shooting_balls[0].x+24,shooting_balls[0].y+24)<=48){
-                    //if()
-                    ballPlacement(i,j,shooting_balls[0].color);
-                    shooting_balls.pop_back();
-                    shooting = false;
-                }
-            }
-        }
+        shooted_ball.x+=dx;
+        shooted_ball.y+=dy;
+        DrawABall(renderer,shooted_ball.x,shooted_ball.y,shooted_ball.color);
+        shooting = !ballCollision();
     }
     DrawShootLine(renderer,mouse_x,mouse_y);
     ShowCannon(renderer,mouse_x,mouse_y);
