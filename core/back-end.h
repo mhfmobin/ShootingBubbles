@@ -255,7 +255,7 @@ void resetFallingBalls() {
         for (int j = 0; j < data[i].size(); ++j) {
             if (!data[i][j].falling_tmp) {
                 data[i][j].is_falling = true;
-                // data[i][j].color = 0;
+                data[i][j].color = 0;
             }
             data[i][j].falling_tmp = false;
         }
