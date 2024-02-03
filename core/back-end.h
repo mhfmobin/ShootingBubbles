@@ -130,6 +130,8 @@ void loadLevel(int level_id) {
             data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
         }
     }
+    level_row_count = data.size();
+
 }
 
 bool isColor(int n) {
@@ -178,10 +180,13 @@ bool isValidPosition(int row, int col) {
 }
 
 void ballPlacement(int row, int col, int color) {
+
+    cout<<row<<" "<<col<<endl;
     data[row][col].color = color;
     float added = (row%2) ? 2*R : R ;
     data[row][col].x = 2*col*R + added;
-    data[row][col].y = START_Y - ((data.size()-1 - row) * sqrt(3) * R + R);
+    data[row][col].y = START_Y - ((level_row_count-1 - row) * sqrt(3) * R + R);
+
     popBalls(row, col, color, true);
 
     for (int i = 0; i < data[0].size(); ++i) {
@@ -247,12 +252,13 @@ void fallBalls(int row, int col) {
 
 void resetFallingBalls() {
     for (int i = 0; i < data.size(); ++i)
-        for (int j = 0; j < data[i].size(); ++j)
-            if (data[i][j].falling_tmp) {
-                data[i][j].falling_tmp = false;
+        for (int j = 0; j < data[i].size(); ++j) {
+            if (!data[i][j].falling_tmp) {
                 data[i][j].is_falling = true;
-                data[i][j].color = 0;
+                // data[i][j].color = 0;
             }
+            data[i][j].falling_tmp = false;
+        }
 }
 
 void generateRandomGame(int n) {
@@ -345,7 +351,7 @@ bool ballCollision() {
                     data.emplace_back();
                     for (int k = 0; k < MAX_BALLS - (fi%2); k++) {
                         data[fi].push_back(empty);
-                    }      
+                    }
                 }
 
                 if (isValidPosition(fi, fj) && !data[fi][fj].color) {
