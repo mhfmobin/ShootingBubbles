@@ -23,7 +23,7 @@ bool ballCollision();
 
 bool isGameOver() {
     if (is_timer_on)
-        if (!timer)
+        if (tim=="time = 00:00")
             return true;
 
     int last_row = data.size() - 1;

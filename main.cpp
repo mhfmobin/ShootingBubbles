@@ -203,6 +203,7 @@ int main(int argc, char* argv[]) {
                 show_timer_level=false;
                 break;
             }
+
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,7);
         }

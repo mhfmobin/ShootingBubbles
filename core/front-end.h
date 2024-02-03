@@ -256,8 +256,6 @@ void ShowBalls(SDL_Renderer* renderer){
             DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
-    aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
-    aalineRGBA(renderer,0,BASE_Y-2,WIDTH,BASE_Y-2,185,0,0,255);
 
 }
 
@@ -351,7 +349,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
 
     ShowBalls(renderer);
     added_y += Vy;
-    DrawWithoutPresent(renderer,bottom_img,bottom_rect,0,BASE_Y+25,WIDTH,100);
+    DrawWithoutPresent(renderer,bottom_img,bottom_rect,0,BASE_Y,WIDTH,HEIGHT-BASE_Y);
     SDL_GetMouseState(&mouse_x,&mouse_y);
    // double angle = 180-( MouseAngle( mouse_x, mouse_y ) * 180 / M_PI );
     if(shoot){
@@ -413,22 +411,25 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     ShowCannon(renderer,mouse_x,mouse_y);
     stringRGBA(renderer,20,720-30, name.c_str(),255,255,255,255);
     if(timer_level){
-        string tim = CountDown(70);
+        tim = CountDown(5);
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
     }
 
-//    if(isGameOver()){
-//        PlayMusic(game_over_sd,50,0,sound_play);
-//        data.clear();
-//        show_level_1=false;
-//        show_level_2=false;
-//        show_level_3=false;
-//        show_level_4=false;
-//        show_level_5=false;
-//        show_level_random=false;
-//        show_game_over=true;
-//
-//    }
+    if(isGameOver()){
+        PlayMusic(game_over_sd,50,0,sound_play);
+        SDL_RenderClear(renderer);
+        data.clear();
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+        show_level_random=false;
+        show_game_over=true;
+        SDL_SetRenderDrawColor(renderer,0,0,0,255);
+        SDL_RenderPresent(renderer);
+        //ShowGameOver(renderer);
+    }
 //    if(isWinner()){
 //        PlayMusic(win_sd,50,0,sound_play);
 //        data.clear();
