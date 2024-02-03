@@ -253,7 +253,8 @@ void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play){
 void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
         for (int j = 0; j < data[i].size(); ++j) {
-            DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
+            if (data[i][j].color)
+                DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
         }
     }
     aalineRGBA(renderer,0,BASE_Y,WIDTH,BASE_Y,185,0,0,255);
@@ -353,14 +354,14 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     added_y += Vy;
     DrawWithoutPresent(renderer,bottom_img,bottom_rect,0,BASE_Y+25,WIDTH,100);
     SDL_GetMouseState(&mouse_x,&mouse_y);
-   // double angle = 180-( MouseAngle( mouse_x, mouse_y ) * 180 / M_PI );
+    // double angle = 180-( MouseAngle( mouse_x, mouse_y ) * 180 / M_PI );
     if(shoot){
         c1=cannonBall();
         c2=cannonBall();
         shoot=false;
     }
 
-    switch (c1) {
+    switch (c2) {
         case 2:
             DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
             break;
@@ -377,7 +378,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
             break;
     }
-    switch (c2) {
+    switch (c1) {
         case 2:
             DrawWithoutPresent(renderer,red_ball_img,red_ball_rect,150,BASE_Y+100-24,36,36);
             break;
@@ -395,11 +396,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             break;
     }
     shooted_ball.color = c1;
-    shooted_ball.x = WIDTH/2;
-    shooted_ball.y = BASE_Y+80;
     if(shooting){
 
-        if((shooted_ball.x==WIDTH-48) || (shooted_ball.x==0+48)){
+        if((shooted_ball.x>=WIDTH+R) || (shooted_ball.x<=R)){
             dx=-dx;
             cout<<"are";
         }
@@ -408,6 +407,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         shooted_ball.y+=dy;
         DrawABall(renderer,shooted_ball.x,shooted_ball.y,shooted_ball.color);
         shooting = !ballCollision();
+    } else {
+        shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
     }
     DrawShootLine(renderer,mouse_x,mouse_y);
     ShowCannon(renderer,mouse_x,mouse_y);
@@ -417,18 +418,18 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
     }
 
-//    if(isGameOver()){
-//        PlayMusic(game_over_sd,50,0,sound_play);
-//        data.clear();
-//        show_level_1=false;
-//        show_level_2=false;
-//        show_level_3=false;
-//        show_level_4=false;
-//        show_level_5=false;
-//        show_level_random=false;
-//        show_game_over=true;
-//
-//    }
+    if(isGameOver()){
+        PlayMusic(game_over_sd,50,0,sound_play);
+        data.clear();
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+        show_level_random=false;
+        show_game_over=true;
+
+    }
 //    if(isWinner()){
 //        PlayMusic(win_sd,50,0,sound_play);
 //        data.clear();

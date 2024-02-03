@@ -130,6 +130,8 @@ void loadLevel(int level_id) {
             data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
         }
     }
+    level_row_count = data.size();
+
 }
 
 bool isColor(int n) {
@@ -178,19 +180,23 @@ bool isValidPosition(int row, int col) {
 }
 
 void ballPlacement(int row, int col, int color) {
+
+    cout<<row<<" "<<col<<endl;
     data[row][col].color = color;
     float added = (row%2) ? 2*R : R ;
     data[row][col].x = 2*col*R + added;
-    data[row][col].y = START_Y - ((data.size()-1 - row) * sqrt(3) * R + R);
-    popBalls(row, col, color, true);
+    data[row][col].y = START_Y - ((level_row_count-1 - row) * sqrt(3) * R + R);
+    cout<<data[row][col].x<<" "<<data[row][col].y<<endl;
 
-    for (int i = 0; i < data[0].size(); ++i) {
-        if (data[0][i].color && !data[0][i].falling_tmp) {
-            data[0][i].falling_tmp = true;
-            fallBalls(0, i);
-        }
-    }
-    resetFallingBalls();
+   popBalls(row, col, color, true);
+
+//    for (int i = 0; i < data[0].size(); ++i) {
+//        if (data[0][i].color && !data[0][i].falling_tmp) {
+//            data[0][i].falling_tmp = true;
+//            fallBalls(0, i);
+//        }
+//    }
+//    resetFallingBalls();
 }
 
 void popBalls(int row, int col, int color, bool first) {
@@ -345,7 +351,7 @@ bool ballCollision() {
                     data.emplace_back();
                     for (int k = 0; k < MAX_BALLS - (fi%2); k++) {
                         data[fi].push_back(empty);
-                    }      
+                    }
                 }
 
                 if (isValidPosition(fi, fj) && !data[fi][fj].color) {

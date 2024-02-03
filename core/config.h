@@ -36,7 +36,7 @@ struct Ball {
 *****************************************************/
 
 vector<vector<Ball>> data;
-Ball shooted_ball = {0, 0, 0, 0, 0};
+Ball shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
 int xl=WIDTH/2;
 int yl=BASE_Y+78;
 time_t start_time;
@@ -44,6 +44,7 @@ string name="";
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
+int level_row_count = 100;
 double dx=0,dy=0;
 double shoot_angle;
 bool shoot = true;
