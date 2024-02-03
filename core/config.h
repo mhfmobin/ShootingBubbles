@@ -46,6 +46,8 @@ vector<vector<Ball>> data;
 vector<ShootBall> shooting_balls;
 int xl=WIDTH/2;
 int yl=BASE_Y+78;
+time_t start_time;
+string name="";
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
