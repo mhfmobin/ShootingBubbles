@@ -320,7 +320,7 @@ unordered_map<string, int> sortedScores() {
     return sortedMap;
 }
 
-void ballCollision(int i, int j) {
+void ballCollision() {
     for (int i = 0; i < data.size(); i++) {
         for (int j = 0; j < data[i].size(); j++) {
             if (!data[i][j].color) continue;
