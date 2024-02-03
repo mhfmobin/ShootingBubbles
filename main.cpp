@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     win_sd = Mix_LoadWAV("../sounds/win.wav");
 
 
-
+    TTF_Init();
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     SDL_RenderPresent(renderer);
@@ -62,25 +62,71 @@ int main(int argc, char* argv[]) {
     Mix_VolumeMusic(10*vol);
     Mix_PlayMusic(test,-1);
 
+    TTF_Font* font = TTF_OpenFont("../ShareTechMono.ttf", 24);
+
+    SDL_StartTextInput();
+
+    char inputText[100] = "";
+    SDL_Color textColor = {255, 255, 255, 255};
+    SDL_Surface* inputSurface = NULL;
+    SDL_Texture* inputTexture = NULL;
+    SDL_Event e2;
+
+    while (login) {
+        stringRGBA(renderer,20,20,"please enter your name: ",255,255,255,255);
+        while (SDL_PollEvent(&e2) != 0) {
+
+            if (e2.type == SDL_QUIT) {
+                login = false;
+            } else if (e2.type == SDL_TEXTINPUT) {
+                strcat(inputText, e2.text.text);
+                SDL_FreeSurface(inputSurface);
+                SDL_DestroyTexture(inputTexture);
+                inputSurface = TTF_RenderText_Solid(font, inputText, textColor);
+                inputTexture = SDL_CreateTextureFromSurface(renderer, inputSurface);
+            } else if (e2.type == SDL_KEYDOWN) {
+                if (e2.key.keysym.sym == SDLK_RETURN && strlen(inputText) > 0) {
+                    name = inputText;
+                    inputText[strlen(inputText) - 1] = '\0';
+                    SDL_FreeSurface(inputSurface);
+                    SDL_DestroyTexture(inputTexture);
+                    inputSurface = TTF_RenderText_Solid(font, inputText, textColor);
+                    inputTexture = SDL_CreateTextureFromSurface(renderer, inputSurface);
+                    login = false;
+                    run=true;
+                }
+            }
+        }
+
+        if (inputSurface != NULL && inputTexture != NULL) {
+            SDL_Rect inputRect = {100, 100, inputSurface->w, inputSurface->h};
+            SDL_RenderCopy(renderer, inputTexture, NULL, &inputRect);
+        }
+
+
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyTexture(inputTexture);
+    SDL_FreeSurface(inputSurface);
+    TTF_CloseFont(font);
+    SDL_StopTextInput();
+    TTF_Quit();
+
+
     e->type = 0;
     SDL_PollEvent(e);
     while (run){
-
         SDL_PollEvent(e);
         SDL_ShowCursor(SDL_ENABLE);
         mouse_x = e->button.x;
         mouse_y = e->button.y;
         if(menu_show) DrawMenu(renderer);
-
         if( e -> type == SDL_QUIT){
             e->type = 0;
             run=false;
             break;
         }
-//        if( e -> type == SDL_TEXTINPUT){
-//            e->type = 0;
-//            name += e->text.text;
-//        }
         if(!music_play){
             menu_sd_c=false;
         }
@@ -172,6 +218,7 @@ int main(int argc, char* argv[]) {
         }
 
         e->type = 0;
+
     }
 
 
