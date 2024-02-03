@@ -47,7 +47,6 @@ void DrawWithoutPresent(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img
     //SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
 }
-
 void Modes(SDL_Renderer* renderer){
     SDL_PollEvent(e);
     SDL_ShowCursor(SDL_ENABLE);
@@ -423,6 +422,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
     DrawShootLine(renderer,mouse_x,mouse_y);
     ShowCannon(renderer,mouse_x,mouse_y);
+    stringRGBA(renderer,20,720-30, name.c_str(),255,255,255,255);
     if(timer_level){
         string tim = CountDown(70);
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
