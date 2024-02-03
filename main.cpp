@@ -33,6 +33,7 @@ int main(int argc, char* argv[]) {
     l_poison_img = IMG_LoadTexture(renderer, "../images/level-poison.png");
     l_shadow_img = IMG_LoadTexture(renderer, "../images/level-shadow.png");
     l_final_img = IMG_LoadTexture(renderer, "../images/level-final.png");
+    l_timer_img = IMG_LoadTexture(renderer, "../images/level-time.png");
     cannon_img = IMG_LoadTexture(renderer, "../images/cannon.png");
     red_ball_img = IMG_LoadTexture(renderer, "../images/ball2.png");
     yellow_ball_img = IMG_LoadTexture(renderer, "../images/ball3.png");
@@ -145,10 +146,19 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,6);
         }
+        while(show_timer_level){
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,7);
+        }
         while(show_game_over){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
+        }
+        while(show_win){
+            //Mix_VolumeMusic(0);
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowWin(renderer);
         }
 
         e->type = 0;

@@ -31,18 +31,25 @@ struct Ball {
     float x = 0, y = 0;
 };
 
+struct ShootBall {
+    double x;
+    double y;
+    int color;
+};
+
 
 /*****************************************************
                     Global Variable
 *****************************************************/
 
 vector<vector<Ball>> data;
+vector<ShootBall> shooting_balls;
 int xl=WIDTH/2;
 int yl=BASE_Y+78;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
-int dx=0,dy=0;
+double dx=0,dy=0;
 double shootedX =0, shootedY=0;
 double shoot_angle;
 bool shoot= true;
@@ -62,6 +69,8 @@ bool show_level_3=false;
 bool show_level_4=false;
 bool show_level_5=false;
 bool show_level_random=false;
+bool timer_level=false;
+bool show_timer_level;
 bool show_win=false;
 bool show_game_over=false;
 bool music_play=true;
@@ -158,6 +167,7 @@ void Initialize() {
     cannon_rect.y=BASE_Y;
     cannon_rect.w=90;
     cannon_rect.h=100;
+
 }
 
 
