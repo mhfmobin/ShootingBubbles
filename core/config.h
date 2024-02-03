@@ -43,7 +43,7 @@ struct ShootBall {
 *****************************************************/
 
 vector<vector<Ball>> data;
-vector<ShootBall> shooting_balls;
+Ball shooted_ball;
 int xl=WIDTH/2;
 int yl=BASE_Y+78;
 time_t start_time;
@@ -51,7 +51,6 @@ string name="";
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
-string username;
 double dx=0,dy=0;
 double shootedX =0, shootedY=0;
 double shoot_angle;

@@ -15,6 +15,7 @@ void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
 void resetFallingBalls();
 void generateRandomGame(int n);
+
 //================================ Implementation ================================
 
 bool isGameOver() {
@@ -282,14 +283,14 @@ void generateRandomGame(int n) {
     }
 }
 
-void saveScore(string username, int score) {
+void saveScore(int score) {
     string filename = "../data/scores.csv"; 
     ofstream file(filename, ios::app);
     if (!file.good()) {
         cerr << "Error opening the file: " << filename << endl;
         return;
     }
-    file << username << "," << score << endl;
+    file << name << "," << score << endl;
     file.close();
 }
 
@@ -317,4 +318,38 @@ unordered_map<string, int> sortedScores() {
     unordered_map<string, int> sortedMap(sortedScoresVec.begin(), sortedScoresVec.end());
 
     return sortedMap;
+}
+
+void ballCollision(int i, int j) {
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < data[i].size(); j++) {
+            if (!data[i][j].color) continue;
+            
+            float d = pow(data[i][j].x - shooted_ball.x, 2) + pow(data[i][j].y - shooted_ball.y, 2);
+            
+            if (d <= pow(2*R, 2)) {
+                Ball ball = data[i][j];
+                float x = ball.x, y = ball.y + added_y;
+                float sx = shooted_ball.x, sy = shooted_ball.y;
+                int fi = 0, fj = 0;
+
+                fi = (sy > y + R) ? i+1 : i;
+                fj = (sx > x) ? j+(i%2)  : j -1 + (i%2);
+                
+                if (fi == data.size()) {
+                    Ball empty;
+                    empty.color = 0;
+                    data.emplace_back();
+                    for (int k = 0; k < MAX_BALLS - (fi%2); k++) {
+                        data[fi].push_back(empty);
+                    }      
+                }
+
+                if (isValidPosition(fi, fj) && !data[fi][fj].color) {
+                    ballPlacement(fi,fj,shooted_ball.color);
+                    return;
+                }
+            }
+        }
+    }
 }
