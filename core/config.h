@@ -31,19 +31,12 @@ struct Ball {
     float x = 0, y = 0;
 };
 
-struct ShootBall {
-    double x;
-    double y;
-    int color;
-};
-
-
 /*****************************************************
                     Global Variable
 *****************************************************/
 
 vector<vector<Ball>> data;
-Ball shooted_ball;
+Ball shooted_ball = {0, 0, 0, 0, 0};
 int xl=WIDTH/2;
 int yl=BASE_Y+78;
 time_t start_time;
