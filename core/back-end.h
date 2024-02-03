@@ -282,3 +282,39 @@ void generateRandomGame(int n) {
     }
 }
 
+void saveScore(string username, int score) {
+    string filename = "../data/scores.csv"; 
+    ofstream file(filename, ios::app);
+    if (!file.good()) {
+        cerr << "Error opening the file: " << filename << endl;
+        return;
+    }
+    file << username << "," << score << endl;
+    file.close();
+}
+
+unordered_map<string, int> sortedScores() {
+    string filename = "../data/scores.csv"; 
+    ifstream file(filename);
+    if (!file.good()) {
+        cerr << "Error opening the file: " << filename << endl;
+        return {};
+    }
+    string line;
+    unordered_map<string, int> scores;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string username;
+        string score;
+        getline(ss, username, ',');
+        getline(ss, score, ',');
+        scores[username] = stoi(score);
+    }
+    file.close();
+
+    vector<pair<string, int>> sortedScoresVec(scores.begin(), scores.end());
+    sort(sortedScoresVec.begin(), sortedScoresVec.end(), [](const auto &a, const auto &b) {return a.second > b.second;});
+    unordered_map<string, int> sortedMap(sortedScoresVec.begin(), sortedScoresVec.end());
+
+    return sortedMap;
+}

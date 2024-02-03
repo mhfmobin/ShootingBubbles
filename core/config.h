@@ -49,6 +49,7 @@ int yl=BASE_Y+78;
 SDL_Event* e = new SDL_Event();
 int mouse_x, mouse_y;
 int c1,c2;
+string username;
 double dx=0,dy=0;
 double shootedX =0, shootedY=0;
 double shoot_angle;
@@ -81,6 +82,7 @@ int timer = 1000000000;
 float Vy = 0.1; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
+unordered_map<string, int> scores;
 vector<int> times = {60,60,60,60,60};
 vector<int> colors = {2,3,5,7,11,13};
 // 2 -> red
