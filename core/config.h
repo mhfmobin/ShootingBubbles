@@ -136,6 +136,10 @@ SDL_Texture* win_img = NULL;
 SDL_Rect win_rect;
 SDL_Texture* login_img = NULL;
 SDL_Rect login_rect;
+SDL_Texture* devil_img = NULL;
+SDL_Rect devil_rect;
+SDL_Texture* beak_img = NULL;
+SDL_Rect beak_rect;
 
 
 
@@ -157,6 +161,7 @@ Mix_Chunk* l_desert_sd;
 Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
+Mix_Chunk* story;
 Mix_Music *test = NULL;
 Mix_Music *menu1_sd = NULL;
 

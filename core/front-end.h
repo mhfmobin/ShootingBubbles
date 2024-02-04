@@ -61,18 +61,13 @@ void Modes(SDL_Renderer* renderer){
         e ->type = 0 ;
         modes = false;
     }
-    if((mouse_x>160)&&(mouse_x<315)&&(mouse_y>180)&&(mouse_y<223) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>150)&&(mouse_y<240) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         levels=true;
         modes=false;
     }
-    if((mouse_x>160)&&(mouse_x<315)&&(mouse_y>460)&&(mouse_y<500) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
-        PlayMusic(btn_sd,25,0,btn_sd_c);
-        modes=false;
-        generateRandomGame(10);
-        show_level_random=true;
-    }
-    if((mouse_x>160)&&(mouse_x<300)&&(mouse_y>320)&&(mouse_y<365) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>50)&&(mouse_x<420)&&(mouse_y>268)&&(mouse_y<350) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
         generateRandomGame(10);
@@ -80,6 +75,12 @@ void Modes(SDL_Renderer* renderer){
         timer_level=true;
         is_timer_on=true;
         start_time = time();
+    }
+    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>400)&&(mouse_y<480) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        modes=false;
+        generateRandomGame(10);
+        show_level_random=true;
     }
 }
 
@@ -97,7 +98,8 @@ void Levels(SDL_Renderer* renderer){
         e ->type = 0 ;
         levels = false;
     }
-    if((mouse_x>24)&&(mouse_x<205)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>110)&&(mouse_x<380)&&(mouse_y>130)&&(mouse_y<220) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         data = {};
         loadLevel(1);
@@ -107,7 +109,7 @@ void Levels(SDL_Renderer* renderer){
         SDL_RenderClear(renderer);
         show_level_1=true;
     }
-    if((mouse_x>265)&&(mouse_x<460)&&(mouse_y>252)&&(mouse_y<297) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>110)&&(mouse_x<380)&&(mouse_y>250)&&(mouse_y<335) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         data = {};
         loadLevel(2);
@@ -117,7 +119,7 @@ void Levels(SDL_Renderer* renderer){
         SDL_RenderClear(renderer);
         show_level_2=true;
     }
-    if((mouse_x>25)&&(mouse_x<200)&&(mouse_y>390)&&(mouse_y<435) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>110)&&(mouse_x<380)&&(mouse_y>360)&&(mouse_y<450) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         data = {};
         loadLevel(3);
@@ -127,7 +129,7 @@ void Levels(SDL_Renderer* renderer){
         SDL_RenderClear(renderer);
         show_level_3=true;
     }
-    if((mouse_x>265)&&(mouse_x<465)&&(mouse_y>390)&&(mouse_y<435) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>110)&&(mouse_x<380)&&(mouse_y>485)&&(mouse_y<570) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         data = {};
         loadLevel(4);
@@ -137,7 +139,7 @@ void Levels(SDL_Renderer* renderer){
         SDL_RenderClear(renderer);
         show_level_4=true;
     }
-    if((mouse_x>180)&&(mouse_x<290)&&(mouse_y>520)&&(mouse_y<580) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>110)&&(mouse_x<380)&&(mouse_y>610)&&(mouse_y<700) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         data = {};
         loadLevel(5);
@@ -163,74 +165,74 @@ void Setting(SDL_Renderer* renderer){
         e ->type = 0 ;
         setting = false;
     }
-    if((mouse_x>214)&&(mouse_x<264)&&(mouse_y>157)&&(mouse_y<222) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>224)&&(mouse_x<274)&&(mouse_y>157)&&(mouse_y<222) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         music_play=false;
         Mix_VolumeMusic(0);
     }
-    if((mouse_x>311)&&(mouse_x<393)&&(mouse_y>155)&&(mouse_y<224) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>311+10)&&(mouse_x<393+10)&&(mouse_y>155)&&(mouse_y<224) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         music_play=true;
         Mix_VolumeMusic(25);
     }
-    if((mouse_x>211)&&(mouse_x<262)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>211+10)&&(mouse_x<262+10)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         sound_play=false;
     }
-    if((mouse_x>323)&&(mouse_x<395)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>323+10)&&(mouse_x<395+10)&&(mouse_y>352)&&(mouse_y<419) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         sound_play=true;
     }
-    if((mouse_x>48)&&(mouse_x<90)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>48+10)&&(mouse_x<90+10)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1/4;
     }
-    if((mouse_x>125)&&(mouse_x<170)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>125+10)&&(mouse_x<170+10)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1/2;
     }
-    if((mouse_x>205)&&(mouse_x<245)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>205+10)&&(mouse_x<245+10)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1;
     }
-    if((mouse_x>280)&&(mouse_x<320)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>280+10)&&(mouse_x<320+10)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=2;
     }
-    if((mouse_x>355)&&(mouse_x<395)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>355+10)&&(mouse_x<395+10)&&(mouse_y>260)&&(mouse_y<305) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=3;
     }
-    if((mouse_x>48)&&(mouse_x<90)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>48+10)&&(mouse_x<90+10)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1/4;
     }
-    if((mouse_x>125)&&(mouse_x<170)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>125+10)&&(mouse_x<170+10)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1/2;
     }
-    if((mouse_x>205)&&(mouse_x<245)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>205+10)&&(mouse_x<245+10)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=1;
     }
-    if((mouse_x>280)&&(mouse_x<320)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>280+10)&&(mouse_x<320+10)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=2;
     }
-    if((mouse_x>355)&&(mouse_x<395)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>355+10)&&(mouse_x<395+10)&&(mouse_y>450)&&(mouse_y<490) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         e ->type = 0 ;
         PlayMusic(btn_sd,25,0,btn_sd_c);
         vol=3;
@@ -253,9 +255,12 @@ void PlayMusic(Mix_Chunk* music,int volume,int repeat,bool can_play){
 void ShowBalls(SDL_Renderer* renderer){
     for (int i = 0; i < data.size(); i++) {
         for (int j = 0; j < data[i].size(); ++j) {
-            if (data[i][j].color)
+            if (data[i][j].color){
                 DrawABall(renderer,data[i][j].x,data[i][j].y + added_y,data[i][j].color);
+                DrawWithoutPresent(renderer,beak_img,beak_rect,data[i][j].x-12,data[i][j].y-2 + added_y,24,24);
+            }
         }
+
     }
 
 }
@@ -409,6 +414,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
     }
     DrawShootLine(renderer,mouse_x,mouse_y);
+    DrawWithoutPresent(renderer,devil_img,devil_rect,WIDTH/2-24,BASE_Y+80-24 ,48,48);
     ShowCannon(renderer,mouse_x,mouse_y);
     stringRGBA(renderer,20,720-30, name.c_str(),255,255,255,255);
     if(timer_level){
@@ -416,7 +422,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
         if(tim == "time = 00:00") timer_level=false;
     }
-
+    DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     if(isGameOver()){
         PlayMusic(game_over_sd,25,0,sound_play);
         data.clear();

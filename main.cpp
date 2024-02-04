@@ -24,9 +24,8 @@ int main(int argc, char* argv[]) {
     SDL_Window* window = SDL_CreateWindow("Bouncing Ball",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
     //load images
-    menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
+    menu_img = IMG_LoadTexture(renderer, "../images/menu.png");
     modes_img = IMG_LoadTexture(renderer, "../images/modes.png");
-    menu_img = IMG_LoadTexture(renderer, "../images/menu-back.png");
     levels_img = IMG_LoadTexture(renderer, "../images/levels.png");
     setting_img = IMG_LoadTexture(renderer, "../images/setting.png");
     l_desert_img = IMG_LoadTexture(renderer, "../images/level-desert.png");
@@ -47,6 +46,9 @@ int main(int argc, char* argv[]) {
     win_img = IMG_LoadTexture(renderer, "../images/win.png");
     win_img = IMG_LoadTexture(renderer, "../images/win.png");
     login_img = IMG_LoadTexture(renderer, "../images/login.png");
+    devil_img = IMG_LoadTexture(renderer, "../images/devil.png");
+    beak_img = IMG_LoadTexture(renderer, "../images/beak.png");
+
 
     //load sounds
     //menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
@@ -55,6 +57,8 @@ int main(int argc, char* argv[]) {
     menu1_sd = Mix_LoadMUS("../sounds/menu1.mp3");
     game_over_sd = Mix_LoadWAV("../sounds/game-over.wav");
     win_sd = Mix_LoadWAV("../sounds/win.wav");
+    story = Mix_LoadWAV("../sounds/story.wav");
+
 
 
     TTF_Init();
@@ -74,6 +78,7 @@ int main(int argc, char* argv[]) {
     SDL_Texture* inputTexture = NULL;
     SDL_Event e2;
 
+    PlayMusic(story,100,0,1);
     while (login) {
 
         DrawWithoutPresent(renderer,login_img,login_rect,0,0,WIDTH,HEIGHT);
@@ -148,18 +153,18 @@ int main(int argc, char* argv[]) {
             shoot_sd_c= true;
         }
 
-        if((menu_show) && (mouse_x>12)&&(mouse_x<85)&&(mouse_y>12)&&(mouse_y<85) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        if((menu_show) && (mouse_x>364)&&(mouse_x<438)&&(mouse_y>620)&&(mouse_y<692) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
             run=false;
             break;
         }
-        if((menu_show) && (mouse_x>294)&&(mouse_x<470)&&(mouse_y>36)&&(mouse_y<88) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        if((menu_show) && (mouse_x>48)&&(mouse_x<423)&&(mouse_y>130)&&(mouse_y<230) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
             modes=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
             Modes(renderer);
         }
-        if((menu_show) && (mouse_x>292)&&(mouse_x<470)&&(mouse_y>145)&&(mouse_y<188) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        if((menu_show) && (mouse_x>185)&&(mouse_x<420)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
             setting=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
