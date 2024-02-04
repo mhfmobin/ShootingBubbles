@@ -75,7 +75,7 @@ bool sound_play=true;
 double vol=1;
 SDL_Point center_cannon;
 int timer = 1000000000;
-float Vy = 0.1; // velocity in Y axis
+float Vy = 0.01; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 unordered_map<string, int> scores;
@@ -134,11 +134,14 @@ SDL_Texture* go_img = NULL;
 SDL_Rect go_rect;
 SDL_Texture* win_img = NULL;
 SDL_Rect win_rect;
+SDL_Texture* login_img = NULL;
+SDL_Rect login_rect;
+
 
 
 // ====================== Sounds =======================
 
-Mix_Chunk* menu1_sd;
+//Mix_Chunk* menu1_sd;
 Mix_Chunk* menu2_sd;
 Mix_Chunk* menu3_sd;
 Mix_Chunk* btn_sd;
@@ -155,6 +158,7 @@ Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
 Mix_Music *test = NULL;
+Mix_Music *menu1_sd = NULL;
 
 // ====================== Initialize =======================
 

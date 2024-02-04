@@ -412,12 +412,13 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     ShowCannon(renderer,mouse_x,mouse_y);
     stringRGBA(renderer,20,720-30, name.c_str(),255,255,255,255);
     if(timer_level){
-        string tim = CountDown(70);
+        tim = CountDown(5);
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
+        if(tim == "time = 00:00") timer_level=false;
     }
 
     if(isGameOver()){
-        PlayMusic(game_over_sd,50,0,sound_play);
+        PlayMusic(game_over_sd,25,0,sound_play);
         data.clear();
         show_level_1=false;
         show_level_2=false;
@@ -428,17 +429,17 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_game_over=true;
 
     }
-//    if(isWinner()){
-//        PlayMusic(win_sd,50,0,sound_play);
-//        data.clear();
-//        show_level_1=false;
-//        show_level_2=false;
-//        show_level_3=false;
-//        show_level_4=false;
-//        show_level_5=false;
-//        show_level_random=false;
-//        show_win=true;
-//    }
+    if(isWinner()){
+        PlayMusic(win_sd,50,0,sound_play);
+        data.clear();
+        show_level_1=false;
+        show_level_2=false;
+        show_level_3=false;
+        show_level_4=false;
+        show_level_5=false;
+        show_level_random=false;
+        show_win=true;
+    }
     SDL_RenderPresent(renderer);
     //SDL_Delay(0.1);
 }

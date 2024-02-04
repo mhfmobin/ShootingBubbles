@@ -45,11 +45,14 @@ int main(int argc, char* argv[]) {
     bottom_img = IMG_LoadTexture(renderer, "../images/botrect.png");
     go_img = IMG_LoadTexture(renderer, "../images/game-over.png");
     win_img = IMG_LoadTexture(renderer, "../images/win.png");
+    win_img = IMG_LoadTexture(renderer, "../images/win.png");
+    login_img = IMG_LoadTexture(renderer, "../images/login.png");
+
     //load sounds
-    menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
+    //menu1_sd = Mix_LoadWAV("../sounds/menu1.wav");
     btn_sd = Mix_LoadWAV("../sounds/button.wav");
     shoot_sd = Mix_LoadWAV("../sounds/shoot.wav");
-    test = Mix_LoadMUS("../sounds/test.mp3");
+    menu1_sd = Mix_LoadMUS("../sounds/menu1.mp3");
     game_over_sd = Mix_LoadWAV("../sounds/game-over.wav");
     win_sd = Mix_LoadWAV("../sounds/win.wav");
 
@@ -59,21 +62,22 @@ int main(int argc, char* argv[]) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
     SDL_RenderPresent(renderer);
 
-    Mix_VolumeMusic(10*vol);
-    Mix_PlayMusic(test,-1);
 
-    TTF_Font* font = TTF_OpenFont("../ShareTechMono.ttf", 24);
+
+    TTF_Font* font = TTF_OpenFont("../comicbd.ttf", 24);
 
     SDL_StartTextInput();
 
     char inputText[100] = "";
-    SDL_Color textColor = {255, 255, 255, 255};
+    SDL_Color textColor = {0, 47, 145, 255};
     SDL_Surface* inputSurface = NULL;
     SDL_Texture* inputTexture = NULL;
     SDL_Event e2;
 
     while (login) {
-        stringRGBA(renderer,20,20,"please enter your name: ",255,255,255,255);
+
+        DrawWithoutPresent(renderer,login_img,login_rect,0,0,WIDTH,HEIGHT);
+        stringRGBA(renderer,280,220,"please Press Enter",255,255,255,255);
         while (SDL_PollEvent(&e2) != 0) {
 
             if (e2.type == SDL_QUIT) {
@@ -99,7 +103,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (inputSurface != NULL && inputTexture != NULL) {
-            SDL_Rect inputRect = {100, 100, inputSurface->w, inputSurface->h};
+            SDL_Rect inputRect = {45, 155, inputSurface->w, inputSurface->h};
             SDL_RenderCopy(renderer, inputTexture, NULL, &inputRect);
         }
 
@@ -113,6 +117,8 @@ int main(int argc, char* argv[]) {
     SDL_StopTextInput();
     TTF_Quit();
 
+    Mix_VolumeMusic(30*vol);
+    Mix_PlayMusic(menu1_sd,-1);
 
     e->type = 0;
     SDL_PollEvent(e);
