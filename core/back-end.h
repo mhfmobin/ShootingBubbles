@@ -336,7 +336,7 @@ bool ballCollision() {
             
             float d = pow(data[i][j].x - shooted_ball.x, 2) + pow(data[i][j].y - shooted_ball.y, 2);
 
-            if (d <= pow(2*R, 2)) {
+            if (d <= pow(2*R, 2) + 20) {
                 Ball ball = data[i][j];
                 float x = ball.x, y = ball.y + added_y;
                 float sx = shooted_ball.x, sy = shooted_ball.y;
