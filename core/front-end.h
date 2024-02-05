@@ -602,6 +602,7 @@ string CountDown(int s) {
 void ShowPoping(double x,double y){
     PlayMusic(pop_sd,50,0,sound_play);
     Draw(renderer,pop_img,pop_rect,x-24,y-24,48,48);
+    SDL_Delay(10);
 }
 
 void ShowFalling(double x,double y,int color){
