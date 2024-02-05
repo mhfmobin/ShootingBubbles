@@ -40,6 +40,7 @@ Ball shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
 int xl=WIDTH/2;
 int yl=BASE_Y+75;
 int score = 0;
+int st = 0;
 time_t start_time;
 string name="";
 string tim;
