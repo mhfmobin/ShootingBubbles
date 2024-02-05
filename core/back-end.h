@@ -15,7 +15,7 @@ void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
 void resetFallingBalls();
 void generateRandomGame(int n);
-void saveScore(int score);
+void saveScore();
 unordered_map<string, int> sortedScores();
 bool ballCollision();
 
@@ -25,7 +25,7 @@ bool isGameOver() {
     if (is_timer_on)
         if (tim=="time = 00:00")
             return true;
-
+            
     int last_row = data.size() - 1;
     for (int i = last_row; i >= 0; i--)
         for (int j = 0; j < MAX_BALLS; j++)
@@ -202,6 +202,7 @@ void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
         data[row][col].color = 0;
+        score += 20;
     }
     
     int offsets[6][2];
@@ -218,7 +219,8 @@ void popBalls(int row, int col, int color, bool first) {
 
         if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
             if (first){
-                data[row][col].color = 0;
+                data[row][col].color = 0;               
+                score += 20;
             }
             popBalls(newRow, newCol, color);
         }
@@ -254,6 +256,7 @@ void resetFallingBalls() {
     for (int i = 0; i < data.size(); ++i)
         for (int j = 0; j < data[i].size(); ++j) {
             if (!data[i][j].falling_tmp) {
+                score += 30;
                 data[i][j].is_falling = true;
                 data[i][j].color = 0;
             }
@@ -292,7 +295,7 @@ void generateRandomGame(int n) {
     }
 }
 
-void saveScore(int score) {
+void saveScore() {
     string filename = "../data/scores.csv"; 
     ofstream file(filename, ios::app);
     if (!file.good()) {

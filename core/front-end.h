@@ -439,6 +439,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(isGameOver()){
+    
+        score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
         data.clear();
         show_level_1=false;
@@ -448,9 +450,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_5=false;
         show_level_random=false;
         show_game_over=true;
-
     }
     if(isWinner()){
+        saveScore();
         PlayMusic(win_sd,50,0,sound_play);
         data.clear();
         show_level_1=false;
@@ -489,8 +491,13 @@ void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY) {
     float dy1 = mouseY - yl;
     float slope;
     float x2,y2;
-    if(dx1!=0) slope=dy1/dx1;
-    else if(dx1==0) aalineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
+
+    if (abs(dx1) <= 3) {
+        aalineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
+        return;
+    }
+    slope=dy1/dx1;
+    // else if(dx1==0) aalineRGBA(renderer,xl,yl,xl,0,142,55,200,255);
     if (slope<0) {
         x2 = WIDTH;
         y2 = slope*(WIDTH-xl)+yl;
@@ -506,8 +513,7 @@ void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY) {
             x2= WIDTH + (WIDTH-xl) + yl/slope;
         }
         aalineRGBA(renderer,WIDTH,slope*(WIDTH-xl)+yl,x2,y2,142,55,200,255);
-    }
-    else if (slope>0) {
+    } else if (slope>0) {
         x2 = 0;
         y2 = slope*(0-xl)+yl;
         if(y2<0){
@@ -533,8 +539,9 @@ void ShowWin(SDL_Renderer* renderer){
     mouse_y = e->button.y;
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
 
-    stringRGBA(renderer,60,20,"scores = ",255,255,255,255);
-    // SHOW SCORES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    stringRGBA(renderer,60,20,"scores = "+to_string(score),255,255,255,255);
+    
+    score = 0;
 
     if( e -> type == SDL_QUIT){
         show_win=false;
