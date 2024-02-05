@@ -222,7 +222,7 @@ void popBalls(int row, int col, int color, bool first) {
 
         if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
             if (first){
-//                ShowPoping(data[row][col].x, data[row][col].y + added_y);
+                ShowPoping(data[row][col].x, data[row][col].y + added_y);
                 data[row][col].color = 0;
                 score += 20;
             }
