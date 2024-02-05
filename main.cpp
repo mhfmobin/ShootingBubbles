@@ -171,13 +171,13 @@ int main(int argc, char* argv[]) {
             PlayMusic(btn_sd,25,0,btn_sd_c);
             Modes(renderer);
         }
-        if((menu_show) && (mouse_x>237)&&(mouse_x<413)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        if((menu_show) && (mouse_x>235)&&(mouse_x<415)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
             setting=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
             Setting(renderer);
         }
-        if((menu_show) && (mouse_x>50)&&(mouse_x<228)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        if((menu_show) && (mouse_x>50)&&(mouse_x<230)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
             setting=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
@@ -283,5 +283,3 @@ int main(int argc, char* argv[]) {
     SDL_Quit();
     return 0;
 }
-
-

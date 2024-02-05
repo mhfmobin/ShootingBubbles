@@ -26,7 +26,6 @@ void ShowFalling(double x,double y,int color);
 bool isGameOver() {
     if (is_timer_on)
         if (tim=="time = 00:00"){
-            tim = "";
             return true;
         }
 
@@ -203,7 +202,7 @@ void ballPlacement(int row, int col, int color) {
 void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
-        ShowPoping(renderer,data[row][col].x, data[row][col].y + added_y);
+        ShowPoping(data[row][col].x, data[row][col].y + added_y);
         data[row][col].color = 0;
         score += 20;
     }

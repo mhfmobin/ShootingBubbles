@@ -20,8 +20,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 void ShowWin(SDL_Renderer* renderer);
 void ShowGameOver(SDL_Renderer* renderer);
-void ShowPoping(SDL_Renderer* renderer,double x,double y);
-void ShowFalling(SDL_Renderer* renderer,double x,double y,int color);
+
 
 
 //_______________________functions______________________________
@@ -441,7 +440,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(isGameOver()){
-    
+
         score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
         data = {};
@@ -483,7 +482,7 @@ double MouseAngle(double mouseX, double mouseY){
     if (mouseX-WIDTH/2>0) {
         t = M_PI / 2 - t;
     } else if (mouseX-WIDTH/2<0) {
-            t = -M_PI / 2 - t;
+        t = -M_PI / 2 - t;
     }
 
     return t;
@@ -542,8 +541,8 @@ void ShowWin(SDL_Renderer* renderer){
     mouse_y = e->button.y;
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
 
-    stringRGBA(renderer,60,20,("scores = "+to_string(score)).c_str(),255,255,255,255);
-    
+    stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
+
     score = 0;
 
     if( e -> type == SDL_QUIT){
@@ -598,15 +597,17 @@ string CountDown(int s) {
 }
 
 
-void ShowPoping(SDL_Renderer* renderer,double x,double y){
+void ShowPoping(double x,double y){
     PlayMusic(pop_sd,50,0,sound_play);
     Draw(renderer,pop_img,pop_rect,x-24,y-24,48,48);
 }
-void ShowFalling(SDL_Renderer* renderer,double x,double y,int color){
+
+void ShowFalling(double x,double y,int color){
     double px=x,py=y;
     while (py>=BASE_Y){
         py+=10;
         DrawABall(renderer,px,py,color);
+        SDL_RenderPresent(renderer);
     }
 }
 
