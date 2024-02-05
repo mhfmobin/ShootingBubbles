@@ -51,6 +51,8 @@ int main(int argc, char* argv[]) {
     pause_b_img = IMG_LoadTexture(renderer, "../images/pause-B.png");
     resume_b_img = IMG_LoadTexture(renderer, "../images/resume-B.png");
     setting_b_img = IMG_LoadTexture(renderer, "../images/setting-B.png");
+    pop_img = IMG_LoadTexture(renderer, "../images/pop.png");
+
 
 
 
