@@ -251,8 +251,14 @@ int main(int argc, char* argv[]) {
             if( e -> type == SDL_QUIT){
                 e->type = 0;
                 is_paused=false;
+                show_level_1=false;
+                show_level_2=false;
+                show_level_3=false;
+                show_level_4=false;
+                show_level_5=false;
+                show_level_random=false;
+                show_timer_level=false;
                 levels=true;
-
             }
             SDL_RenderPresent(renderer);
         }

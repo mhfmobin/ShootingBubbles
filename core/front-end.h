@@ -440,13 +440,14 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(isGameOver()){
         PlayMusic(game_over_sd,25,0,sound_play);
-        data.clear();
+        data = {};
         show_level_1=false;
         show_level_2=false;
         show_level_3=false;
         show_level_4=false;
         show_level_5=false;
         show_level_random=false;
+        show_timer_level=false;
         show_game_over=true;
 
     }
@@ -459,6 +460,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_4=false;
         show_level_5=false;
         show_level_random=false;
+        show_timer_level=false;
         show_win=true;
     }
     SDL_RenderPresent(renderer);
@@ -479,7 +481,6 @@ double MouseAngle(double mouseX, double mouseY){
     } else if (mouseX-WIDTH/2<0) {
             t = -M_PI / 2 - t;
     }
-
 
     return t;
 }
@@ -566,7 +567,7 @@ void ShowGameOver(SDL_Renderer* renderer){
     }
     if((mouse_x>190)&&(mouse_x<280)&&(mouse_y>545)&&(mouse_y<635) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
-        levels=true;
+        modes=true;
         show_game_over=false;
     }
 }
