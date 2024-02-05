@@ -538,8 +538,10 @@ void ShowWin(SDL_Renderer* renderer){
     mouse_x = e->button.x;
     mouse_y = e->button.y;
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
-
-    stringRGBA(renderer,60,20,"scores = "+to_string(score),255,255,255,255);
+    
+    string score_string = "Score = "+to_string(score);
+    const char* cscore_string = score_string.c_str();
+    stringRGBA(renderer,60,20,cscore_string,255,255,255,255);
     
     score = 0;
 
