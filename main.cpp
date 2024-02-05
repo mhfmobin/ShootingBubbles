@@ -44,13 +44,14 @@ int main(int argc, char* argv[]) {
     bottom_img = IMG_LoadTexture(renderer, "../images/botrect.png");
     go_img = IMG_LoadTexture(renderer, "../images/game-over.png");
     win_img = IMG_LoadTexture(renderer, "../images/win.png");
-    win_img = IMG_LoadTexture(renderer, "../images/win.png");
     login_img = IMG_LoadTexture(renderer, "../images/login.png");
     devil_img = IMG_LoadTexture(renderer, "../images/devil.png");
     beak_img = IMG_LoadTexture(renderer, "../images/beak.png");
     pause_b_img = IMG_LoadTexture(renderer, "../images/pause-B.png");
     resume_b_img = IMG_LoadTexture(renderer, "../images/resume-B.png");
     setting_b_img = IMG_LoadTexture(renderer, "../images/setting-B.png");
+    pop_img = IMG_LoadTexture(renderer, "../images/pop.png");
+
 
 
 
@@ -62,6 +63,8 @@ int main(int argc, char* argv[]) {
     game_over_sd = Mix_LoadWAV("../sounds/game-over.wav");
     win_sd = Mix_LoadWAV("../sounds/win.wav");
     story = Mix_LoadWAV("../sounds/story.wav");
+    pop_sd = Mix_LoadWAV("../sounds/pop.wav");
+
 
 
 
@@ -251,8 +254,14 @@ int main(int argc, char* argv[]) {
             if( e -> type == SDL_QUIT){
                 e->type = 0;
                 is_paused=false;
+                show_level_1=false;
+                show_level_2=false;
+                show_level_3=false;
+                show_level_4=false;
+                show_level_5=false;
+                show_level_random=false;
+                show_timer_level=false;
                 levels=true;
-
             }
             SDL_RenderPresent(renderer);
         }

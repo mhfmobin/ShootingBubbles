@@ -148,6 +148,8 @@ SDL_Texture* setting_b_img = NULL;
 SDL_Rect setting_b_rect;
 SDL_Texture* resume_b_img = NULL;
 SDL_Rect resume_b_rect;
+SDL_Texture* pop_img = NULL;
+SDL_Rect pop_rect;
 
 // ====================== Sounds =======================
 
@@ -170,6 +172,7 @@ Mix_Chunk* win_sd;
 Mix_Chunk* story;
 Mix_Music *test = NULL;
 Mix_Music *menu1_sd = NULL;
+
 
 // ====================== Initialize =======================
 

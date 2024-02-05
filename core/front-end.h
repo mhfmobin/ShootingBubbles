@@ -20,6 +20,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 void ShowWin(SDL_Renderer* renderer);
 void ShowGameOver(SDL_Renderer* renderer);
+void ShowPoping(SDL_Renderer* renderer,double x,double y,int color);
+void ShowFalling(SDL_Renderer* renderer,double x,double y,int color);
 
 
 //_______________________functions______________________________
@@ -442,13 +444,14 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     
         score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
-        data.clear();
+        data = {};
         show_level_1=false;
         show_level_2=false;
         show_level_3=false;
         show_level_4=false;
         show_level_5=false;
         show_level_random=false;
+        show_timer_level=false;
         show_game_over=true;
     }
     if(isWinner()){
@@ -461,6 +464,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_4=false;
         show_level_5=false;
         show_level_random=false;
+        show_timer_level=false;
         show_win=true;
     }
     SDL_RenderPresent(renderer);
@@ -481,7 +485,6 @@ double MouseAngle(double mouseX, double mouseY){
     } else if (mouseX-WIDTH/2<0) {
             t = -M_PI / 2 - t;
     }
-
 
     return t;
 }
@@ -538,11 +541,9 @@ void ShowWin(SDL_Renderer* renderer){
     mouse_x = e->button.x;
     mouse_y = e->button.y;
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
-    
-    string score_string = "Score = "+to_string(score);
-    const char* cscore_string = score_string.c_str();
-    stringRGBA(renderer,60,20,cscore_string,255,255,255,255);
-    
+
+    stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
+
     score = 0;
 
     if( e -> type == SDL_QUIT){
@@ -575,7 +576,7 @@ void ShowGameOver(SDL_Renderer* renderer){
     }
     if((mouse_x>190)&&(mouse_x<280)&&(mouse_y>545)&&(mouse_y<635) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
-        levels=true;
+        modes=true;
         show_game_over=false;
     }
 }
@@ -594,6 +595,19 @@ string CountDown(int s) {
     ostringstream oss;
     oss << setw(2) << setfill('0') << minutes << ":"<< setw(2) << setfill('0') << seconds;
     return "time = "+oss.str();
+}
+
+
+void ShowPoping(SDL_Renderer* renderer,double x,double y){
+    PlayMusic(pop_sd,50,0,sound_play);
+    Draw(renderer,pop_img,pop_rect,x-24,y-24,48,48);
+}
+void ShowFalling(SDL_Renderer* renderer,double x,double y,int color){
+    double px=x,py=y;
+    while (py>=BASE_Y){
+        py+=10;
+        DrawABall(renderer,px,py,color);
+    }
 }
 
 

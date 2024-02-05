@@ -23,9 +23,10 @@ bool ballCollision();
 
 bool isGameOver() {
     if (is_timer_on)
-        if (tim=="time = 00:00")
+        if (tim=="time = 00:00"){
             return true;
-            
+        }
+
     int last_row = data.size() - 1;
     for (int i = last_row; i >= 0; i--)
         for (int j = 0; j < MAX_BALLS; j++)
