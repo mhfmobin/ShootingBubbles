@@ -49,6 +49,9 @@ int main(int argc, char* argv[]) {
     devil_img = IMG_LoadTexture(renderer, "../images/devil.png");
     beak_img = IMG_LoadTexture(renderer, "../images/beak.png");
     pause_b_img = IMG_LoadTexture(renderer, "../images/pause-B.png");
+    resume_b_img = IMG_LoadTexture(renderer, "../images/resume-B.png");
+    setting_b_img = IMG_LoadTexture(renderer, "../images/setting-B.png");
+
 
 
     //load sounds
@@ -230,12 +233,29 @@ int main(int argc, char* argv[]) {
             ShowWin(renderer);
         }
 
-        while (is_paused){
-            SDL_SetRenderDrawColor(renderer,0,0,0,225);
-            stringRGBA(renderer,100,100,"It's Paused!",255,255,255,255);
+        if (is_paused){
+            DrawWithoutPresent(renderer,resume_b_img,resume_b_rect,420,650-50-10-50-10,45,50);
+            DrawWithoutPresent(renderer,setting_b_img,setting_b_rect,420,650-50-10,45,50);
+            SDL_PollEvent(e);
+            if((mouse_x>420)&&(mouse_x<420+45)&&(mouse_y>650-50-10-50-10)&&(mouse_y<650-50-10-50-10+50) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+                e->type = 0;
+                PlayMusic(btn_sd,25,0,btn_sd_c);
+                is_paused=false;
+            }
+            if((mouse_x>420)&&(mouse_x<420+45)&&(mouse_y>650-50-10)&&(mouse_y<650-50-10+50) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+                e->type = 0;
+                PlayMusic(btn_sd,25,0,btn_sd_c);
+                is_paused=false;
+                setting=true;
+            }
+            if( e -> type == SDL_QUIT){
+                e->type = 0;
+                is_paused=false;
+                levels=true;
+
+            }
             SDL_RenderPresent(renderer);
         }
-
         e->type = 0;
 
     }

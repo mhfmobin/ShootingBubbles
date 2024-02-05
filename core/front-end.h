@@ -324,8 +324,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             SDL_GetMouseState(&mouse_x,&mouse_y);
             swap(c1,c2);
             c2 = cannonBall();
-            dx = ((float)mouse_x-(WIDTH/2))/1000;
-            dy = ((float)mouse_y-(BASE_Y+80))/1000;
+            dx = ((float)mouse_x-(WIDTH/2))/200;
+            dy = ((float)mouse_y-(BASE_Y+80))/200;
         }
 
 
@@ -405,16 +405,16 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     shooted_ball.color = c1;
     if(shooting){
 
-        if(shooted_ball.x>=WIDTH-R){
-            while (shooted_ball.x>=WIDTH-R) {
+        if(shooted_ball.x>=WIDTH){
+            while (shooted_ball.x>=WIDTH) {
                 shooted_ball.x-=2;
             }
             dx=-dx;
             cout<<"rast";
-        } else if (shooted_ball.x<=R) {
+        } else if (shooted_ball.x<=0) {
             dx=-dx;
             cout<<"chap";
-            while (shooted_ball.x<=R) {
+            while (shooted_ball.x<=0) {
                 shooted_ball.x+=2;
             }
         }
@@ -471,7 +471,7 @@ void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY){
     SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, angle, &center_cannon, SDL_FLIP_NONE);
 }
 double MouseAngle(double mouseX, double mouseY){
-    double t= atan((mouseY-(BASE_Y+50))/(mouseX-WIDTH/2));
+    double t= atan((mouseY-(BASE_Y+75))/(mouseX-WIDTH/2));
     if(mouseX-WIDTH/2>0) t = M_PI/2 - t;
     else if(mouseX-WIDTH/2<0) t = 3*M_PI/2 - t;
     return t;

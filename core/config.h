@@ -143,7 +143,10 @@ SDL_Texture* beak_img = NULL;
 SDL_Rect beak_rect;
 SDL_Texture* pause_b_img = NULL;
 SDL_Rect pause_b_rect;
-
+SDL_Texture* setting_b_img = NULL;
+SDL_Rect setting_b_rect;
+SDL_Texture* resume_b_img = NULL;
+SDL_Rect resume_b_rect;
 
 // ====================== Sounds =======================
 
