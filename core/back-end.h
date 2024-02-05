@@ -131,7 +131,7 @@ void loadLevel(int level_id) {
         }
     }
     level_row_count = data.size();
-
+    cout<<"data size is: "<<data.size()<<endl;
 }
 
 bool isColor(int n) {
@@ -330,21 +330,21 @@ unordered_map<string, int> sortedScores() {
 }
 
 bool ballCollision() {
-    for (int i = 0; i < data.size(); i++) {
-        for (int j = 0; j < data[i].size(); j++) {
+    for (int i = data.size(); i >= 0; i--) {
+        for (int j = data[i].size()-1; j >= 0; j--) {
             if (!data[i][j].color) continue;
             
             float d = pow(data[i][j].x - shooted_ball.x, 2) + pow(data[i][j].y - shooted_ball.y, 2);
-            
+
             if (d <= pow(2*R, 2)) {
                 Ball ball = data[i][j];
                 float x = ball.x, y = ball.y + added_y;
                 float sx = shooted_ball.x, sy = shooted_ball.y;
                 int fi = 0, fj = 0;
 
-                fi = (sy > y + R) ? i+1 : i;
+                fi = (sy < y - R) ? i : i+1;
                 fj = (sx > x) ? j+(i%2)  : j -1 + (i%2);
-                
+
                 if (fi == data.size()) {
                     Ball empty;
                     empty.color = 0;
@@ -353,6 +353,7 @@ bool ballCollision() {
                         data[fi].push_back(empty);
                     }
                 }
+//                cout<<sy<<" "<<y<<endl<<(sy > y)<<" "<<isValidPosition(fi, fj)<<" ("<<fi<<","<<fj<<") "<<!data[fi][fj].color<<endl;
 
                 if (isValidPosition(fi, fj) && !data[fi][fj].color) {
                     ballPlacement(fi,fj,shooted_ball.color);
