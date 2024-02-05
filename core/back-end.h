@@ -18,7 +18,9 @@ void generateRandomGame(int n);
 void saveScore();
 unordered_map<string, int> sortedScores();
 bool ballCollision();
-
+// these are implemented in front end
+void ShowPoping(double x,double y);
+void ShowFalling(double x,double y,int color);
 //================================ Implementation ================================
 
 bool isGameOver() {
@@ -203,6 +205,7 @@ void ballPlacement(int row, int col, int color) {
 void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
+        ShowPoping(data[row][col].x, data[row][col].y + added_y);
         data[row][col].color = 0;
         score += 20;
     }
@@ -221,7 +224,8 @@ void popBalls(int row, int col, int color, bool first) {
 
         if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
             if (first){
-                data[row][col].color = 0;               
+//                ShowPoping(data[row][col].x, data[row][col].y + added_y);
+                data[row][col].color = 0;
                 score += 20;
             }
             popBalls(newRow, newCol, color);

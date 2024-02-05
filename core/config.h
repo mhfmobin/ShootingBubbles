@@ -76,6 +76,7 @@ bool music_play=true;
 bool sound_play=true;
 double vol=1;
 SDL_Point center_cannon;
+SDL_Renderer* renderer;
 int timer = 1000000000;
 float Vy = 0.01; // velocity in Y axis
 float added_y = 0;
