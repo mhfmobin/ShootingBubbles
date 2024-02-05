@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     Mix_Init(0);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     SDL_Window* window = SDL_CreateWindow("Bouncing Ball",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(window, -1, 0);
     //load images
     menu_img = IMG_LoadTexture(renderer, "../images/menu.png");
     modes_img = IMG_LoadTexture(renderer, "../images/modes.png");

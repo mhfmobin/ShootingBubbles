@@ -20,8 +20,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 void ShowWin(SDL_Renderer* renderer);
 void ShowGameOver(SDL_Renderer* renderer);
-void ShowPoping(SDL_Renderer* renderer,double x,double y,int color);
-void ShowFalling(SDL_Renderer* renderer,double x,double y,int color);
+
 
 
 //_______________________functions______________________________
@@ -598,15 +597,17 @@ string CountDown(int s) {
 }
 
 
-void ShowPoping(SDL_Renderer* renderer,double x,double y){
+void ShowPoping(double x,double y){
     PlayMusic(pop_sd,50,0,sound_play);
     Draw(renderer,pop_img,pop_rect,x-24,y-24,48,48);
 }
-void ShowFalling(SDL_Renderer* renderer,double x,double y,int color){
+
+void ShowFalling(double x,double y,int color){
     double px=x,py=y;
     while (py>=BASE_Y){
         py+=10;
-        DrawABall(renderer,px,py,color);
+        DrawABall(renderer,px,py,color);    
+        SDL_RenderPresent(renderer);
     }
 }
 
