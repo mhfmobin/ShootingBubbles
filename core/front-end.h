@@ -432,8 +432,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,devil_img,devil_rect,WIDTH/2-24,BASE_Y+80-24 ,48,48);
     ShowCannon(renderer,mouse_x,mouse_y);
     stringRGBA(renderer,20,720-30, name.c_str(),255,255,255,255);
+    stringRGBA(renderer,20,720-20,("Score = "+to_string(score)).c_str(),255,255,255,255);
     if(timer_level){
-        tim = CountDown(5);
+        tim = CountDown(75);
         stringRGBA(renderer,480-155,720-30, tim.c_str(),255,255,255,255);
         if(tim == "time = 00:00") timer_level=false;
     }
@@ -565,6 +566,7 @@ void ShowGameOver(SDL_Renderer* renderer){
     mouse_x = e->button.x;
     mouse_y = e->button.y;
     Draw(renderer,go_img,win_rect,0,0,WIDTH,HEIGHT);
+    stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
     if( e -> type == SDL_QUIT){
         show_game_over=false;
     }
