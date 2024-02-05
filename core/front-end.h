@@ -68,7 +68,7 @@ void Modes(SDL_Renderer* renderer){
         levels=true;
         modes=false;
     }
-    if((mouse_x>50)&&(mouse_x<420)&&(mouse_y>268)&&(mouse_y<350) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>268)&&(mouse_y<350) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
         generateRandomGame(10);
@@ -411,9 +411,11 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
                 shooted_ball.x-=2;
             }
             dx=-dx;
+            PlayMusic(wall_sd,70,0,sound_play);
             cout<<"rast";
         } else if (shooted_ball.x<=0) {
             dx=-dx;
+            PlayMusic(wall_sd,70,0,sound_play);
             cout<<"chap";
             while (shooted_ball.x<=0) {
                 shooted_ball.x+=2;
@@ -607,7 +609,7 @@ void ShowPoping(double x,double y){
 
 void ShowFalling(double x,double y,int color){
     double px=x,py=y;
-    while (py>=BASE_Y){
+    while (py<=BASE_Y){
         py+=10;
         DrawABall(renderer,px,py,color);
         SDL_RenderPresent(renderer);

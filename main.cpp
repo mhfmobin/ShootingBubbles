@@ -64,6 +64,8 @@ int main(int argc, char* argv[]) {
     win_sd = Mix_LoadWAV("../sounds/win.wav");
     story = Mix_LoadWAV("../sounds/story.wav");
     pop_sd = Mix_LoadWAV("../sounds/pop.wav");
+    wall_sd = Mix_LoadWAV("../sounds/attack-wall.wav");
+
 
 
 

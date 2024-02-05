@@ -171,6 +171,7 @@ Mix_Chunk* l_timer_sd;
 Mix_Chunk* game_over_sd;
 Mix_Chunk* win_sd;
 Mix_Chunk* story;
+Mix_Chunk* wall_sd;
 Mix_Music *test = NULL;
 Mix_Music *menu1_sd = NULL;
 
