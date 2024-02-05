@@ -15,7 +15,7 @@ void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
 void resetFallingBalls();
 void generateRandomGame(int n);
-void saveScore(int score);
+void saveScore();
 unordered_map<string, int> sortedScores();
 bool ballCollision();
 
@@ -24,10 +24,8 @@ bool ballCollision();
 bool isGameOver() {
     if (is_timer_on)
         if (tim=="time = 00:00"){
-            tim = "";
             return true;
         }
-
 
     int last_row = data.size() - 1;
     for (int i = last_row; i >= 0; i--)
@@ -205,6 +203,7 @@ void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
         data[row][col].color = 0;
+        score += 20;
     }
     
     int offsets[6][2];
@@ -221,7 +220,8 @@ void popBalls(int row, int col, int color, bool first) {
 
         if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
             if (first){
-                data[row][col].color = 0;
+                data[row][col].color = 0;               
+                score += 20;
             }
             popBalls(newRow, newCol, color);
         }
@@ -257,6 +257,7 @@ void resetFallingBalls() {
     for (int i = 0; i < data.size(); ++i)
         for (int j = 0; j < data[i].size(); ++j) {
             if (!data[i][j].falling_tmp) {
+                score += 30;
                 data[i][j].is_falling = true;
                 data[i][j].color = 0;
             }
@@ -295,7 +296,7 @@ void generateRandomGame(int n) {
     }
 }
 
-void saveScore(int score) {
+void saveScore() {
     string filename = "../data/scores.csv"; 
     ofstream file(filename, ios::app);
     if (!file.good()) {
@@ -335,17 +336,18 @@ unordered_map<string, int> sortedScores() {
 bool ballCollision() {
     for (int i = data.size(); i >= 0; i--) {
         for (int j = data[i].size()-1; j >= 0; j--) {
-            if (!data[i][j].color) continue;
-            
-            float d = pow(data[i][j].x - shooted_ball.x, 2) + pow(data[i][j].y - shooted_ball.y, 2);
+            Ball ball = data[i][j];
+            float x = ball.x, y = ball.y + added_y;
+            float sx = shooted_ball.x, sy = shooted_ball.y;
+            if (!ball.color || abs(x - sx) > 2.5*R || abs(y - sy) > 2.5*R) continue;
 
-            if (d <= pow(2*R, 2) + 20) {
-                Ball ball = data[i][j];
-                float x = ball.x, y = ball.y + added_y;
-                float sx = shooted_ball.x, sy = shooted_ball.y;
+            float d = pow(x - sx, 2) + pow(y - sy, 2);
+
+            if (d <= pow(2*R, 2)) {
+
                 int fi = 0, fj = 0;
 
-                fi = (sy < y - R) ? i : i+1;
+                fi = (sy < y+R/2) ? i : i+1;
                 fj = (sx > x) ? j+(i%2)  : j -1 + (i%2);
 
                 if (fi == data.size()) {
@@ -356,8 +358,6 @@ bool ballCollision() {
                         data[fi].push_back(empty);
                     }
                 }
-//                cout<<sy<<" "<<y<<endl<<(sy > y)<<" "<<isValidPosition(fi, fj)<<" ("<<fi<<","<<fj<<") "<<!data[fi][fj].color<<endl;
-
                 if (isValidPosition(fi, fj) && !data[fi][fj].color) {
                     ballPlacement(fi,fj,shooted_ball.color);
                     return true;
@@ -368,3 +368,4 @@ bool ballCollision() {
 
     return false;
 }
+         
