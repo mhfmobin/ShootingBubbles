@@ -14,7 +14,7 @@ void popBalls(int row, int col, int color, bool first = false);
 void ballPlacement(int row, int col, int color);
 bool isSame(int one, int two);
 void resetFallingBalls();
-void generateRandomGame(int n);
+void generateRandomGame(int n, int mode = 1);
 void saveScore();
 unordered_map<string, int> sortedScores();
 bool ballCollision();
@@ -267,10 +267,12 @@ void resetFallingBalls() {
         }
 }
 
-void generateRandomGame(int n) {
-    data.clear();
+void generateRandomGame(int n, int mode) {
+    if (mode) {
+        data.clear();
+    }
     srand(time(NULL));
-    for (int i = 0; i < n; ++i) {
+    for (int i = n-1; i >= 0; ++i) {
         vector<Ball> row;
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
         int prevColor = -1;
@@ -286,7 +288,8 @@ void generateRandomGame(int n) {
             ball.color = color;
             row.push_back(ball);
         }
-        data.push_back(row);
+        data.insert(data.begin(), row);
+        // data.push_back(row);
     }
     for (int i = 0; i < data.size(); i++) {
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
