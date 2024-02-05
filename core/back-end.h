@@ -37,11 +37,12 @@ bool isGameOver() {
 }
 
 bool isWinner() {
+    bool flag = 1;
     for (int i = 0; i < data.size(); i++)
         for (int j = 0; j < data[i].size(); j++)
             if (data[i][j].color)
-                return false;
-    return false;
+                flag = 0;
+    return flag;
 }
 
 void loadSettings() {
