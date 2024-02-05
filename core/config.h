@@ -50,6 +50,7 @@ double dx=0,dy=0;
 double shoot_angle;
 bool shoot = true;
 bool shooting = false;
+bool is_paused= false;
 bool run=true;
 bool login=true;
 bool modes = false;
@@ -140,7 +141,8 @@ SDL_Texture* devil_img = NULL;
 SDL_Rect devil_rect;
 SDL_Texture* beak_img = NULL;
 SDL_Rect beak_rect;
-
+SDL_Texture* pause_b_img = NULL;
+SDL_Rect pause_b_rect;
 
 
 // ====================== Sounds =======================

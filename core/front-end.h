@@ -312,6 +312,11 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         if((e->key.keysym.sym == SDLK_SPACE && e ->type == SDL_KEYDOWN)){
             swap(c1,c2);
         }
+        if((mouse_x>420)&&(mouse_x<420+45)&&(mouse_y>650)&&(mouse_y<650+50) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+            e ->type = 0 ;
+            PlayMusic(btn_sd,25,0,btn_sd_c);
+            is_paused=true;
+        }
         if((e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type=0;
             PlayMusic(shoot_sd,70,0,sound_play);
@@ -322,15 +327,11 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             dx = ((float)mouse_x-(WIDTH/2))/100;
             dy = ((float)mouse_y-(BASE_Y+80))/100;
         }
-    }
-    int temp_id;
-    if(level_id==6){
-        srand(time(NULL));
-        temp_id=1+rand()%5;
+
+
     }
 
-    else temp_id=level_id;
-    switch (temp_id) {
+    switch (level_id) {
         case 1:
             DrawWithoutPresent(renderer,l_desert_img,l_desert_rect,0,0,WIDTH,HEIGHT);
             //PlayMusic(l_desert_sd,100,-1,1);
@@ -345,6 +346,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             DrawWithoutPresent(renderer,l_shadow_img,l_shadow_rect,0,0,WIDTH,HEIGHT);
             break;
         case 5:
+            DrawWithoutPresent(renderer,l_final_img,l_final_rect,0,0,WIDTH,HEIGHT);
+            break;
+        case 6:
             DrawWithoutPresent(renderer,l_final_img,l_final_rect,0,0,WIDTH,HEIGHT);
             break;
         case 7:
@@ -423,6 +427,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         if(tim == "time = 00:00") timer_level=false;
     }
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
+    DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(isGameOver()){
         PlayMusic(game_over_sd,25,0,sound_play);
         data.clear();

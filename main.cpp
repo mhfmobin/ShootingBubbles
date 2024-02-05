@@ -48,6 +48,7 @@ int main(int argc, char* argv[]) {
     login_img = IMG_LoadTexture(renderer, "../images/login.png");
     devil_img = IMG_LoadTexture(renderer, "../images/devil.png");
     beak_img = IMG_LoadTexture(renderer, "../images/beak.png");
+    pause_b_img = IMG_LoadTexture(renderer, "../images/pause-B.png");
 
 
     //load sounds
@@ -179,36 +180,36 @@ int main(int argc, char* argv[]) {
         while(setting){
             Setting(renderer);
         }
-        while(show_level_1){
+        while(show_level_1 && !is_paused){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,1);
         }
-        while(show_level_2){
+        while(show_level_2 && !is_paused){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,2);
         }
-        while(show_level_3){
+        while(show_level_3 && !is_paused){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,3);
         }
-        while(show_level_4){
+        while(show_level_4 && !is_paused){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,4);
         }
-        while(show_level_5){
+        while(show_level_5 && !is_paused){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,5);
         }
-        while(show_level_random){
+        while(show_level_random && !is_paused){
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,6);
         }
-        while(show_timer_level){
+        while(show_timer_level && !is_paused){
             if( e -> type == SDL_QUIT){
                 e->type = 0;
                 show_timer_level=false;
@@ -227,6 +228,12 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowWin(renderer);
+        }
+
+        while (is_paused){
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            stringRGBA(renderer,100,100,"It's Paused!",255,255,255,255);
+            SDL_RenderPresent(renderer);
         }
 
         e->type = 0;
