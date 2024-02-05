@@ -135,7 +135,6 @@ void loadLevel(int level_id) {
         }
     }
     level_row_count = data.size();
-    cout<<"data size is: "<<data.size()<<endl;
 }
 
 bool isColor(int n) {
@@ -185,7 +184,6 @@ bool isValidPosition(int row, int col) {
 
 void ballPlacement(int row, int col, int color) {
 
-    cout<<row<<" "<<col<<endl;
     data[row][col].color = color;
     float added = (row%2) ? 2*R : R ;
     data[row][col].x = 2*col*R + added;
