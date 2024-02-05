@@ -37,6 +37,7 @@ struct Ball {
 
 vector<vector<Ball>> data;
 Ball shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
+Ball shooted_laser = {19, 0, 0,  WIDTH/2, BASE_Y+80};
 int xl=WIDTH/2;
 int yl=BASE_Y+75;
 int score = 0;
@@ -84,13 +85,15 @@ float added_y = 0;
 map<string, int> settings;
 unordered_map<string, int> scores;
 vector<int> times = {60,60,60,60,60};
-vector<int> colors = {2,3,5,7,11,13};
+vector<int> colors = {2,3,5,7,11,13,17,10};
 // 2 -> red
 // 3 -> yellow
 // 5 -> green
 // 7 -> blue
 // 11 -> purple
 // 13 -> black
+// 17 -> bomb
+// 19 -> laser
 
 /*****************************************************
                     File Handlers
