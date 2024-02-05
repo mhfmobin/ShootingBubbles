@@ -324,8 +324,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             SDL_GetMouseState(&mouse_x,&mouse_y);
             swap(c1,c2);
             c2 = cannonBall();
-            dx = ((float)mouse_x-(WIDTH/2))/100;
-            dy = ((float)mouse_y-(BASE_Y+80))/100;
+            dx = ((float)mouse_x-(WIDTH/2))/1000;
+            dy = ((float)mouse_y-(BASE_Y+80))/1000;
         }
 
 
@@ -405,10 +405,20 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     shooted_ball.color = c1;
     if(shooting){
 
-        if((shooted_ball.x>=WIDTH+R) || (shooted_ball.x<=R)){
+        if(shooted_ball.x>=WIDTH-R){
+            while (shooted_ball.x>=WIDTH-R) {
+                shooted_ball.x-=2;
+            }
             dx=-dx;
-            cout<<"are";
+            cout<<"rast";
+        } else if (shooted_ball.x<=R) {
+            dx=-dx;
+            cout<<"chap";
+            while (shooted_ball.x<=R) {
+                shooted_ball.x+=2;
+            }
         }
+
 
         shooted_ball.x+=dx;
         shooted_ball.y+=dy;
