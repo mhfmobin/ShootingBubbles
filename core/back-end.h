@@ -36,7 +36,7 @@ bool isGameOver() {
             if (data[i][j].color)
                 return (data[i][j].y + R + added_y >= BASE_Y);
 }
- 
+
 bool isWinner() {
     for (int i = 0; i < data.size(); i++)
         for (int j = 0; j < data[i].size(); j++)
@@ -46,7 +46,7 @@ bool isWinner() {
 }
 
 void loadSettings() {
-    string filename = "../data/user-setting.txt"; 
+    string filename = "../data/user-setting.txt";
     string line;
 
     ifstream file(filename);
@@ -60,23 +60,23 @@ void loadSettings() {
     settings["music_mode"] = stoi(line);
 
     getline(file, line);
-    settings["music_volume"] = stoi(line);   
+    settings["music_volume"] = stoi(line);
 
     getline(file, line);
-    settings["sound_mode"] = stoi(line);  
+    settings["sound_mode"] = stoi(line);
 
     getline(file, line);
-    settings["sound_volume"] = stoi(line);  
+    settings["sound_volume"] = stoi(line);
 
     getline(file, line);
     settings["theme"] = stoi(line);
-    
+
     file.close();
 
 }
 
 void saveSettings() {
-    string filename = "../data/user-setting.txt"; 
+    string filename = "../data/user-setting.txt";
     string line;
 
     ofstream file(filename);
@@ -91,14 +91,14 @@ void saveSettings() {
     file << settings["sound_mode"] << endl;
     file << settings["sound_volume"] << endl;
     file << settings["theme"] << endl;
-    
+
     file.close();
 }
 
 void loadLevel(int level_id) {
     data.clear();
 
-    string filename = "../data/level-" + to_string(level_id) + ".csv"; 
+    string filename = "../data/level-" + to_string(level_id) + ".csv";
 
     ifstream file(filename);
 
@@ -121,7 +121,7 @@ void loadLevel(int level_id) {
         }
         data.push_back(row);
 
-        
+
     }
 
     file.close();
@@ -155,7 +155,7 @@ int cannonBall() {
         for (const Ball& ball : balls)
             if (ball.color)
                 result.insert(ball.color);
-        
+
         return result;
     });
 
@@ -164,7 +164,7 @@ int cannonBall() {
     if (uniqueColors.find(13) != uniqueColors.end())
         uniqueColors.erase(13);
 
- 
+
     int color = 0;
 
     if (uniqueColors.size() == 1) {
@@ -205,11 +205,11 @@ void ballPlacement(int row, int col, int color) {
 void popBalls(int row, int col, int color, bool first) {
 
     if (!first) {
-        ShowPoping(data[row][col].x, data[row][col].y + added_y);
+        ShowPoping(renderer,data[row][col].x, data[row][col].y + added_y);
         data[row][col].color = 0;
         score += 20;
     }
-    
+
     int offsets[6][2];
     if (row % 2) {
         int temp[][2] = {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}};
@@ -283,8 +283,8 @@ void generateRandomGame(int n) {
             if (prevColor != -1 && rand() % 2 == 0) {
                 color = prevColor;
             } else {
-                color = colors[rand() % colors.size()]; 
-                prevColor = color; 
+                color = colors[rand() % colors.size()];
+                prevColor = color;
             }
             ball.color = color;
             row.push_back(ball);
@@ -302,7 +302,7 @@ void generateRandomGame(int n) {
 }
 
 void saveScore() {
-    string filename = "../data/scores.csv"; 
+    string filename = "../data/scores.csv";
     ofstream file(filename, ios::app);
     if (!file.good()) {
         cerr << "Error opening the file: " << filename << endl;
@@ -313,7 +313,7 @@ void saveScore() {
 }
 
 unordered_map<string, int> sortedScores() {
-    string filename = "../data/scores.csv"; 
+    string filename = "../data/scores.csv";
     ifstream file(filename);
     if (!file.good()) {
         cerr << "Error opening the file: " << filename << endl;

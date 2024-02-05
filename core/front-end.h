@@ -20,7 +20,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 void ShowWin(SDL_Renderer* renderer);
 void ShowGameOver(SDL_Renderer* renderer);
-void ShowPoping(SDL_Renderer* renderer,double x,double y,int color);
+void ShowPoping(SDL_Renderer* renderer,double x,double y);
 void ShowFalling(SDL_Renderer* renderer,double x,double y,int color);
 
 
