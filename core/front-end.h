@@ -542,7 +542,7 @@ void ShowWin(SDL_Renderer* renderer){
     mouse_y = e->button.y;
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
 
-    stringRGBA(renderer,60,20,"scores = "+to_string(score),255,255,255,255);
+    stringRGBA(renderer,60,20,("scores = "+to_string(score)).c_str(),255,255,255,255);
     
     score = 0;
 
@@ -599,10 +599,15 @@ string CountDown(int s) {
 
 
 void ShowPoping(SDL_Renderer* renderer,double x,double y){
+    PlayMusic(pop_sd,50,0,sound_play);
     Draw(renderer,pop_img,pop_rect,x-24,y-24,48,48);
 }
 void ShowFalling(SDL_Renderer* renderer,double x,double y,int color){
-
+    double px=x,py=y;
+    while (py>=BASE_Y){
+        py+=10;
+        DrawABall(renderer,px,py,color);
+    }
 }
 
 

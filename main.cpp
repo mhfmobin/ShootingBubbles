@@ -44,7 +44,6 @@ int main(int argc, char* argv[]) {
     bottom_img = IMG_LoadTexture(renderer, "../images/botrect.png");
     go_img = IMG_LoadTexture(renderer, "../images/game-over.png");
     win_img = IMG_LoadTexture(renderer, "../images/win.png");
-    win_img = IMG_LoadTexture(renderer, "../images/win.png");
     login_img = IMG_LoadTexture(renderer, "../images/login.png");
     devil_img = IMG_LoadTexture(renderer, "../images/devil.png");
     beak_img = IMG_LoadTexture(renderer, "../images/beak.png");
@@ -64,6 +63,8 @@ int main(int argc, char* argv[]) {
     game_over_sd = Mix_LoadWAV("../sounds/game-over.wav");
     win_sd = Mix_LoadWAV("../sounds/win.wav");
     story = Mix_LoadWAV("../sounds/story.wav");
+    pop_sd = Mix_LoadWAV("../sounds/pop.wav");
+
 
 
 

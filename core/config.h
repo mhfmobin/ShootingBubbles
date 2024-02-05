@@ -77,7 +77,7 @@ bool sound_play=true;
 double vol=1;
 SDL_Point center_cannon;
 int timer = 1000000000;
-float Vy = 0.1; // velocity in Y axis
+float Vy = 0.01; // velocity in Y axis
 float added_y = 0;
 map<string, int> settings;
 unordered_map<string, int> scores;
@@ -172,6 +172,7 @@ Mix_Chunk* win_sd;
 Mix_Chunk* story;
 Mix_Music *test = NULL;
 Mix_Music *menu1_sd = NULL;
+
 
 // ====================== Initialize =======================
 
