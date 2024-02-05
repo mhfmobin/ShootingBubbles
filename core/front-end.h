@@ -471,9 +471,16 @@ void ShowCannon(SDL_Renderer* renderer,double mouseX, double mouseY){
     SDL_RenderCopyEx(renderer, cannon_img, NULL, &cannon_rect, angle, &center_cannon, SDL_FLIP_NONE);
 }
 double MouseAngle(double mouseX, double mouseY){
-    double t= atan((mouseY-(BASE_Y+75))/(mouseX-WIDTH/2));
-    if(mouseX-WIDTH/2>0) t = M_PI/2 - t;
-    else if(mouseX-WIDTH/2<0) t = 3*M_PI/2 - t;
+    if (mouseX >= (WIDTH/2 - 3) && mouseX <= (WIDTH/2 + 3))
+        return M_PI;
+    double t= atan((mouseY-(BASE_Y+50))/(mouseX-WIDTH/2));
+    if (mouseX-WIDTH/2>0) {
+        t = M_PI / 2 - t;
+    } else if (mouseX-WIDTH/2<0) {
+            t = -M_PI / 2 - t;
+    }
+
+
     return t;
 }
 
