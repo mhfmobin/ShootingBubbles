@@ -24,6 +24,7 @@ bool ballCollision();
 bool isGameOver() {
     if (is_timer_on)
         if (tim=="time = 00:00"){
+            tim = "";
             return true;
         }
 
