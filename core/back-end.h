@@ -449,6 +449,10 @@ void laserEffect() {
             }
         }
     }
-    if (sy <= 0) shooting_laser = false;
+    if (sy <= 0) {
+        shooting_laser = false;
+        shooted_laser = {19, 0, 0,  WIDTH/2, BASE_Y+80};
+        
+    }
     return;
 }
