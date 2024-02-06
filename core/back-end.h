@@ -331,8 +331,8 @@ void generateRandomGame(int n, int mode) {
             }
             ball.color = color;
             float added = (i%2) ? 2*R : R ;
-            data[i][j].x = 2*j*R + added;
-            data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
+            row[j].x = 2*j*R + added;
+            row[j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
             row.push_back(ball);
         }
         data.insert(data.begin(), row);
