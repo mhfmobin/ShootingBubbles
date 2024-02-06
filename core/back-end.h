@@ -21,6 +21,8 @@ bool ballCollision();
 // these are implemented in front end
 void ShowPoping(double x,double y);
 void ShowFalling(double x,double y,int color);
+void explodeBalls(int row, int col);
+void laserEffect();
 //================================ Implementation ================================
 
 bool isGameOver() {

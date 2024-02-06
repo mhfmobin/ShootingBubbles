@@ -76,6 +76,8 @@ bool show_win=false;
 bool show_game_over=false;
 bool music_play=true;
 bool sound_play=true;
+bool game_over_viewed = false;
+bool win_viewed = false;
 double vol=1;
 SDL_Point center_cannon;
 SDL_Renderer* renderer;

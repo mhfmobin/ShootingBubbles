@@ -443,7 +443,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(isGameOver()){
-
+        saveScore();
         score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
         data = {};
@@ -454,9 +454,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_5=false;
         show_level_random=false;
         show_timer_level=false;
+        show_win=false;
         show_game_over=true;
-    }
-    if(isWinner()){
+    } else if (isWinner()){
         saveScore();
         PlayMusic(win_sd,50,0,sound_play);
         data.clear();
@@ -467,6 +467,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_5=false;
         show_level_random=false;
         show_timer_level=false;
+        show_game_over=false;
         show_win=true;
     }
     SDL_RenderPresent(renderer);
@@ -569,6 +570,7 @@ void ShowGameOver(SDL_Renderer* renderer){
     mouse_y = e->button.y;
     Draw(renderer,go_img,win_rect,0,0,WIDTH,HEIGHT);
     stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
+    SDL_RenderPresent(renderer);
     if( e -> type == SDL_QUIT){
         show_game_over=false;
     }

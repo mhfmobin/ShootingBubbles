@@ -237,6 +237,7 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
+            game_over_viewed = true;
         }
         while(show_win){
             //Mix_VolumeMusic(0);
