@@ -30,7 +30,6 @@ void DrawMenu(SDL_Renderer* renderer){
     shooting_laser = 0;
     bomb_count = 2;
     laser_count = 2;
-    score = 0;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
