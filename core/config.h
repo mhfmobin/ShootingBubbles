@@ -162,6 +162,9 @@ SDL_Texture* pop_img = NULL;
 SDL_Rect pop_rect;
 SDL_Texture* ranking_img = NULL;
 SDL_Rect ranking_rect;
+SDL_Texture* bomb_img = NULL;
+SDL_Rect bomb_rect;
+
 
 // ====================== Sounds =======================
 

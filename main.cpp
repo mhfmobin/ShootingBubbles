@@ -52,8 +52,7 @@ int main(int argc, char* argv[]) {
     setting_b_img = IMG_LoadTexture(renderer, "../images/setting-B.png");
     pop_img = IMG_LoadTexture(renderer, "../images/pop.png");
     ranking_img = IMG_LoadTexture(renderer, "../images/Ranking.png");
-
-
+    bomb_img = IMG_LoadTexture(renderer, "../images/bomb.png");
 
 
 

@@ -30,7 +30,6 @@ void DrawMenu(SDL_Renderer* renderer){
     shooting_laser = 0;
     bomb_count = 2;
     laser_count = 2;
-    score = 0;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
@@ -291,6 +290,9 @@ void DrawABall(SDL_Renderer* renderer,double x,double y,int color){
         case 13:
             DrawWithoutPresent(renderer,black_ball_img,black_ball_rect,x-24,y-24,48,48);
             break;
+        case 17:
+            DrawWithoutPresent(renderer,bomb_img,bomb_rect,x-24,y-24,48,48);
+            break;
     }
 }
 void ShowLevel(SDL_Renderer* renderer,int level_id){
@@ -332,6 +334,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             c2 = cannonBall();
             dx = ((float)mouse_x-(WIDTH/2))/200;
             dy = ((float)mouse_y-(BASE_Y+80))/200;
+        }
+        if((e->key.keysym.sym == SDLK_b && e ->type == SDL_KEYDOWN)){
+            c2=17;
         }
 
 
@@ -390,6 +395,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         case 11:
             DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
             break;
+        case 17:
+            DrawWithoutPresent(renderer,bomb_img,bomb_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
     }
     switch (c1) {
         case 2:
@@ -406,6 +414,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             break;
         case 11:
             DrawWithoutPresent(renderer,purple_ball_img,purple_ball_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 17:
+            DrawWithoutPresent(renderer,bomb_img,bomb_rect,150,BASE_Y+100-24,36,36);
             break;
     }
     shooted_ball.color = c1;
