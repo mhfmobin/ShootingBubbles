@@ -373,12 +373,11 @@ unordered_map<string, int> sortedScores() {
 }
 
 bool ballCollision() {
-    float sx = shooted_ball.x, sy = shooted_ball.y;
     for (int i = data.size(); i >= 0; i--) {
         for (int j = data[i].size()-1; j >= 0; j--) {
             Ball ball = data[i][j];
             float x = ball.x, y = ball.y + added_y;
-            sx = shooted_ball.x, sy = shooted_ball.y;
+            float sx = shooted_ball.x, sy = shooted_ball.y;
             if (!ball.color || abs(x - sx) > 2.5*R || abs(y - sy) > 2.5*R) continue;
 
             float d = pow(x - sx, 2) + pow(y - sy, 2);
@@ -411,11 +410,12 @@ bool ballCollision() {
 
 
 void laserEffect() {
+    float sx = shooted_laser.x, sy = shooted_laser.y;
     for (int i = data.size(); i >= 0; i--) {
         for (int j = data[i].size()-1; j >= 0; j--) {
             Ball ball = data[i][j];
             float x = ball.x, y = ball.y + added_y;
-            float sx = shooted_laser.x, sy = shooted_laser.y;
+            sx = shooted_laser.x, sy = shooted_laser.y;
             if (!ball.color || abs(x - sx) > 2.5*R || abs(y - sy) > 2.5*R) continue;
 
             float d = pow(x - sx, 2) + pow(y - sy, 2);
