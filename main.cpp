@@ -53,6 +53,8 @@ int main(int argc, char* argv[]) {
     pop_img = IMG_LoadTexture(renderer, "../images/pop.png");
     ranking_img = IMG_LoadTexture(renderer, "../images/Ranking.png");
     bomb_img = IMG_LoadTexture(renderer, "../images/bomb.png");
+    laser_img = IMG_LoadTexture(renderer, "../images/laser.png");
+
 
 
 
@@ -246,13 +248,16 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
-            stringRGBA(renderer,173,85,("Score = "+to_string(score)).c_str(),255,255,255,255);
+            stringRGBA(renderer,173,50,("Score = "+to_string(score)).c_str(),0,0,0,255);
             game_over_viewed = true;
+            SDL_RenderPresent(renderer);
         }
         while(show_win){
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowWin(renderer);
+            stringRGBA(renderer,173,50,("Score = "+to_string(score)).c_str(),0,0,0,255);
+            SDL_RenderPresent(renderer);
         }
 
         if (is_paused){
