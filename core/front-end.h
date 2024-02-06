@@ -71,22 +71,9 @@ void Modes(SDL_Renderer* renderer){
     setting = false;
     is_timer_on = false;
     menu_show = true;
-    ranking_show=false;
-    show_level_1=false;
-    show_level_2=false;
-    show_level_3=false;
-    show_level_4=false;
-    show_level_5=false;
-    show_level_random=false;
     timer_level=false;
-    show_timer_level;
     show_win=false;
-    show_level_infinity=false;
     show_game_over=false;
-    music_play=true;
-    sound_play=true;
-    game_over_viewed = false;
-    win_viewed = false;
     added_y = 0;
 
     SDL_PollEvent(e);
