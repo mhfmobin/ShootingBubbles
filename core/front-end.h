@@ -274,7 +274,7 @@ void ShowBalls(SDL_Renderer* renderer){
         DrawABall(renderer,fallings[i].x,fallings[i].y,fallings[i].color);
         DrawWithoutPresent(renderer,beak_img,beak_rect,fallings[i].x-12,fallings[i].y-2,24,24);
         
-        fallings[i].y += 10 + rand() % 5;
+        fallings[i].y += 5 + rand() % 5;
         if(fallings[i].y >= BASE_Y) {
             fallings.erase(fallings.begin() + i);
         }
