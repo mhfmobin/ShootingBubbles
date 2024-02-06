@@ -33,6 +33,36 @@ void DrawMenu(SDL_Renderer* renderer){
     show_win = 0;
     show_game_over = 0;
     score = 0;
+    shoot = true;
+    shooting = false;
+    shooting_laser = false;
+    is_paused= false;
+    run=true;
+    login=true;
+    modes = false;
+    levels = false;
+    menu_sd_c = true;
+    shoot_sd_c = true;
+    btn_sd_c = true;
+    setting = false;
+    is_timer_on = false;
+    menu_show = true;
+    ranking_show=false;
+    show_level_1=false;
+    show_level_2=false;
+    show_level_3=false;
+    show_level_4=false;
+    show_level_5=false;
+    show_level_random=false;
+    timer_level=false;
+    show_timer_level;
+    show_win=false;
+    show_level_infinity=false;
+    show_game_over=false;
+    music_play=true;
+    sound_play=true;
+    game_over_viewed = false;
+    win_viewed = false;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
