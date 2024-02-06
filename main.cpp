@@ -228,6 +228,10 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowLevel(renderer,6);
         }
+        while(show_level_infinity && !is_paused){
+            SDL_SetRenderDrawColor(renderer,0,0,0,225);
+            ShowLevel(renderer,6);
+        }
         while(show_timer_level && !is_paused){
             if( e -> type == SDL_QUIT){
                 e->type = 0;
@@ -242,6 +246,7 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
+            stringRGBA(renderer,173,85,("Score = "+to_string(score)).c_str(),255,255,255,255);
             game_over_viewed = true;
         }
         while(show_win){

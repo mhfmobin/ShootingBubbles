@@ -485,8 +485,12 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
+    if(show_level_infinity){
+        int tmp_time = time()%10;
+        if(tmp_time == st) generateRandomGame(6,0);
+    }
     if(isGameOver()){
-
+        saveScore();
         score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
         data = {};
