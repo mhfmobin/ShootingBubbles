@@ -335,23 +335,12 @@ void generateRandomGame(int n, int mode) {
         data.insert(data.begin(), row);
         // data.push_back(row);
     }
-    if (mode) {
-        for (int i = 0; i < data.size(); i++) {
-            int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
-            for (int j = 0; j < limit; ++j) {
-                float added = (i%2) ? 2*R : R ;
-                data[i][j].x = 2*j*R + added;
-                data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
-            }
-        }
-    } else {
-        for (int i = n-1; i >= 0; i--) {
-            int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
-            for (int j = 0; j < limit; ++j) {
-                float added = (i%2) ? 2*R : R ;
-                data[i][j].x = 2*j*R + added;
-                data[i][j].y = data[i+1][0].y - sqrt(3) * R;
-            }
+    for (int i = 0; i < data.size(); i++) {
+        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+        for (int j = 0; j < limit; ++j) {
+            float added = (i%2) ? 2*R : R ;
+            data[i][j].x = 2*j*R + added;
+            data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
         }
     }
     
