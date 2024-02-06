@@ -77,6 +77,7 @@ bool show_level_random=false;
 bool timer_level=false;
 bool show_timer_level;
 bool show_win=false;
+bool show_level_infinity=false;
 bool show_game_over=false;
 bool music_play=true;
 bool sound_play=true;

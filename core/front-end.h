@@ -87,6 +87,13 @@ void Modes(SDL_Renderer* renderer){
         generateRandomGame(10,1);
         show_level_random=true;
     }
+    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>400)&&(mouse_y<480) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+        PlayMusic(btn_sd,25,0,btn_sd_c);
+        modes=false;
+        generateRandomGame(10);
+        st = time() % 10;
+        show_level_infinity=true;
+    }
 }
 
 void Levels(SDL_Renderer* renderer){
