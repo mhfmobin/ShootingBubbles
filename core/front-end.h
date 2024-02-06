@@ -65,6 +65,7 @@ void Modes(SDL_Renderer* renderer){
     show_win=false;
     show_game_over=false;
     added_y = 0;
+    saved = 0;
 
     SDL_PollEvent(e);
     SDL_ShowCursor(SDL_ENABLE);
@@ -516,7 +517,10 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         if(tmp_time == st) generateRandomGame(6,0);
     }
     if(isGameOver()){
-        saveScore();
+        if (!saved) {
+            saveScore();
+            saved = true;
+        }
         PlayMusic(game_over_sd,25,0,sound_play);
         data = {};
         show_level_1=false;
@@ -528,7 +532,10 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_timer_level=false;
         show_game_over=true;
     } else if(isWinner()){
-        saveScore();
+        if (!saved) {
+            saveScore();
+            saved = true;
+        }
         PlayMusic(win_sd,50,0,sound_play);
         data.clear();
         show_level_1=false;
