@@ -188,6 +188,7 @@ void ballPlacement(int row, int col, int color) {
 
     if (color == 17) {
         explodeBalls(row, col);
+        cout<<"HEY Osama is here!";
     } else {
         data[row][col].color = color;
         float added = (row%2) ? 2*R : R ;
@@ -316,10 +317,10 @@ void generateRandomGame(int n, int mode) {
         for (int j = 0; j < limit; ++j) {
             Ball ball;
             int color;
-            if (prevColor != -1 && rand() % 2 == 0) {
+            if (prevColor != -1 && prevColor != 13 && rand() % 2 == 0) {
                 color = prevColor;
             } else {
-                color = colors[rand() % colors.size(  )];
+                color = colors[rand() % colors.size()];
                 prevColor = color;
             }
             ball.color = color;
