@@ -498,8 +498,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         show_level_random=false;
         show_timer_level=false;
         show_game_over=true;
-    }
-    if(isWinner()){
+    } else if(isWinner()){
         saveScore();
         PlayMusic(win_sd,50,0,sound_play);
         data.clear();
