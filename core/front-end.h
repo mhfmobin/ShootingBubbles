@@ -63,6 +63,7 @@ void DrawMenu(SDL_Renderer* renderer){
     sound_play=true;
     game_over_viewed = false;
     win_viewed = false;
+    added_y = 0;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
