@@ -330,19 +330,22 @@ void generateRandomGame(int n, int mode) {
                 prevColor = color;
             }
             ball.color = color;
+            float added = (i%2) ? 2*R : R ;
+            data[i][j].x = 2*j*R + added;
+            data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
             row.push_back(ball);
         }
         data.insert(data.begin(), row);
         // data.push_back(row);
     }
-    for (int i = 0; i < data.size(); i++) {
-        int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
-        for (int j = 0; j < limit; ++j) {
-            float added = (i%2) ? 2*R : R ;
-            data[i][j].x = 2*j*R + added;
-            data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
-        }
-    }
+    // for (int i = 0; i < data.size(); i++) {
+    //     int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
+    //     for (int j = 0; j < limit; ++j) {
+    //         float added = (i%2) ? 2*R : R ;
+    //         data[i][j].x = 2*j*R + added;
+    //         data[i][j].y = START_Y - ((data.size()-1 - i) * sqrt(3) * R + R);
+    //     }
+    // }
     
     
 }
