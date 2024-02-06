@@ -104,8 +104,8 @@ void Modes(SDL_Renderer* renderer){
     if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>530)&&(mouse_y<610) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
-        generateRandomGame(10);
-        st = time() % 10;
+        generateRandomGame(100);
+        st = time() % 100;
         show_level_infinity=true;
     }
 }
@@ -513,8 +513,8 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     DrawWithoutPresent(renderer,devil_img,devil_rect,150,BASE_Y+100-24 ,36,36);
     DrawWithoutPresent(renderer,pause_b_img,pause_b_rect,420,650,45,50);
     if(show_level_infinity){
-        int tmp_time = time()%10;
-        if(tmp_time == st) generateRandomGame(6,0);
+        int tmp_time = time()%100;
+        if(tmp_time == st) generateRandomGame(100,0);
     }
     if(isGameOver()){
         if (!saved) {
