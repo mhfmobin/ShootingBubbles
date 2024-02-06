@@ -30,6 +30,7 @@ void DrawMenu(SDL_Renderer* renderer){
     shooting_laser = 0;
     bomb_count = 2;
     laser_count = 2;
+    score = 0;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
@@ -491,7 +492,6 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
     if(isGameOver()){
         saveScore();
-        score = 0;
         PlayMusic(game_over_sd,25,0,sound_play);
         data = {};
         show_level_1=false;
@@ -591,8 +591,6 @@ void ShowWin(SDL_Renderer* renderer){
     Draw(renderer,win_img,win_rect,0,0,WIDTH,HEIGHT);
 
     stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
-
-    score = 0;
 
     if( e -> type == SDL_QUIT){
         show_win=false;
