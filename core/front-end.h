@@ -61,17 +61,7 @@ void Modes(SDL_Renderer* renderer){
     shooting = false;
     shooting_laser = false;
     is_paused= false;
-    run=true;
-    login=true;
-    modes = false;
-    levels = false;
-    menu_sd_c = true;
-    shoot_sd_c = true;
-    btn_sd_c = true;
-    setting = false;
     is_timer_on = false;
-    menu_show = true;
-    timer_level=false;
     show_win=false;
     show_game_over=false;
     added_y = 0;
