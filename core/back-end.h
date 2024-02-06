@@ -294,7 +294,10 @@ void resetFallingBalls() {
             if (!data[i][j].falling_tmp) {
                 score += 30;
                 data[i][j].is_falling = true;
-                ShowFalling(data[i][j].x,data[i][j].y+added_y,data[i][j].color);
+                // ShowFalling(data[i][j].x,data[i][j].y+added_y,data[i][j].color);
+                Ball ball = data[i][j];
+                ball.y += added_y;
+                fallings.push_back(ball);
                 data[i][j].color = 0;
             }
             data[i][j].falling_tmp = false;

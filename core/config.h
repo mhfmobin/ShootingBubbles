@@ -36,6 +36,7 @@ struct Ball {
 *****************************************************/
 
 vector<vector<Ball>> data;
+vector<Ball> fallings;
 Ball shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
 Ball shooted_laser = {19, 0, 0,  WIDTH/2, BASE_Y+80};
 int xl=WIDTH/2;
