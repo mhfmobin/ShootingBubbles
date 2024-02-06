@@ -27,6 +27,30 @@ void ShowRanking(SDL_Renderer* renderer);
 //_______________________functions______________________________
 
 void DrawMenu(SDL_Renderer* renderer){
+    Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
+}
+
+void Draw(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h)
+{
+    img_rect.x = x;
+    img_rect.y = y;
+    img_rect.w = w;
+    img_rect.h = h;
+    //SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
+    SDL_RenderPresent(renderer);
+}
+void DrawWithoutPresent(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h)
+{
+    img_rect.x = x;
+    img_rect.y = y;
+    img_rect.w = w;
+    img_rect.h = h;
+    //SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
+}
+void Modes(SDL_Renderer* renderer){
+
     shooting_laser = 0;
     bomb_count = 2;
     laser_count = 2;
@@ -64,29 +88,7 @@ void DrawMenu(SDL_Renderer* renderer){
     game_over_viewed = false;
     win_viewed = false;
     added_y = 0;
-    Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
-}
 
-void Draw(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h)
-{
-    img_rect.x = x;
-    img_rect.y = y;
-    img_rect.w = w;
-    img_rect.h = h;
-    //SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
-    SDL_RenderPresent(renderer);
-}
-void DrawWithoutPresent(SDL_Renderer* renderer, SDL_Texture* m_img, SDL_Rect img_rect, int x, int y, int w, int h)
-{
-    img_rect.x = x;
-    img_rect.y = y;
-    img_rect.w = w;
-    img_rect.h = h;
-    //SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, m_img, NULL, &img_rect);
-}
-void Modes(SDL_Renderer* renderer){
     SDL_PollEvent(e);
     SDL_ShowCursor(SDL_ENABLE);
     mouse_x = e->button.x;
