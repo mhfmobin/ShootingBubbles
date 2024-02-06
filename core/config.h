@@ -63,6 +63,7 @@ bool btn_sd_c = true;
 bool setting = false;
 bool is_timer_on = false;
 bool menu_show = true;
+bool ranking_show=false;
 bool show_level_1=false;
 bool show_level_2=false;
 bool show_level_3=false;
@@ -152,6 +153,8 @@ SDL_Texture* resume_b_img = NULL;
 SDL_Rect resume_b_rect;
 SDL_Texture* pop_img = NULL;
 SDL_Rect pop_rect;
+SDL_Texture* ranking_img = NULL;
+SDL_Rect ranking_rect;
 
 // ====================== Sounds =======================
 

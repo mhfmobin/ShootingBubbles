@@ -20,6 +20,7 @@ void ShowLevel(SDL_Renderer* renderer,int level_id);
 void DrawShootLine(SDL_Renderer* renderer, double mouseX, double mouseY);
 void ShowWin(SDL_Renderer* renderer);
 void ShowGameOver(SDL_Renderer* renderer);
+void ShowRanking(SDL_Renderer* renderer);
 
 
 
@@ -71,7 +72,7 @@ void Modes(SDL_Renderer* renderer){
     if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>268)&&(mouse_y<350) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
-        generateRandomGame(10);
+        generateRandomGame(10,1);
         show_timer_level=true;
         timer_level=true;
         is_timer_on=true;
@@ -80,7 +81,7 @@ void Modes(SDL_Renderer* renderer){
     if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>400)&&(mouse_y<480) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
-        generateRandomGame(10);
+        generateRandomGame(10,1);
         show_level_random=true;
     }
 }
@@ -568,7 +569,8 @@ void ShowGameOver(SDL_Renderer* renderer){
     mouse_x = e->button.x;
     mouse_y = e->button.y;
     Draw(renderer,go_img,win_rect,0,0,WIDTH,HEIGHT);
-    stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
+
+
     if( e -> type == SDL_QUIT){
         show_game_over=false;
     }
@@ -615,6 +617,27 @@ void ShowFalling(double x,double y,int color){
         SDL_RenderPresent(renderer);
     }
 }
+void ShowRanking(SDL_Renderer* renderer){
+    SDL_PollEvent(e);
+    if( e -> type == SDL_QUIT){
+        ranking_show=false;
+    }
+    if((e->key.keysym.sym == SDLK_ESCAPE && e ->type == SDL_KEYDOWN) )
+    {
+        e ->type = 0 ;
+        ranking_show = false;
+    }
+    Draw(renderer,ranking_img,ranking_rect,0,0,WIDTH,HEIGHT);
+    scores.clear();
+    scores = sortedScores();
+    int i = 0;
+    for (const auto& s : scores) {
+        i++;
+        string a= to_string(i)+"- "+s.first+" : "+ to_string(s.second);
+        stringRGBA(renderer,20,30+i*15, a.c_str(),255,255,255,255);
+    }
+}
+
 
 
 #endif //BOUNCINGBALLS_FRONT_END_H

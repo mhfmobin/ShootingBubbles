@@ -51,6 +51,8 @@ int main(int argc, char* argv[]) {
     resume_b_img = IMG_LoadTexture(renderer, "../images/resume-B.png");
     setting_b_img = IMG_LoadTexture(renderer, "../images/setting-B.png");
     pop_img = IMG_LoadTexture(renderer, "../images/pop.png");
+    ranking_img = IMG_LoadTexture(renderer, "../images/Ranking.png");
+
 
 
 
@@ -87,7 +89,7 @@ int main(int argc, char* argv[]) {
     SDL_Texture* inputTexture = NULL;
     SDL_Event e2;
 
-    PlayMusic(story,100,0,1);
+    //PlayMusic(story,100,0,1);
     while (login) {
 
         DrawWithoutPresent(renderer,login_img,login_rect,0,0,WIDTH,HEIGHT);
@@ -181,10 +183,11 @@ int main(int argc, char* argv[]) {
         }
         if((menu_show) && (mouse_x>50)&&(mouse_x<230)&&(mouse_y>250)&&(mouse_y<330) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
             e->type = 0;
-            setting=true;
+            ranking_show=true;
             PlayMusic(btn_sd,25,0,btn_sd_c);
-            Setting(renderer);
+            ShowRanking(renderer);
         }
+
         while (modes){
             Modes(renderer);
         }
@@ -193,6 +196,11 @@ int main(int argc, char* argv[]) {
         }
         while(setting){
             Setting(renderer);
+        }
+        while(ranking_show){
+            ShowRanking(renderer);
+            SDL_RenderPresent(renderer);
+
         }
         while(show_level_1 && !is_paused){
             //Mix_VolumeMusic(0);
@@ -237,6 +245,8 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
+            stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
+
         }
         while(show_win){
             //Mix_VolumeMusic(0);
