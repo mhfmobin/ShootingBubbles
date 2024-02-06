@@ -166,6 +166,8 @@ SDL_Texture* ranking_img = NULL;
 SDL_Rect ranking_rect;
 SDL_Texture* bomb_img = NULL;
 SDL_Rect bomb_rect;
+SDL_Texture* laser_img = NULL;
+SDL_Rect laser_rect;
 
 
 // ====================== Sounds =======================

@@ -100,7 +100,7 @@ void Modes(SDL_Renderer* renderer){
         generateRandomGame(10,1);
         show_level_random=true;
     }
-    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>400)&&(mouse_y<480) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
+    if((mouse_x>100)&&(mouse_x<370)&&(mouse_y>530)&&(mouse_y<610) && (e->button.button == SDL_BUTTON_LEFT && e->type == SDL_MOUSEBUTTONDOWN)){
         PlayMusic(btn_sd,25,0,btn_sd_c);
         modes=false;
         generateRandomGame(10);
@@ -326,6 +326,9 @@ void DrawABall(SDL_Renderer* renderer,double x,double y,int color){
         case 17:
             DrawWithoutPresent(renderer,bomb_img,bomb_rect,x-24,y-24,48,48);
             break;
+        case 19:
+            DrawWithoutPresent(renderer,laser_img,laser_rect,x-24,y-24,48,48);
+            break;
     }
 }
 void ShowLevel(SDL_Renderer* renderer,int level_id){
@@ -370,6 +373,10 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         }
         if((e->key.keysym.sym == SDLK_b && e ->type == SDL_KEYDOWN)){
             c2=17;
+        }
+        if((e->key.keysym.sym == SDLK_l && e ->type == SDL_KEYDOWN)){
+            shooting_laser=true;
+            c2=19;
         }
 
 
@@ -431,6 +438,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
         case 17:
             DrawWithoutPresent(renderer,bomb_img,bomb_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
             break;
+        case 19:
+            DrawWithoutPresent(renderer,laser_img,laser_rect,WIDTH/2-24,BASE_Y+80-24,48,48);
+            break;
     }
     switch (c1) {
         case 2:
@@ -450,6 +460,9 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
             break;
         case 17:
             DrawWithoutPresent(renderer,bomb_img,bomb_rect,150,BASE_Y+100-24,36,36);
+            break;
+        case 19:
+            DrawWithoutPresent(renderer,laser_img,laser_rect,150,BASE_Y+100-24,36,36);
             break;
     }
     shooted_ball.color = c1;
