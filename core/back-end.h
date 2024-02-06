@@ -306,7 +306,7 @@ void generateRandomGame(int n, int mode) {
         data.clear();
     }
     srand(time(NULL));
-    for (int i = n-1; i >= 0; ++i) {
+    for (int i = n-1; i >= 0; --i) {
         vector<Ball> row;
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
         int prevColor = -1;
