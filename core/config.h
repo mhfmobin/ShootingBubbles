@@ -90,7 +90,7 @@ float added_y = 0;
 map<string, int> settings;
 unordered_map<string, int> scores;
 vector<int> times = {60,60,60,60,60};
-vector<int> colors = {2,3,5,7,11,13,17,10};
+vector<int> colors = {2,3,5,7,11,13};
 // 2 -> red
 // 3 -> yellow
 // 5 -> green
