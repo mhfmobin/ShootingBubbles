@@ -316,7 +316,7 @@ void generateRandomGame(int n, int mode) {
             if (prevColor != -1 && rand() % 2 == 0) {
                 color = prevColor;
             } else {
-                color = colors[rand() % colors.size()];
+                color = colors[rand() % colors.size(  )];
                 prevColor = color;
             }
             ball.color = color;
@@ -425,6 +425,6 @@ void laserEffect() {
             }
         }
     }
-
+    if (sy <= 0) shooting_laser = false;
     return;
 }

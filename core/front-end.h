@@ -26,6 +26,10 @@ void ShowGameOver(SDL_Renderer* renderer);
 //_______________________functions______________________________
 
 void DrawMenu(SDL_Renderer* renderer){
+    shooting_laser = 0;
+    bomb_count = 2;
+    laser_count = 2;
+    score = 0;
     Draw(renderer,menu_img,menu_rect,0,0,WIDTH,HEIGHT);
 }
 
@@ -405,28 +409,35 @@ void ShowLevel(SDL_Renderer* renderer,int level_id){
     }
     shooted_ball.color = c1;
     if(shooting){
+        if (shooting_laser) {
+            laserEffect();
+            shooted_laser.x+=dx;
+            shooted_laser.y+=dy;
+            DrawABall(renderer,shooted_laser.x,shooted_laser.y,shooted_laser.color);
+        } else {
+            if(shooted_ball.x>=WIDTH){
+                while (shooted_ball.x>=WIDTH) {
+                    shooted_ball.x-=2;
+                }
+                dx=-dx;
+                PlayMusic(wall_sd,70,0,sound_play);
+                cout<<"rast";
+            } else if (shooted_ball.x<=0) {
+                dx=-dx;
+                PlayMusic(wall_sd,70,0,sound_play);
+                cout<<"chap";
+                while (shooted_ball.x<=0) {
+                    shooted_ball.x+=2;
+                }
+            }
 
-        if(shooted_ball.x>=WIDTH){
-            while (shooted_ball.x>=WIDTH) {
-                shooted_ball.x-=2;
-            }
-            dx=-dx;
-            PlayMusic(wall_sd,70,0,sound_play);
-            cout<<"rast";
-        } else if (shooted_ball.x<=0) {
-            dx=-dx;
-            PlayMusic(wall_sd,70,0,sound_play);
-            cout<<"chap";
-            while (shooted_ball.x<=0) {
-                shooted_ball.x+=2;
-            }
+
+            shooted_ball.x+=dx;
+            shooted_ball.y+=dy;
+            DrawABall(renderer,shooted_ball.x,shooted_ball.y,shooted_ball.color);
+            shooting = !ballCollision();
         }
-
-
-        shooted_ball.x+=dx;
-        shooted_ball.y+=dy;
-        DrawABall(renderer,shooted_ball.x,shooted_ball.y,shooted_ball.color);
-        shooting = !ballCollision();
+        
     } else {
         shooted_ball = {0, 0, 0,  WIDTH/2, BASE_Y+80};
     }
