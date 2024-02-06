@@ -21,6 +21,8 @@ bool ballCollision();
 // these are implemented in front end
 void ShowPoping(double x,double y);
 void ShowFalling(double x,double y,int color);
+void explodeBalls(int row, int col);
+void laserEffect();
 //================================ Implementation ================================
 
 bool isGameOver() {
@@ -184,12 +186,16 @@ bool isValidPosition(int row, int col) {
 
 void ballPlacement(int row, int col, int color) {
 
-    data[row][col].color = color;
-    float added = (row%2) ? 2*R : R ;
-    data[row][col].x = 2*col*R + added;
-    data[row][col].y = START_Y - ((level_row_count-1 - row) * sqrt(3) * R + R);
+    if (color == 17) {
+        explodeBalls(row, col);
+    } else {
+        data[row][col].color = color;
+        float added = (row%2) ? 2*R : R ;
+        data[row][col].x = 2*col*R + added;
+        data[row][col].y = START_Y - ((level_row_count-1 - row) * sqrt(3) * R + R);
 
-    popBalls(row, col, color, true);
+        popBalls(row, col, color, true);
+    }
 
     for (int i = 0; i < data[0].size(); ++i) {
         if (data[0][i].color && !data[0][i].falling_tmp) {
@@ -222,11 +228,37 @@ void popBalls(int row, int col, int color, bool first) {
 
         if (isValidPosition(newRow, newCol) && data[newRow][newCol].color && isSame(color, data[newRow][newCol].color)) {
             if (first){
-//                ShowPoping(data[row][col].x, data[row][col].y + added_y);
+                ShowPoping(data[row][col].x, data[row][col].y + added_y);
                 data[row][col].color = 0;
                 score += 20;
             }
             popBalls(newRow, newCol, color);
+        }
+    }
+    return;
+}
+
+void explodeBalls(int row, int col) {
+
+    int offsets[6][2];
+    if (row % 2) {
+        int temp[][2] = {{-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, 0}, {1, 1}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
+    } else {
+        int temp[][2] = {{-1, -1}, {-1, 0}, {0, -1}, {0, 1}, {1, -1}, {1, 0}};
+        copy_n(&temp[0][0], 6 * 2, &offsets[0][0]);
+    }
+    for (int i = 0; i < 6; ++i) {
+        int newRow = row + offsets[i][0];
+        int newCol = col + offsets[i][1];
+
+        if (isValidPosition(newRow, newCol) && data[newRow][newCol].color) {
+            ShowPoping(data[row][col].x, data[row][col].y + added_y);
+
+            // TO DO: Change it to explode animation
+
+            data[row][col].color = 0;
+            score += 20;
         }
     }
     return;
@@ -274,7 +306,7 @@ void generateRandomGame(int n, int mode) {
         data.clear();
     }
     srand(time(NULL));
-    for (int i = n-1; i >= 0; ++i) {
+    for (int i = n-1; i >= 0; --i) {
         vector<Ball> row;
         int limit = (i%2) ? MAX_BALLS - 1 : MAX_BALLS ;
         int prevColor = -1;
@@ -375,4 +407,24 @@ bool ballCollision() {
 
     return false;
 }
-         
+
+
+void laserEffect() {
+    for (int i = data.size(); i >= 0; i--) {
+        for (int j = data[i].size()-1; j >= 0; j--) {
+            Ball ball = data[i][j];
+            float x = ball.x, y = ball.y + added_y;
+            float sx = shooted_laser.x, sy = shooted_laser.y;
+            if (!ball.color || abs(x - sx) > 2.5*R || abs(y - sy) > 2.5*R) continue;
+
+            float d = pow(x - sx, 2) + pow(y - sy, 2);
+
+            if (d <= pow(2*R, 2)) {
+                ShowPoping(x, y);
+                data[i][j].color = 0;
+            }
+        }
+    }
+
+    return;
+}

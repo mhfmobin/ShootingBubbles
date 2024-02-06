@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
     SDL_Texture* inputTexture = NULL;
     SDL_Event e2;
 
-    //PlayMusic(story,100,0,1);
+    PlayMusic(story,100,0,1);
     while (login) {
 
         DrawWithoutPresent(renderer,login_img,login_rect,0,0,WIDTH,HEIGHT);
@@ -187,7 +187,6 @@ int main(int argc, char* argv[]) {
             PlayMusic(btn_sd,25,0,btn_sd_c);
             ShowRanking(renderer);
         }
-
         while (modes){
             Modes(renderer);
         }
@@ -200,7 +199,6 @@ int main(int argc, char* argv[]) {
         while(ranking_show){
             ShowRanking(renderer);
             SDL_RenderPresent(renderer);
-
         }
         while(show_level_1 && !is_paused){
             //Mix_VolumeMusic(0);
@@ -245,8 +243,7 @@ int main(int argc, char* argv[]) {
             //Mix_VolumeMusic(0);
             SDL_SetRenderDrawColor(renderer,0,0,0,225);
             ShowGameOver(renderer);
-            stringRGBA(renderer,60,20,("Score = "+to_string(score)).c_str(),255,255,255,255);
-
+            game_over_viewed = true;
         }
         while(show_win){
             //Mix_VolumeMusic(0);
